@@ -1,661 +1,368 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Rahmotpur News</title>
 
-<link rel="manifest" href="manifest.json">
-
-<meta name="theme-color" content="#d40000">
+<meta name="description" content="রহমতপুর, মিঠাপুকুরসহ বাংলাদেশের সর্বশেষ গুরুত্বপূর্ণ খবর।">
 
 <style>
-
 *{
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
+  box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:Arial,"Noto Sans Bengali",sans-serif;
-background:#f3f3f3;
-color:#222;
-padding-bottom:75px;
-transition:.3s;
-}
-
-body.dark{
-background:#121212;
-color:#eee;
-}
-
-body.dark .welcome,
-body.dark .featured-card,
-body.dark .news-card,
-body.dark .search-box,
-body.dark .notification-box,
-body.dark .menu-panel,
-body.dark .settings-box{
-background:#1e1e1e;
-color:#eee;
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f4f5f7;
+  color:#222;
 }
 
 header{
-background:#d40000;
-color:white;
-padding:16px 15px;
-text-align:center;
-position:relative;
+  background:#d90000;
+  color:white;
+  padding:15px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 2px 8px rgba(0,0,0,.2);
 }
 
-header h1{
-margin:0;
-font-size:27px;
+.header{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
-header p{
-margin:6px 0 0;
-font-size:14px;
+.logo{
+  font-size:24px;
+  font-weight:bold;
 }
 
-.menu-button{
-position:absolute;
-right:12px;
-top:13px;
-width:45px;
-height:45px;
-border:0;
-border-radius:50%;
-background:#b00000;
-color:white;
-font-size:25px;
-cursor:pointer;
-}
-
-.menu-panel{
-position:fixed;
-top:0;
-right:-310px;
-width:300px;
-height:100vh;
-background:white;
-z-index:10001;
-box-shadow:-3px 0 15px rgba(0,0,0,.35);
-transition:.3s;
-padding:20px;
-overflow-y:auto;
-}
-
-.menu-panel.open{
-right:0;
-}
-
-.menu-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid #ddd;
-padding-bottom:12px;
-margin-bottom:15px;
-}
-
-.menu-header h2{
-margin:0;
-color:#d40000;
-}
-
-.close-menu{
-border:0;
-background:#eee;
-width:38px;
-height:38px;
-border-radius:50%;
-font-size:22px;
-}
-
-.menu-item{
-width:100%;
-display:block;
-padding:14px;
-margin-bottom:10px;
-border:0;
-border-radius:9px;
-background:#f2f2f2;
-color:#222;
-text-decoration:none;
-text-align:left;
-font-size:15px;
-cursor:pointer;
-}
-
-body.dark .menu-item{
-background:#292929;
-color:#fff;
-}
-
-.menu-item span{
-margin-right:8px;
-font-size:20px;
-}
-
-.menu-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.5);
-z-index:10000;
-display:none;
-}
-
-.menu-overlay.show{
-display:block;
-}
-
-nav{
-background:#111;
-padding:9px 10px;
-display:flex;
-overflow-x:auto;
-gap:8px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-background:#333;
-padding:8px 13px;
-border-radius:20px;
-font-size:13px;
-white-space:nowrap;
-}
-
-.breaking{
-height:42px;
-background:#111;
-color:white;
-display:flex;
-align-items:center;
-overflow:hidden;
-}
-
-.breaking-title{
-height:100%;
-background:#d40000;
-padding:0 13px;
-display:flex;
-align-items:center;
-font-weight:bold;
-white-space:nowrap;
-}
-
-.breaking-scroll{
-flex:1;
-overflow:hidden;
-}
-
-.breaking-track{
-display:inline-block;
-white-space:nowrap;
-padding-left:100%;
-animation:moveNews 28s linear infinite;
-}
-
-@keyframes moveNews{
-
-0%{
-transform:translateX(0);
-}
-
-100%{
-transform:translateX(-100%);
-}
-
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:15px;
-}
-
-.welcome{
-background:white;
-padding:20px;
-border-radius:14px;
-box-shadow:0 2px 8px #ccc;
-margin-bottom:18px;
-}
-
-.welcome h2{
-margin-top:0;
-color:#d40000;
-}
-
-.main-button,
-.news-button{
-display:inline-block;
-background:#d40000;
-color:white;
-padding:10px 15px;
-border-radius:7px;
-text-decoration:none;
-margin-top:8px;
-}
-
-.category-title{
-font-size:21px;
-color:#d40000;
-margin:22px 0 12px;
-font-weight:bold;
-}
-
-.featured-card{
-background:white;
-border-radius:14px;
-overflow:hidden;
-box-shadow:0 2px 8px #ccc;
-margin-bottom:20px;
-}
-
-.featured-card img{
-width:100%;
-height:270px;
-object-fit:cover;
-display:block;
-}
-
-.featured-content{
-padding:16px;
-}
-
-.featured-label{
-font-size:13px;
-color:#d40000;
-font-weight:bold;
-margin-bottom:7px;
-}
-
-.featured-title{
-font-size:22px;
-font-weight:bold;
-line-height:1.5;
-}
-
-.categories{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-}
-
-.category{
-background:white;
-padding:17px 8px;
-text-align:center;
-border-radius:12px;
-text-decoration:none;
-color:#222;
-font-weight:bold;
-box-shadow:0 2px 7px #ccc;
-}
-
-.category .icon{
-display:block;
-font-size:28px;
-margin-bottom:6px;
+.menu-btn{
+  background:white;
+  color:#d90000;
+  border:0;
+  border-radius:5px;
+  padding:8px 12px;
+  font-size:20px;
+  cursor:pointer;
 }
 
 .search-box{
-background:white;
-padding:15px;
-border-radius:12px;
-box-shadow:0 2px 7px #ccc;
+  max-width:1000px;
+  margin:12px auto 0;
+  display:flex;
 }
 
-.search-input{
-width:100%;
-padding:13px;
-border:1px solid #ccc;
-border-radius:8px;
-font-size:16px;
+.search-box input{
+  flex:1;
+  padding:12px;
+  border:0;
+  border-radius:6px 0 0 6px;
+  font-size:15px;
+  outline:none;
 }
 
-.search-button{
-margin-top:10px;
-padding:11px 18px;
-background:#d40000;
-color:white;
-border:0;
-border-radius:7px;
-font-size:15px;
+.search-box button{
+  background:#222;
+  color:white;
+  border:0;
+  padding:0 18px;
+  border-radius:0 6px 6px 0;
+  cursor:pointer;
+}
+
+nav{
+  display:none;
+  background:white;
+  border-bottom:1px solid #ddd;
+}
+
+nav a{
+  display:block;
+  padding:13px 18px;
+  text-decoration:none;
+  color:#222;
+  border-bottom:1px solid #eee;
+  font-weight:bold;
+}
+
+nav a:hover{
+  background:#f2f2f2;
+  color:#d90000;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:15px;
+}
+
+.welcome{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:15px;
+  box-shadow:0 2px 7px rgba(0,0,0,.08);
+}
+
+.welcome h2{
+  margin-top:0;
+  color:#d90000;
+}
+
+.section-title{
+  background:#d90000;
+  color:white;
+  padding:10px 14px;
+  border-radius:6px;
+  margin:20px 0 12px;
+  font-size:19px;
 }
 
 .news-card{
-background:white;
-margin-bottom:15px;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 2px 8px #ccc;
+  background:white;
+  margin-bottom:12px;
+  border-radius:9px;
+  overflow:hidden;
+  box-shadow:0 2px 7px rgba(0,0,0,.08);
 }
 
 .news-card img{
-width:100%;
-height:210px;
-object-fit:cover;
-display:block;
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  display:block;
 }
 
 .news-content{
-padding:15px;
+  padding:14px;
 }
 
 .news-title{
-font-size:18px;
-font-weight:bold;
-line-height:1.5;
+  font-size:19px;
+  font-weight:bold;
+  line-height:1.5;
+  margin:0 0 8px;
+}
+
+.news-title a{
+  color:#222;
+  text-decoration:none;
+}
+
+.news-title a:hover{
+  color:#d90000;
 }
 
 .news-date{
-font-size:12px;
-color:#777;
-margin-top:7px;
+  color:#777;
+  font-size:13px;
+  margin-bottom:8px;
 }
 
-.install-box{
-background:#d40000;
-color:white;
-padding:16px;
-border-radius:12px;
-margin-top:20px;
-text-align:center;
+.news-label{
+  display:inline-block;
+  background:#d90000;
+  color:white;
+  padding:4px 8px;
+  border-radius:4px;
+  font-size:12px;
 }
 
-.install-button{
-background:white;
-color:#d40000;
-border:0;
-padding:11px 17px;
-border-radius:7px;
-font-weight:bold;
-font-size:15px;
-margin-top:8px;
-cursor:pointer;
+.buttons{
+  text-align:center;
+  margin:18px 0;
 }
 
-.notification-box{
-background:white;
-padding:16px;
-border-radius:12px;
-box-shadow:0 2px 7px #ccc;
-margin-top:15px;
+.btn{
+  display:inline-block;
+  padding:11px 18px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+  margin:4px;
 }
 
-.info-box{
-background:#d40000;
-color:white;
-padding:18px;
-border-radius:12px;
-margin-top:20px;
-line-height:1.7;
+.more{
+  background:#d90000;
+  color:white;
 }
 
-.loading{
-text-align:center;
-padding:25px;
-font-size:15px;
+.facebook{
+  background:#1877F2;
+  color:white;
 }
 
-.error-box{
-background:#fff0f0;
-color:#b00000;
-padding:18px;
-border-radius:10px;
-text-align:center;
+.notification{
+  background:white;
+  padding:18px;
+  text-align:center;
+  border-radius:10px;
+  box-shadow:0 2px 7px rgba(0,0,0,.08);
+  margin-top:20px;
 }
 
-body.dark .error-box{
-background:#301919;
-color:#ff8a8a;
+.notification h3{
+  margin-top:0;
+}
+
+.notify-btn{
+  background:#d90000;
+  color:white;
+  border:0;
+  padding:11px 20px;
+  border-radius:6px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 footer{
-background:#111;
-color:white;
-text-align:center;
-padding:22px 10px;
-margin-top:30px;
-font-size:13px;
+  background:#222;
+  color:#ddd;
+  text-align:center;
+  padding:25px 15px;
+  margin-top:30px;
+  font-size:14px;
 }
 
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:65px;
-background:#111;
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:9999;
-box-shadow:0 -2px 8px #555;
+.loading{
+  text-align:center;
+  padding:20px;
+  color:#777;
 }
 
-.bottom-nav button{
-background:none;
-border:0;
-color:white;
-font-size:11px;
-cursor:pointer;
+.no-result{
+  background:white;
+  padding:20px;
+  text-align:center;
+  border-radius:8px;
+  color:#777;
 }
 
-.nav-icon{
-display:block;
-font-size:21px;
-margin-bottom:2px;
+/* Desktop */
+@media(min-width:700px){
+  .menu-btn{
+    display:none;
+  }
+
+  nav{
+    display:block;
+  }
+
+  nav .nav-inner{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+  }
+
+  nav a{
+    border:0;
+  }
+
+  .news-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .news-card{
+    margin-bottom:0;
+  }
 }
-
-.bottom-nav button.active{
-color:#ff3333;
-}
-
-@media(min-width:600px){
-
-.categories{
-grid-template-columns:repeat(4,1fr);
-}
-
-.featured-card img{
-height:330px;
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
 
-
 <header>
 
-<button
-class="menu-button"
-id="menuButton">
+<div class="header">
 
-☰
+<div class="logo">
+📰 Rahmotpur News
+</div>
 
-</button>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-<h1>📰 Rahmotpur News</h1>
+</div>
 
-<p>আপনার এলাকার খবর সবার আগে</p>
+<div class="search-box">
+
+<input
+id="searchInput"
+type="search"
+placeholder="খবর সার্চ করুন..."
+onkeyup="searchNews()">
+
+<button onclick="searchNews()">🔍</button>
+
+</div>
 
 </header>
 
 
-<!-- MENU -->
+<nav id="menu">
 
-<div
-class="menu-overlay"
-id="menuOverlay">
-</div>
+<div class="nav-inner">
 
+<a href="#" onclick="loadCategory('')">🏠 হোম</a>
 
-<div
-class="menu-panel"
-id="menuPanel">
+<a href="#" onclick="loadCategory('রহমতপুর')">রহমতপুর</a>
 
-<div class="menu-header">
+<a href="#" onclick="loadCategory('মিঠাপুকুর')">মিঠাপুকুর</a>
 
-<h2>☰ মেনু</h2>
+<a href="#" onclick="loadCategory('জাতীয়')">জাতীয়</a>
 
-<button
-class="close-menu"
-id="closeMenu">
+<a href="#" onclick="loadCategory('সারাদেশ')">সারাদেশ</a>
 
-×
+<a href="#" onclick="loadCategory('আন্তর্জাতিক')">আন্তর্জাতিক</a>
 
-</button>
+<a href="#" onclick="loadCategory('রাজনীতি')">রাজনীতি</a>
 
-</div>
+<a href="#" onclick="loadCategory('খেলাধুলো')">খেলাধুলো</a>
 
+<a href="#" onclick="loadCategory('ইমাদপুর')">ইমাদপুর</a>
 
-<a
-class="menu-item"
-href="https://www.facebook.com/rahmotpurnews"
-target="_blank">
+<a href="#" onclick="loadCategory('অপরাধ')">অপরাধ</a>
 
-<span>📘</span>
-Facebook Page
+<a href="#" onclick="loadCategory('শিক্ষা')">শিক্ষা</a>
 
-</a>
+<a href="#" onclick="loadCategory('বিজ্ঞান ও প্রযুক্তি')">বিজ্ঞান ও প্রযুক্তি</a>
 
-
-<button
-class="menu-item"
-id="menuDarkButton">
-
-<span>🌙</span>
-Dark Mode
-
-</button>
-
-
-<button
-class="menu-item"
-id="menuSettingsButton">
-
-<span>⚙️</span>
-Settings
-
-</button>
-
-
-<button
-class="menu-item"
-id="menuNotificationButton">
-
-<span>🔔</span>
-Notification চালু করুন
-
-</button>
-
-
-<button
-class="menu-item"
-id="menuHomeButton">
-
-<span>🏠</span>
-Home
-
-</button>
-
-
-<button
-class="menu-item"
-id="menuAboutButton">
-
-<span>ℹ️</span>
-Rahmotpur News সম্পর্কে
-
-</button>
+<a href="#" onclick="loadCategory('আবহাওয়া')">আবহাওয়া</a>
 
 </div>
 
-
-<!-- BREAKING -->
-
-<div class="breaking">
-
-<div class="breaking-title">
-🔴 ব্রেকিং
-</div>
-
-<div class="breaking-scroll">
-
-<div
-class="breaking-track"
-id="breakingNews">
-
-সর্বশেষ খবর লোড হচ্ছে...
-
-</div>
-
-</div>
-
-</div>
+</nav>
 
 
-<!-- TOP NAV -->
+<main class="container">
 
-<nav id="topNav"></nav>
+<section class="welcome">
 
-
-<div class="container">
-
-
-<!-- HOME -->
-
-<section id="homeSection">
-
-<div class="welcome">
-
-<h2>
-Welcome to Rahmotpur News
-</h2>
+<h2>Welcome to Rahmotpur News</h2>
 
 <p>
-রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর
-জানতে আমাদের নিউজ পোর্টালে প্রবেশ করুন।
+রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর জানতে আমাদের নিউজ পোর্টালে প্রবেশ করুন।
 </p>
 
-<a
-class="main-button"
-href="https://rahmotpurnewsbd.blogspot.com/"
-target="_blank">
+</section>
 
-সর্বশেষ খবর দেখুন →
 
-</a>
-
+<div class="section-title" id="categoryTitle">
+⭐ প্রধান খবর
 </div>
 
-
-<h2 class="category-title">
-⭐ প্রধান খবর
-</h2>
-
-
-<div id="featuredNews">
+<div id="featuredNews" class="news-grid">
 
 <div class="loading">
 প্রধান খবর লোড হচ্ছে...
@@ -664,121 +371,11 @@ target="_blank">
 </div>
 
 
-<div id="homeLatestNews">
-
-</div>
-
-
-<div
-class="install-box"
-id="installBox"
-style="display:none">
-
-📱 Rahmotpur News অ্যাপ ইনস্টল করুন
-
-<br>
-
-<button
-class="install-button"
-id="installButton">
-
-অ্যাপ ইনস্টল করুন
-
-</button>
-
-</div>
-
-
-<div class="notification-box">
-
-<b>
-🔔 নতুন খবরের নোটিফিকেশন
-</b>
-
-<p>
-নতুন খবর প্রকাশিত হলে Notification পেতে অনুমতি দিন।
-</p>
-
-<button
-class="install-button"
-id="notificationButton">
-
-🔔 Notification চালু করুন
-
-</button>
-
-</div>
-
-
-</section>
-
-
-<!-- CATEGORY -->
-
-<section
-id="categorySection"
-style="display:none">
-
-<h2 class="category-title">
-📰 সংবাদ বিভাগ
-</h2>
-
-<div
-class="categories"
-id="categories">
-</div>
-
-</section>
-
-
-<!-- SEARCH -->
-
-<section
-id="searchSection"
-style="display:none">
-
-<h2 class="category-title">
-🔎 খবর খুঁজুন
-</h2>
-
-<div class="search-box">
-
-<input
-type="search"
-id="searchInput"
-class="search-input"
-placeholder="খবরের শিরোনাম লিখুন...">
-
-<button
-class="search-button"
-id="searchButton">
-
-🔎 খুঁজুন
-
-</button>
-
-</div>
-
-<div
-id="searchResults"
-style="margin-top:15px">
-
-</div>
-
-</section>
-
-
-<!-- LATEST -->
-
-<section
-id="latestSection"
-style="display:none">
-
-<h2 class="category-title">
+<div class="section-title">
 🔴 সর্বশেষ খবর
-</h2>
+</div>
 
-<div id="latestNews">
+<div id="latestNews" class="news-grid">
 
 <div class="loading">
 খবর লোড হচ্ছে...
@@ -786,1111 +383,48 @@ style="display:none">
 
 </div>
 
-</section>
 
-
-<!-- SETTINGS -->
-
-<section
-id="settingsSection"
-style="display:none">
-
-<h2 class="category-title">
-⚙️ Settings
-</h2>
-
-<div class="settings-box"
-style="
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 2px 8px #ccc;
-">
-
-<h3>🌙 Dark Mode</h3>
-
-<p>
-অ্যাপের আলো/অন্ধকার মোড পরিবর্তন করুন।
-</p>
-
-<button
-class="search-button"
-id="settingsDarkButton">
-
-🌙 Dark Mode চালু/বন্ধ
-
-</button>
-
-
-<hr style="margin:20px 0">
-
-
-<h3>🔔 Notification</h3>
-
-<p>
-নতুন খবর প্রকাশ হলে Notification পেতে চালু করুন।
-</p>
-
-<button
-class="search-button"
-id="settingsNotificationButton">
-
-🔔 Notification চালু করুন
-
-</button>
-
-
-<hr style="margin:20px 0">
-
-
-<h3>📘 Facebook Page</h3>
+<div class="buttons">
 
 <a
-class="main-button"
-href="https://www.facebook.com/rahmotpurnews"
-target="_blank">
-
-Facebook Page খুলুন →
-
-</a>
-
-</div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section
-id="aboutSection"
-style="display:none">
-
-<h2 class="category-title">
-ℹ️ Rahmotpur News
-</h2>
-
-<div class="info-box">
-
-<b>📰 Rahmotpur News</b>
-
-<br><br>
-
-রহমতপুর ও মিঠাপুকুরসহ আশপাশের এলাকার
-নির্ভরযোগ্য সংবাদ, বাংলাদেশ ও বিশ্বের
-গুরুত্বপূর্ণ খবর পাঠকদের কাছে পৌঁছে দেওয়াই
-আমাদের লক্ষ্য।
-
-<br><br>
-
-সত্য ও বস্তুনিষ্ঠ সংবাদ প্রকাশে
-আমরা প্রতিশ্রুতিবদ্ধ।
-
-<br><br>
-
-📘 Facebook:
-Rahmotpur News
-
-</div>
-
-</section>
-
-
-</div>
-
-
-<footer>
-
-© 2026 Rahmotpur News
-
-<br>
-
-আপনার এলাকার খবর সবার আগে
-
-<br><br>
-
-<a
-href="https://www.facebook.com/rahmotpurnews"
+href="https://rahmotpurnewsbd.blogspot.com/"
 target="_blank"
-style="color:#fff">
-
-📘 Facebook Page
-
-</a>
-
-</footer>
-
-
-<!-- BOTTOM NAV -->
-
-<div class="bottom-nav">
-
-<button
-class="active"
-data-section="homeSection">
-
-<span class="nav-icon">
-🏠
-</span>
-
-হোম
-
-</button>
-
-
-<button
-data-section="categorySection">
-
-<span class="nav-icon">
-📰
-</span>
-
-ক্যাটাগরি
-
-</button>
-
-
-<button
-data-section="latestSection">
-
-<span class="nav-icon">
-🔴
-</span>
-
-সর্বশেষ
-
-</button>
-
-
-<button
-data-section="searchSection">
-
-<span class="nav-icon">
-🔎
-</span>
-
-সার্চ
-
-</button>
-
-</div>
-
-
-<script>
-
-
-/* =========================
-Blogger
-========================= */
-
-const BLOGGER =
-"https://rahmotpurnewsbd.blogspot.com";
-
-
-/* =========================
-Categories
-========================= */
-
-const labels = [
-
-["রহমতপুর","📍"],
-["ইমাদপুর","🏘️"],
-["মিঠাপুকুর","📌"],
-["রাজনীতি","🏛️"],
-["জাতীয়","🇧🇩"],
-["আন্তর্জাতিক","🌍"],
-["সারাদেশ","🗺️"],
-["খেলাধুলা","⚽"],
-["অপরাধ","🚔"],
-["মতামত","💬"],
-["শিক্ষা","🎓"],
-["ধর্মীয়","🕌"],
-["আবহাওয়া","🌦️"],
-["বিনোদন","🎬"],
-["পরিবেশ","🌳"],
-["অর্থনীতি","💰"],
-["বিজ্ঞান ও প্রযুক্তি","💻"],
-["খাদ্য","🍲"],
-["ভোক্তা","🛒"],
-["মহাকাশ","🚀"],
-["সৌদি আরব","🕋"],
-["আশেপাশের অঞ্চল","📍"]
-
-];
-
-
-const categories =
-document.getElementById("categories");
-
-
-labels.forEach(function(item){
-
-const a =
-document.createElement("a");
-
-a.className="category";
-
-a.href =
-BLOGGER+
-"/search/label/"+
-encodeURIComponent(item[0]);
-
-a.target="_blank";
-
-a.innerHTML =
-'<span class="icon">'+
-item[1]+
-'</span>'+
-item[0];
-
-categories.appendChild(a);
-
-});
-
-
-/* =========================
-Top Navigation
-========================= */
-
-const topNav =
-document.getElementById("topNav");
-
-
-function addTopNav(name,url){
-
-const a =
-document.createElement("a");
-
-a.href=url;
-
-a.textContent=name;
-
-a.target="_blank";
-
-topNav.appendChild(a);
-
-}
-
-
-addTopNav(
-"হোম",
-"https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/"
-);
-
-
-addTopNav(
-"সর্বশেষ",
-BLOGGER
-);
-
-
-addTopNav(
-"জাতীয়",
-BLOGGER+
-"/search/label/"+
-encodeURIComponent("জাতীয়")
-);
-
-
-addTopNav(
-"রাজনীতি",
-BLOGGER+
-"/search/label/"+
-encodeURIComponent("রাজনীতি")
-);
-
-
-addTopNav(
-"আন্তর্জাতিক",
-BLOGGER+
-"/search/label/"+
-encodeURIComponent("আন্তর্জাতিক")
-);
-
-
-addTopNav(
-"খেলাধুলা",
-BLOGGER+
-"/search/label/"+
-encodeURIComponent("খেলাধুলা")
-);
-
-
-/* =========================
-News Data
-========================= */
-
-let allNews=[];
-
-
-/* =========================
-HTML Escape
-========================= */
-
-function escapeHTML(text){
-
-const div =
-document.createElement("div");
-
-div.textContent =
-text || "";
-
-return div.innerHTML;
-
-}
-
-
-/* =========================
-Create News Card
-========================= */
-
-function createCard(news){
-
-let image="";
-
-
-if(news.image){
-
-image =
-'<img src="'+
-news.image+
-'" alt="'+
-escapeHTML(news.title)+
-'" loading="lazy">';
-
-}
-
-
-return `
-
-<div class="news-card">
-
-${image}
-
-<div class="news-content">
-
-<div class="news-title">
-
-${escapeHTML(news.title)}
-
-</div>
-
-<div class="news-date">
-
-প্রকাশ: ${escapeHTML(news.date)}
-
-</div>
-
-<a
-class="news-button"
-href="${news.link}"
-target="_blank">
-
-বিস্তারিত পড়ুন →
-
-</a>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-Render News
-========================= */
-
-window.showNews =
-function(data){
-
-try{
-
-const entries =
-(data.feed && data.feed.entry)
-?
-data.feed.entry
-:
-[];
-
-
-allNews=[];
-
-
-entries.forEach(function(entry){
-
-let title =
-entry.title?.$t ||
-"শিরোনাম নেই";
-
-
-let link=BLOGGER;
-
-
-if(entry.link){
-
-const alternate =
-entry.link.find(
-function(x){
-
-return x.rel==="alternate";
-
-});
-
-
-if(alternate){
-
-link=alternate.href;
-
-}
-
-}
-
-
-let image="";
-
-
-if(entry.media$thumbnail){
-
-image =
-entry.media$thumbnail.url
-.replace(
-"/s72-w640-h",
-"/s800"
-);
-
-}
-
-
-/* যদি উপরের image URL কাজ না করে */
-
-if(
-entry.media$thumbnail &&
-!image
-){
-
-image =
-entry.media$thumbnail.url;
-
-}
-
-
-let date="";
-
-
-if(entry.published){
-
-date =
-new Date(
-entry.published.$t
-).toLocaleDateString(
-"bn-BD",
-{
-year:"numeric",
-month:"long",
-day:"numeric"
-}
-);
-
-}
-
-
-allNews.push({
-
-title:title,
-link:link,
-image:image,
-date:date
-
-});
-
-});
-
-
-renderNews();
-
-
-}catch(error){
-
-console.error(
-"News rendering error:",
-error
-);
-
-showNewsError();
-
-}
-
-};
-
-
-/* =========================
-News Error
-========================= */
-
-function showNewsError(){
-
-document.getElementById(
-"featuredNews"
-).innerHTML = `
-
-<div class="error-box">
-
-⚠️ খবর লোড করা যাচ্ছে না।
-
-<br><br>
-
-দয়া করে Internet connection
-চেক করে আবার Refresh করুন।
-
-</div>
-
-`;
-
-
-document.getElementById(
-"latestNews"
-).innerHTML = `
-
-<div class="error-box">
-
-⚠️ খবর লোড করা যাচ্ছে না।
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-Render
-========================= */
-
-function renderNews(){
-
-const latest =
-document.getElementById(
-"latestNews"
-);
-
-
-const featured =
-document.getElementById(
-"featuredNews"
-);
-
-
-const breaking =
-document.getElementById(
-"breakingNews"
-);
-
-
-if(!allNews.length){
-
-featured.innerHTML =
-"<p>কোনো খবর পাওয়া যায়নি।</p>";
-
-latest.innerHTML =
-"<p>কোনো খবর পাওয়া যায়নি।</p>";
-
-return;
-
-}
-
-
-/* MAIN NEWS */
-
-const first =
-allNews[0];
-
-
-const image =
-first.image ||
-"https://via.placeholder.com/900x500?text=Rahmotpur+News";
-
-
-featured.innerHTML = `
-
-<a
-href="${first.link}"
-target="_blank"
-style="
-text-decoration:none;
-color:inherit;
-">
-
-<div class="featured-card">
-
-<img
-src="${image}"
-alt="${escapeHTML(first.title)}">
-
-<div class="featured-content">
-
-<div class="featured-label">
-
-⭐ প্রধান খবর
-
-</div>
-
-<div class="featured-title">
-
-${escapeHTML(first.title)}
-
-</div>
-
-<div class="news-date">
-
-প্রকাশ: ${escapeHTML(first.date)}
-
-</div>
-
-<div
-class="news-button">
-
-বিস্তারিত পড়ুন →
-
-</div>
-
-</div>
-
-</div>
-
-</a>
-
-`;
-
-
-/* HOME LATEST */
-
-const homeLatest =
-allNews
-.slice(1)
-.map(createCard)
-.join("");
-
-
-const homeBox =
-document.getElementById(
-"homeLatestNews"
-);
-
-
-homeBox.innerHTML = `
-
-<h2 class="category-title">
-
-🔴 সর্বশেষ খবর
-
-</h2>
-
-${homeLatest}
-
-<div
-style="
-text-align:center;
-margin:20px 0;
-">
-
-<a
-href="${BLOGGER}"
-target="_blank"
-class="main-button">
+class="btn more">
 
 আরও সব খবর দেখুন →
 
 </a>
 
+<a
+href="https://www.facebook.com/share/19EcGsuomM/"
+target="_blank"
+class="btn facebook">
+
+👍 Facebook Page
+
+</a>
+
 </div>
 
-`;
 
+<div class="notification">
 
-/* LATEST PAGE */
+<h3>🔔 নতুন খবরের নোটিফিকেশন</h3>
 
-latest.innerHTML =
-allNews
-.map(createCard)
-.join("");
+<p>
+নতুন খবর প্রকাশিত হলে Notification পেতে অনুমতি দিন।
+</p>
 
+<button
+class="notify-btn"
+onclick="enableNotification()">
 
-/* BREAKING */
+🔔 Notification চালু করুন
 
-breaking.textContent =
-allNews
-.slice(0,5)
-.map(function(x){
+</button>
 
-return "📰 "+x.title;
+<p id="notifyStatus"></p>
 
-})
-.join(" • ");
+</div>
 
-}
-
-
-/* =========================
-Search
-========================= */
-
-document.getElementById(
-"searchButton"
-).onclick =
-function(){
-
-const word =
-document.getElementById(
-"searchInput"
-).value
-.trim()
-.toLowerCase();
-
-
-const result =
-document.getElementById(
-"searchResults"
-);
-
-
-if(!word){
-
-result.innerHTML =
-"<p>খবরের নাম লিখুন।</p>";
-
-return;
-
-}
-
-
-const found =
-allNews.filter(
-function(news){
-
-return news.title
-.toLowerCase()
-.includes(word);
-
-});
-
-
-if(!found.length){
-
-result.innerHTML =
-"<p>কোনো খবর পাওয়া যায়নি।</p>";
-
-return;
-
-}
-
-
-result.innerHTML =
-found
-.map(createCard)
-.join("");
-
-};
-
-
-/* =========================
-Sections
-========================= */
-
-function showSection(id){
-
-const sections = [
-
-"homeSection",
-"categorySection",
-"latestSection",
-"searchSection",
-"settingsSection",
-"aboutSection"
-
-];
-
-
-sections.forEach(function(sectionId){
-
-const section =
-document.getElementById(
-sectionId
-);
-
-if(section){
-
-section.style.display =
-sectionId===id
-?
-"block"
-:
-"none";
-
-}
-
-});
-
-
-document
-.querySelectorAll(
-".bottom-nav button"
-)
-.forEach(function(button){
-
-button.classList.remove(
-"active"
-);
-
-});
-
-
-const active =
-document.querySelector(
-'.bottom-nav button[data-section="'+
-id+
-'"]'
-);
-
-
-if(active){
-
-active.classList.add(
-"active"
-);
-
-}
-
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-/* BOTTOM NAV */
-
-document
-.querySelectorAll(
-".bottom-nav button"
-)
-.forEach(function(button){
-
-button.onclick =
-function(){
-
-showSection(
-button.dataset.section
-);
-
-};
-
-});
-
-
-/* =========================
-Menu
-========================= */
-
-const menuButton =
-document.getElementById(
-"menuButton"
-);
-
-
-const menuPanel =
-document.getElementById(
-"menuPanel"
-);
-
-
-const menuOverlay =
-document.getElementById(
-"menuOverlay"
-);
-
-
-const closeMenu =
-document.getElementById(
-"closeMenu"
-);
-
-
-function openMenu(){
-
-menuPanel.classList.add(
-"open"
-);
-
-menuOverlay.classList.add(
-"show"
-);
-
-}
-
-
-function closeMenuPanel(){
-
-menuPanel.classList.remove(
-"open"
-);
-
-menuOverlay.classList.remove(
-"show"
-);
-
-}
-
-
-menuButton.onclick =
-openMenu;
-
-
-closeMenu.onclick =
-closeMenuPanel;
-
-
-menuOverlay.onclick =
-closeMenuPanel;
-
-
-/* =========================
-Dark Mode
-========================= */
-
-function toggleDarkMode(){
-
-document.body.classList.toggle(
-"dark"
-);
-
-
-if(
-document.body.classList.contains(
-"dark"
-)
-){
-
-localStorage.setItem(
-"rahmotpurDark",
-"1"
-);
-
-}else{
-
-localStorage.removeItem(
-"rahmotpurDark"
-);
-
-}
-
-}
-
-
-if(
-localStorage.getItem(
-"rahmotpurDark"
-)
-){
-
-document.body.classList.add(
-"dark"
-);
-
-}
-
-
-document.getElementById(
-"menuDarkButton"
-).onclick =
-function(){
-
-toggleDarkMode();
-
-};
-
-
-document.getElementById(
-"settingsDarkButton"
-).onclick =
-function(){
-
-toggleDarkMode();
-
-};
-
-
-document.getElementById(
-"menuSettingsButton"
-).onclick =
-function(){
-
-closeMenuPanel();
-
-showSection(
-"settingsSection"
-);
-
-};
-
-
-document.getElementById(
-"menuHomeButton"
-).onclick =
-function(){
-
-closeMenuPanel();
-
-showSection(
-"homeSection"
-);
-
-};
-
-
-document.getElementById(
-"menuAboutButton"
-).onclick =
-function(){
-
-closeMenuPanel();
-
-showSection(
-"aboutSection"
-);
-
-};
-
-
-/* =========================
-Notification
-========================= */
-
-document.getElementById(
-"menuNotificationButton"
-).onclick =
-function(){
-
-closeMenuPanel();
-
-enableNotifications();
-
-};
-
-
-document.getElementById(
-"settingsNotificationButton"
-).onclick =
-function(){
-
-enableNotifications();
-
-};
-
-
-document.getElementById(
-"notificationButton"
-).on
+  </main>
