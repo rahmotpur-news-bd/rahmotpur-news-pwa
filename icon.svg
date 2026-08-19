@@ -1,26 +1,21 @@
-{
-  "name": "Rahmotpur News",
-  "short_name": "Rahmotpur",
-  "description": "রহমতপুর, মিঠাপুকুর ও বাংলাদেশের সর্বশেষ খবর",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#d40000",
-  "orientation": "portrait",
-  "lang": "bn",
-  "icons": [
-    {
-      "src": "./icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
-  ]
-}
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">  
+  <rect width="512" height="512" rx="100" fill="#d40000"/>  <rect x="35" y="35" width="442" height="442" rx="80"  
+fill="#ffffff"/>
+
+  <circle cx="256" cy="205" r="105" fill="#d40000"/>  <text x="256" y="245"  
+text-anchor="middle"  
+font-family="Arial, sans-serif"  
+font-size="115"  
+font-weight="bold"  
+fill="#ffffff">RN</text>
+
+<text x="256" y="365"  
+text-anchor="middle"  
+font-family="Arial, sans-serif"  
+font-size="48"  
+font-weight="bold"  
+fill="#111111">NEWS</text>
+
+<rect x="125" y="400" width="262" height="8" rx="4"  
+fill="#d40000"/>
+</svg>
