@@ -8,7 +8,50 @@
 
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#d40000">
+.latest-section{
+  margin-top:25px;
+}
 
+.news-card{
+  background:white;
+  margin-bottom:15px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 2px 8px #ccc;
+}
+
+.news-card img{
+  width:100%;
+  max-height:220px;
+  object-fit:cover;
+}
+
+.news-content{
+  padding:15px;
+}
+
+.news-title{
+  font-size:18px;
+  font-weight:bold;
+  color:#222;
+  margin-bottom:8px;
+}
+
+.news-date{
+  font-size:12px;
+  color:#777;
+}
+
+.news-button{
+  display:inline-block;
+  margin-top:10px;
+  background:#d40000;
+  color:white;
+  padding:8px 12px;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:13px;
+}
 <style>
 *{box-sizing:border-box}
 
@@ -148,7 +191,15 @@ style="display:inline-block;background:#d40000;color:white;padding:12px 18px;bor
 <h2 class="category-title">📰 সংবাদ বিভাগ</h2>
 
 <div class="categories" id="categories"></div>
+<div class="latest-section">
 
+  <h2 class="category-title">🔴 সর্বশেষ খবর</h2>
+
+  <div id="latestNews">
+    <p style="text-align:center;">খবর লোড হচ্ছে...</p>
+  </div>
+
+</div>
 </div>
 
 <footer>
@@ -323,7 +374,86 @@ topNav.appendChild(a);
 
 
 /* Service Worker */
+const feedURL =
+"https://rahmotpurnewsbd.blogspot.com/feeds/posts/default?alt=json&max-results=10";
 
+fetch(feedURL)
+
+.then(response => response.json())
+
+.then(data => {
+
+const entries =
+data.feed.entry || [];
+
+const newsBox =
+document.getElementById("latestNews");
+
+newsBox.innerHTML = "";
+
+entries.forEach(entry => {
+
+let title =
+entry.title.$t;
+
+let link =
+entry.link.find(
+l => l.rel === "alternate"
+).href;
+
+let image =
+"https://via.placeholder.com/800x450?text=Rahmotpur+News";
+
+if(entry.media$thumbnail){
+image =
+entry.media$thumbnail.url
+.replace("s72-c","s800");
+}
+
+let published =
+entry.published.$t;
+
+let date =
+new Date(published)
+.toLocaleDateString("bn-BD");
+
+newsBox.innerHTML += `
+
+<div class="news-card">
+
+<img src="${image}" alt="${title}">
+
+<div class="news-content">
+
+<div class="news-title">
+${title}
+</div>
+
+<div class="news-date">
+প্রকাশ: ${date}
+</div>
+
+<a class="news-button"
+href="${link}">
+বিস্তারিত পড়ুন
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+})
+
+.catch(error => {
+
+document.getElementById("latestNews").innerHTML =
+"<p>খবর লোড করা যাচ্ছে না।</p>";
+
+});
 if ("serviceWorker" in navigator) {
 
 window.addEventListener("load", () => {
