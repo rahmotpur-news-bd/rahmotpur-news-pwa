@@ -1,4 +1,4 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
@@ -10,9 +10,7 @@
 <meta name="theme-color" content="#d40000">
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -21,7 +19,6 @@ body{
   color:#222;
 }
 
-/* HEADER */
 header{
   background:#d40000;
   color:white;
@@ -39,7 +36,6 @@ header p{
   font-size:14px;
 }
 
-/* NAVIGATION */
 nav{
   background:#111;
   padding:12px 8px;
@@ -58,14 +54,12 @@ nav a{
   white-space:nowrap;
 }
 
-/* CONTAINER */
 .container{
   max-width:900px;
   margin:auto;
   padding:15px;
 }
 
-/* WELCOME */
 .welcome{
   background:white;
   padding:20px;
@@ -79,14 +73,12 @@ nav a{
   margin-top:0;
 }
 
-/* CATEGORY TITLE */
 .category-title{
   font-size:21px;
   margin:20px 0 12px;
   color:#d40000;
 }
 
-/* CATEGORY GRID */
 .categories{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -102,11 +94,6 @@ nav a{
   color:#222;
   font-weight:bold;
   box-shadow:0 2px 7px #ccc;
-  transition:0.2s;
-}
-
-.category:hover{
-  transform:scale(1.03);
 }
 
 .category .icon{
@@ -124,7 +111,6 @@ footer{
   font-size:13px;
 }
 
-/* DESKTOP */
 @media(min-width:600px){
   .categories{
     grid-template-columns:repeat(4,1fr);
@@ -142,129 +128,101 @@ footer{
 
 <nav>
   <a href="https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/">হোম</a>
+
   <a href="https://rahmotpurnewsbd.blogspot.com/">সর্বশেষ</a>
-  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/রাজনীতি">রাজনীতি</a>
-  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/আন্তর্জাতিক">আন্তর্জাতিক</a>
-  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/খেলাধুলো">খেলাধুলো</a>
+
+  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF">রাজনীতি</a>
+
+  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC">জাতীয়</a>
+
+  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95">আন্তর্জাতিক</a>
 </nav>
 
 <div class="container">
 
-  <div class="welcome">
-    <h2>Welcome to Rahmotpur News</h2>
-    <p>
-      রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর
-      জানতে আমাদের নিউজ পোর্টালে প্রবেশ করুন।
-    </p>
+<div class="welcome">
 
-    <a href="https://rahmotpurnewsbd.blogspot.com/"
-       style="display:inline-block;background:#d40000;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;">
-       সর্বশেষ খবর দেখুন
-    </a>
-  </div>
+<h2>Welcome to Rahmotpur News</h2>
 
-  <h2 class="category-title">📰 সংবাদ বিভাগ</h2>
+<p>
+রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর
+জানতে আমাদের নিউজ পোর্টালে প্রবেশ করুন।
+</p>
 
-  <div class="categories">
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/জাতীয়">
-      <span class="icon">🇧🇩</span>
-      জাতীয়
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/সারাদেশ">
-      <span class="icon">🗺️</span>
-      সারাদেশ
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/রাজনীতি">
-      <span class="icon">🏛️</span>
-      রাজনীতি
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/আন্তর্জাতিক">
-      <span class="icon">🌍</span>
-      আন্তর্জাতিক
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/অপরাধ">
-      <span class="icon">🚔</span>
-      অপরাধ
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/খেলাধুলো">
-      <span class="icon">⚽</span>
-      খেলাধুলো
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/বিনোদন">
-      <span class="icon">🎬</span>
-      বিনোদন
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/শিক্ষা">
-      <span class="icon">🎓</span>
-      শিক্ষা
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/ধর্মীয়">
-      <span class="icon">🕌</span>
-      ধর্মীয়
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/মতামত">
-      <span class="icon">💬</span>
-      মতামত
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/আবহাওয়া">
-      <span class="icon">🌦️</span>
-      আবহাওয়া
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/পরিবেশ">
-      <span class="icon">🌳</span>
-      পরিবেশ
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/রহমতপুর">
-      <span class="icon">📍</span>
-      রহমতপুর
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/ইমাদপুর">
-      <span class="icon">🏘️</span>
-      ইমাদপুর
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/মিঠাপুকুর">
-      <span class="icon">📌</span>
-      মিঠাপুকুর
-    </a>
-
-    <a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/আশেপাশের%20অঞ্চল">
-      <span class="icon">📍</span>
-      আশেপাশের অঞ্চল
-    </a>
-
-  </div>
+<a href="https://rahmotpurnewsbd.blogspot.com/"
+style="display:inline-block;background:#d40000;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;">
+সর্বশেষ খবর দেখুন
+</a>
 
 </div>
 
-<footer>
-  © 2026 Rahmotpur News<br>
-  আপনার এলাকার খবর সবার আগে
-</footer>
+<h2 class="category-title">📰 সংবাদ বিভাগ</h2>
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js")
-      .then(() => console.log("Rahmotpur News PWA ready"))
-      .catch(error => console.log("Service Worker error:", error));
-  });
-}
-</script>
+<div class="categories">
 
-</body>
-      </html>
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%A4%E0%A6%AA%E0%A7%81%E0%A6%B0">
+<span class="icon">📍</span>
+রহমতপুর
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%87%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A6%AA%E0%A7%81%E0%A6%B0">
+<span class="icon">🏘️</span>
+ইমাদপুর
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%AE%E0%A6%BF%E0%A6%A0%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%95%E0%A7%81%E0%A6%B0">
+<span class="icon">📌</span>
+মিঠাপুকুর
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF">
+<span class="icon">🏛️</span>
+রাজনীতি
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC">
+<span class="icon">🇧🇩</span>
+জাতীয়
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95">
+<span class="icon">🌍</span>
+আন্তর্জাতিক
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6">
+<span class="icon">🗺️</span>
+সারাদেশ
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%96%E0%A7%87%E0%A6%B2%E0%A6%BE%E0%A6%A7%E0%A7%81%E0%A6%B2%E0%A6%BE">
+<span class="icon">⚽</span>
+খেলাধুলা
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%85%E0%A6%AA%E0%A6%B0%E0%A6%BE%E0%A6%A7">
+<span class="icon">🚔</span>
+অপরাধ
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4">
+<span class="icon">💬</span>
+মতামত
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B6%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE">
+<span class="icon">🎓</span>
+শিক্ষা
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%A7%E0%A6%B0%E0%A7%8D%E0%A6%AE%E0%A7%80%E0%A6%AF%E0%A6%BC">
+<span class="icon">🕌</span>
+ধর্মীয়
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%86%E0%A6%AC%E0%A6%B9%E0%A6%BE%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE">
+<span class="icon">🌦️</span>
+আবহাওয়া
+</a>
+
+<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%AC%E0%A6%
