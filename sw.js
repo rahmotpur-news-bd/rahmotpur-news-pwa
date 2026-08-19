@@ -1,4 +1,4 @@
-const CACHE_NAME = "rahmotpur-news-v4";
+const CACHE_NAME = "rahmotpur-news-v5";
 
 
 const FILES_TO_CACHE = [
@@ -21,7 +21,7 @@ importScripts(
 firebase.initializeApp({
 
   apiKey:
-    "AIzaSyBZjx3DqTd-1yzymUBp4cVpO3QokVq11M4",
+    "AIzaSyBZjx3DqTd-1yzymUB4cVpO3QokVq11M4",
 
   authDomain:
     "rahmotpur-news.firebaseapp.com",
@@ -60,6 +60,9 @@ function(payload){
       "নতুন খবর প্রকাশিত হয়েছে।",
 
     icon:
+      "./icon.svg",
+
+    badge:
       "./icon.svg",
 
     data: {
