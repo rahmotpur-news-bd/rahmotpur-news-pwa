@@ -1,59 +1,24 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Rahmotpur News</title>
 
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d40000">
-.latest-section{
-  margin-top:25px;
-}
 
-.news-card{
-  background:white;
-  margin-bottom:15px;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 2px 8px #ccc;
-}
+<meta name="theme-color"
+content="#d40000">
 
-.news-card img{
-  width:100%;
-  max-height:220px;
-  object-fit:cover;
-}
-
-.news-content{
-  padding:15px;
-}
-
-.news-title{
-  font-size:18px;
-  font-weight:bold;
-  color:#222;
-  margin-bottom:8px;
-}
-
-.news-date{
-  font-size:12px;
-  color:#777;
-}
-
-.news-button{
-  display:inline-block;
-  margin-top:10px;
-  background:#d40000;
-  color:white;
-  padding:8px 12px;
-  border-radius:6px;
-  text-decoration:none;
-  font-size:13px;
-}
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -61,6 +26,8 @@ font-family:Arial,sans-serif;
 background:#f3f3f3;
 color:#222;
 }
+
+/* HEADER */
 
 header{
 background:#d40000;
@@ -78,6 +45,8 @@ header p{
 margin:6px 0 0;
 font-size:14px;
 }
+
+/* TOP MENU */
 
 nav{
 background:#111;
@@ -97,11 +66,15 @@ font-size:13px;
 white-space:nowrap;
 }
 
+/* CONTAINER */
+
 .container{
 max-width:900px;
 margin:auto;
 padding:15px;
 }
+
+/* WELCOME */
 
 .welcome{
 background:white;
@@ -116,11 +89,26 @@ color:#d40000;
 margin-top:0;
 }
 
+/* BUTTON */
+
+.main-button{
+display:inline-block;
+background:#d40000;
+color:white;
+padding:12px 18px;
+border-radius:7px;
+text-decoration:none;
+}
+
+/* CATEGORY TITLE */
+
 .category-title{
 font-size:21px;
 margin:20px 0 12px;
 color:#d40000;
 }
+
+/* CATEGORY GRID */
 
 .categories{
 display:grid;
@@ -145,6 +133,57 @@ display:block;
 margin-bottom:7px;
 }
 
+/* NEWS */
+
+.latest-section{
+margin-top:25px;
+}
+
+.news-card{
+background:white;
+margin-bottom:15px;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 2px 8px #ccc;
+}
+
+.news-card img{
+width:100%;
+max-height:230px;
+object-fit:cover;
+display:block;
+}
+
+.news-content{
+padding:15px;
+}
+
+.news-title{
+font-size:18px;
+font-weight:bold;
+line-height:1.5;
+color:#222;
+margin-bottom:8px;
+}
+
+.news-date{
+font-size:12px;
+color:#777;
+}
+
+.news-button{
+display:inline-block;
+margin-top:10px;
+background:#d40000;
+color:white;
+padding:8px 12px;
+border-radius:6px;
+text-decoration:none;
+font-size:13px;
+}
+
+/* FOOTER */
+
 footer{
 background:#111;
 color:white;
@@ -154,27 +193,50 @@ margin-top:30px;
 font-size:13px;
 }
 
+/* DESKTOP */
+
 @media(min-width:600px){
+
 .categories{
 grid-template-columns:repeat(4,1fr);
 }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
+
 <h1>📰 Rahmotpur News</h1>
-<p>আপনার এলাকার খবর সবার আগে</p>
+
+<p>
+আপনার এলাকার খবর সবার আগে
+</p>
+
 </header>
+
+
+<!-- TOP NAVIGATION -->
 
 <nav id="topNav"></nav>
 
+
 <div class="container">
 
+
+<!-- WELCOME -->
+
 <div class="welcome">
-<h2>Welcome to Rahmotpur News</h2>
+
+<h2>
+Welcome to Rahmotpur News
+</h2>
 
 <p>
 রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর
@@ -182,38 +244,78 @@ grid-template-columns:repeat(4,1fr);
 </p>
 
 <a
-href="https://rahmotpurnewsbd.blogspot.com/"
-style="display:inline-block;background:#d40000;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;">
+class="main-button"
+href="https://rahmotpurnewsbd.blogspot.com/">
+
 সর্বশেষ খবর দেখুন
+
 </a>
+
 </div>
 
-<h2 class="category-title">📰 সংবাদ বিভাগ</h2>
 
-<div class="categories" id="categories"></div>
+<!-- CATEGORIES -->
+
+<h2 class="category-title">
+📰 সংবাদ বিভাগ
+</h2>
+
+<div
+class="categories"
+id="categories">
+
+</div>
+
+
+<!-- LATEST NEWS -->
+
 <div class="latest-section">
 
-  <h2 class="category-title">🔴 সর্বশেষ খবর</h2>
+<h2 class="category-title">
+🔴 সর্বশেষ খবর
+</h2>
 
-  <div id="latestNews">
-    <p style="text-align:center;">খবর লোড হচ্ছে...</p>
-  </div>
+<div id="latestNews">
+
+<p style="text-align:center;">
+খবর লোড হচ্ছে...
+</p>
 
 </div>
+
 </div>
+
+
+</div>
+
+
+<!-- FOOTER -->
 
 <footer>
-© 2026 Rahmotpur News<br>
+
+© 2026 Rahmotpur News
+
+<br>
+
 আপনার এলাকার খবর সবার আগে
+
 </footer>
+
 
 <script>
 
-/* Blogger website */
+/* =========================
+   BLOGGER WEBSITE
+========================= */
+
 const BLOGGER =
 "https://rahmotpurnewsbd.blogspot.com";
 
-/* All Blogger Labels */
+
+/* =========================
+   BLOGGER LABELS
+========================= */
+
 const labels = [
 
 {
@@ -298,21 +400,22 @@ icon:"📍"
 
 ];
 
-/* Create category links */
+
+/* =========================
+   CREATE CATEGORY BUTTONS
+========================= */
+
 const categoryBox =
 document.getElementById("categories");
 
-labels.forEach(item => {
+
+labels.forEach(function(item){
 
 const link =
 document.createElement("a");
 
-link.className = "category";
-
-/*
-URL encoding automatically handles
-Bangla characters.
-*/
+link.className =
+"category";
 
 link.href =
 BLOGGER +
@@ -330,10 +433,13 @@ categoryBox.appendChild(link);
 });
 
 
-/* Top navigation */
+/* =========================
+   TOP NAVIGATION
+========================= */
 
 const topNav =
 document.getElementById("topNav");
+
 
 const home =
 document.createElement("a");
@@ -341,7 +447,8 @@ document.createElement("a");
 home.href =
 "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/";
 
-home.textContent = "হোম";
+home.textContent =
+"হোম";
 
 topNav.appendChild(home);
 
@@ -349,14 +456,21 @@ topNav.appendChild(home);
 const latest =
 document.createElement("a");
 
-latest.href = BLOGGER;
+latest.href =
+BLOGGER;
 
-latest.textContent = "সর্বশেষ";
+latest.textContent =
+"সর্বশেষ";
 
 topNav.appendChild(latest);
 
 
-["জাতীয়","রাজনীতি","আন্তর্জাতিক","খেলাধুলা"].forEach(name => {
+[
+"জাতীয়",
+"রাজনীতি",
+"আন্তর্জাতিক",
+"খেলাধুলা"
+].forEach(function(name){
 
 const a =
 document.createElement("a");
@@ -366,105 +480,272 @@ BLOGGER +
 "/search/label/" +
 encodeURIComponent(name);
 
-a.textContent = name;
+a.textContent =
+name;
 
 topNav.appendChild(a);
 
 });
 
 
-/* Service Worker */
-const feedURL =
-"https://rahmotpurnewsbd.blogspot.com/feeds/posts/default?alt=json&max-results=10";
+/* =========================
+   BLOGGER NEWS
+========================= */
 
-fetch(feedURL)
-
-.then(response => response.json())
-
-.then(data => {
-
-const entries =
-data.feed.entry || [];
+function showNews(data){
 
 const newsBox =
 document.getElementById("latestNews");
 
+const entries =
+data.feed.entry || [];
+
+
 newsBox.innerHTML = "";
 
-entries.forEach(entry => {
 
-let title =
+if(entries.length === 0){
+
+newsBox.innerHTML =
+"<p style='text-align:center;'>কোনো খবর পাওয়া যায়নি।</p>";
+
+return;
+
+}
+
+
+entries.forEach(function(entry){
+
+
+/* TITLE */
+
+const title =
 entry.title.$t;
 
+
+/* LINK */
+
 let link =
-entry.link.find(
-l => l.rel === "alternate"
-).href;
+BLOGGER;
+
+
+if(entry.link){
+
+const alternate =
+entry.link.find(function(item){
+
+return item.rel === "alternate";
+
+});
+
+if(alternate){
+
+link =
+alternate.href;
+
+}
+
+}
+
+
+/* IMAGE */
 
 let image =
-"https://via.placeholder.com/800x450?text=Rahmotpur+News";
+"";
+
 
 if(entry.media$thumbnail){
+
 image =
 entry.media$thumbnail.url
 .replace("s72-c","s800");
+
 }
 
-let published =
-entry.published.$t;
 
-let date =
-new Date(published)
-.toLocaleDateString("bn-BD");
+/* DATE */
 
-newsBox.innerHTML += `
+let date = "";
 
-<div class="news-card">
 
-<img src="${image}" alt="${title}">
+if(entry.published){
 
-<div class="news-content">
+date =
+new Date(
+entry.published.$t
+).toLocaleDateString(
+"bn-BD"
+);
 
-<div class="news-title">
-${title}
-</div>
+}
 
-<div class="news-date">
-প্রকাশ: ${date}
-</div>
 
-<a class="news-button"
-href="${link}">
-বিস্তারিত পড়ুন
-</a>
+/* CARD */
 
-</div>
+const card =
+document.createElement("div");
 
-</div>
+card.className =
+"news-card";
 
-`;
+
+/* IMAGE */
+
+if(image){
+
+const img =
+document.createElement("img");
+
+img.src =
+image;
+
+img.alt =
+title;
+
+card.appendChild(img);
+
+}
+
+
+/* CONTENT */
+
+const content =
+document.createElement("div");
+
+content.className =
+"news-content";
+
+
+const titleElement =
+document.createElement("div");
+
+titleElement.className =
+"news-title";
+
+titleElement.textContent =
+title;
+
+
+const dateElement =
+document.createElement("div");
+
+dateElement.className =
+"news-date";
+
+dateElement.textContent =
+"প্রকাশ: " + date;
+
+
+const button =
+document.createElement("a");
+
+button.className =
+"news-button";
+
+button.href =
+link;
+
+button.textContent =
+"বিস্তারিত পড়ুন";
+
+
+content.appendChild(
+titleElement
+);
+
+content.appendChild(
+dateElement
+);
+
+content.appendChild(
+button
+);
+
+
+card.appendChild(
+content
+);
+
+
+newsBox.appendChild(
+card
+);
 
 });
+
+}
+
+
+/* =========================
+   LOAD BLOGGER JSONP
+========================= */
+
+function loadBloggerNews(){
+
+const script =
+document.createElement("script");
+
+
+script.src =
+BLOGGER +
+"/feeds/posts/default" +
+"?alt=json-in-script" +
+"&max-results=10" +
+"&callback=showNews";
+
+
+script.onerror =
+function(){
+
+document.getElementById(
+"latestNews"
+).innerHTML =
+"<p style='text-align:center;'>খবর লোড করা যাচ্ছে না।</p>";
+
+};
+
+
+document.body.appendChild(
+script
+);
+
+}
+
+
+loadBloggerNews();
+
+
+/* =========================
+   SERVICE WORKER
+========================= */
+
+if(
+"serviceWorker" in navigator
+){
+
+window.addEventListener(
+"load",
+function(){
+
+navigator.serviceWorker
+.register("./sw.js")
+
+.then(function(){
+
+console.log(
+"Rahmotpur News PWA ready"
+);
 
 })
 
-.catch(error => {
+.catch(function(error){
 
-document.getElementById("latestNews").innerHTML =
-"<p>খবর লোড করা যাচ্ছে না।</p>";
+console.log(
+"Service Worker error:",
+error
+);
 
 });
-if ("serviceWorker" in navigator) {
-
-window.addEventListener("load", () => {
-
-navigator.serviceWorker.register("./sw.js")
-.then(() =>
-console.log("Rahmotpur News PWA ready")
-)
-.catch(error =>
-console.log("Service Worker error:",error)
-);
 
 });
 
@@ -472,5 +753,7 @@ console.log("Service Worker error:",error)
 
 </script>
 
+
 </body>
+
   </html>
