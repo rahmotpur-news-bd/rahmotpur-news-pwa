@@ -7,39 +7,59 @@ importScripts(
 );
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBZjx3DqTd-1yzymUB5p4cVpO3QokVq11M4",
-  authDomain: "rahmotpur-news.firebaseapp.com",
-  projectId: "rahmotpur-news",
-  storageBucket: "rahmotpur-news.firebasestorage.app",
-  messagingSenderId: "669823932201",
-  appId: "1:669823932201:web:0f6e4fd04fc01293a78938"
+
+  apiKey:
+    "AIzaSyBZjx3DqTd-1yzymUBp4cVpO3QokVq11M4",
+
+  authDomain:
+    "rahmotpur-news.firebaseapp.com",
+
+  projectId:
+    "rahmotpur-news",
+
+  storageBucket:
+    "rahmotpur-news.firebasestorage.app",
+
+  messagingSenderId:
+    "669823932201",
+
+  appId:
+    "1:669823932201:web:0f6e4fd04fc01293a78938"
+
 });
 
 const messaging = firebase.messaging();
 
+
 messaging.onBackgroundMessage(function(payload) {
 
-  const notificationTitle =
+  const title =
     payload.notification?.title ||
     "Rahmotpur News";
 
-  const notificationOptions = {
+  const options = {
+
     body:
       payload.notification?.body ||
       "নতুন খবর প্রকাশিত হয়েছে।",
 
-    icon: "./icon.svg",
+    icon:
+      "./icon.svg",
 
     data: {
+
       url:
         payload.data?.url ||
         "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/"
+
     }
+
   };
 
+
   self.registration.showNotification(
-    notificationTitle,
-    notificationOptions
+    title,
+    options
   );
 
 });
@@ -52,7 +72,7 @@ self.addEventListener(
     event.notification.close();
 
     const url =
-      event.notification.data?.url ||
+      event.notification?.data?.url ||
       "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/";
 
     event.waitUntil(
