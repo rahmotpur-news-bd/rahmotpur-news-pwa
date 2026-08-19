@@ -15,101 +15,7 @@ content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#d40000">
 
 <style>
-/* MENU BUTTON */
 
-.menu-button{
-position:absolute;
-right:15px;
-top:15px;
-width:45px;
-height:45px;
-border:0;
-border-radius:50%;
-background:#111;
-color:white;
-font-size:24px;
-cursor:pointer;
-z-index:10001;
-}
-
-.menu-overlay{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.55);
-z-index:10000;
-}
-
-.menu-overlay.show{
-display:block;
-}
-
-.side-menu{
-position:fixed;
-top:0;
-right:-300px;
-width:280px;
-height:100%;
-background:white;
-z-index:10002;
-box-shadow:-3px 0 12px rgba(0,0,0,.3);
-transition:.3s;
-padding:20px;
-}
-
-.side-menu.show{
-right:0;
-}
-
-body.dark .side-menu{
-background:#1e1e1e;
-color:white;
-}
-
-.menu-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding-bottom:15px;
-border-bottom:1px solid #ddd;
-}
-
-.menu-header h2{
-margin:0;
-color:#d40000;
-}
-
-.menu-close{
-background:none;
-border:0;
-font-size:28px;
-cursor:pointer;
-color:inherit;
-}
-
-.menu-item{
-width:100%;
-display:flex;
-align-items:center;
-gap:12px;
-padding:15px 8px;
-border:0;
-background:none;
-font-size:16px;
-text-align:left;
-color:inherit;
-text-decoration:none;
-cursor:pointer;
-border-bottom:1px solid #eee;
-}
-
-.menu-item span{
-font-size:22px;
-}
-
-body.dark .menu-item{
-border-bottom-color:#333;
-  }
 *{
 box-sizing:border-box;
 }
@@ -147,6 +53,7 @@ background:#d40000;
 color:white;
 padding:18px 15px;
 text-align:center;
+position:relative;
 }
 
 header h1{
@@ -157,6 +64,24 @@ font-size:28px;
 header p{
 margin:6px 0 0;
 font-size:14px;
+}
+
+
+/* MENU BUTTON */
+
+.menu-button{
+position:absolute;
+right:15px;
+top:15px;
+width:45px;
+height:45px;
+border:0;
+border-radius:50%;
+background:#111;
+color:white;
+font-size:24px;
+cursor:pointer;
+z-index:10001;
 }
 
 nav{
@@ -449,6 +374,89 @@ font-size:20px;
 z-index:9998;
 }
 
+
+/* SIDE MENU */
+
+.menu-overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+z-index:10000;
+}
+
+.menu-overlay.show{
+display:block;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+right:-300px;
+width:280px;
+height:100%;
+background:white;
+z-index:10002;
+box-shadow:-3px 0 12px rgba(0,0,0,.3);
+transition:.3s;
+padding:20px;
+overflow-y:auto;
+}
+
+.side-menu.show{
+right:0;
+}
+
+body.dark .side-menu{
+background:#1e1e1e;
+color:white;
+}
+
+.menu-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding-bottom:15px;
+border-bottom:1px solid #ddd;
+}
+
+.menu-header h2{
+margin:0;
+color:#d40000;
+}
+
+.menu-close{
+background:none;
+border:0;
+font-size:30px;
+cursor:pointer;
+color:inherit;
+}
+
+.menu-item{
+width:100%;
+display:flex;
+align-items:center;
+gap:12px;
+padding:15px 8px;
+border:0;
+background:none;
+font-size:16px;
+text-align:left;
+color:inherit;
+text-decoration:none;
+cursor:pointer;
+border-bottom:1px solid #eee;
+}
+
+.menu-item span{
+font-size:22px;
+}
+
+body.dark .menu-item{
+border-bottom-color:#333;
+}
+
 @media(min-width:600px){
 
 .categories{
@@ -471,12 +479,13 @@ height:320px;
 
 <header>
 
-<header style="position:relative;">
-
 <button
 class="menu-button"
-id="menuButton">
+id="menuButton"
+aria-label="Menu">
+
 ☰
+
 </button>
 
 <h1>📰 Rahmotpur News</h1>
@@ -673,12 +682,15 @@ style="display:none">
 আপনার এলাকার খবর সবার আগে
 
 </footer>
-<!-- MENU -->
+
+
+<!-- SIDE MENU -->
 
 <div
 class="menu-overlay"
 id="menuOverlay">
 </div>
+
 
 <div
 class="side-menu"
@@ -690,50 +702,63 @@ id="sideMenu">
 
 <button
 class="menu-close"
-id="menuClose">
+id="menuClose"
+aria-label="Close">
+
 ×
+
 </button>
 
 </div>
+
 
 <button
 class="menu-item"
 id="settingsMenu">
 
 <span>⚙️</span>
+
 Settings
 
 </button>
+
 
 <button
 class="menu-item"
 id="menuDarkMode">
 
 <span id="menuDarkIcon">🌙</span>
+
 <span id="menuDarkText">Dark Mode</span>
 
 </button>
 
+
 <a
 class="menu-item"
 href="https://www.facebook.com/rahmotpurnews"
-target="_blank">
+target="_blank"
+rel="noopener">
 
 <span>📘</span>
+
 Facebook Page
 
 </a>
+
 
 <button
 class="menu-item"
 id="aboutMenu">
 
 <span>ℹ️</span>
+
 About Rahmotpur News
 
 </button>
 
 </div>
+
 
 <div class="bottom-nav">
 
@@ -818,7 +843,7 @@ from
 const firebaseConfig = {
 
 apiKey:
-"AIzaSyBZjx3DqTd-1yzymUBp4cVpO3QokVq11M4",
+"AIzaSyBZjx3DqTd-1yzymUB5p4cVpO3QokVq11M4",
 
 authDomain:
 "rahmotpur-news.firebaseapp.com",
@@ -1415,6 +1440,32 @@ behavior:"smooth"
 
 /* DARK MODE */
 
+function updateDarkModeButtons(){
+
+const dark =
+document.body.classList.contains("dark");
+
+
+document.getElementById(
+"darkButton"
+).textContent =
+dark ? "☀️" : "🌙";
+
+
+document.getElementById(
+"menuDarkIcon"
+).textContent =
+dark ? "☀️" : "🌙";
+
+
+document.getElementById(
+"menuDarkText"
+).textContent =
+dark ? "Light Mode" : "Dark Mode";
+
+}
+
+
 document.getElementById(
 "darkButton"
 ).onclick =
@@ -1433,17 +1484,15 @@ localStorage.setItem(
 "1"
 );
 
-this.textContent="☀️";
-
 }else{
 
 localStorage.removeItem(
 "rahmotpurDark"
 );
 
-this.textContent="🌙";
-
 }
+
+updateDarkModeButtons();
 
 };
 
@@ -1454,11 +1503,10 @@ localStorage.getItem("rahmotpurDark")
 
 document.body.classList.add("dark");
 
-document.getElementById(
-"darkButton"
-).textContent="☀️";
-
 }
+
+
+updateDarkModeButtons();
 
 
 /* INSTALL */
@@ -1576,7 +1624,7 @@ script
 
 
 loadBlogger();
-<script>
+
 
 /* MENU */
 
@@ -1642,34 +1690,30 @@ document.getElementById(
 ).onclick =
 function(){
 
-document.getElementById(
-"darkButton"
-).click();
+document.body.classList.toggle(
+"dark"
+);
 
-updateMenuDarkMode();
+if(
+document.body.classList.contains("dark")
+){
 
-};
+localStorage.setItem(
+"rahmotpurDark",
+"1"
+);
 
+}else{
 
-function updateMenuDarkMode(){
-
-const dark =
-document.body.classList.contains("dark");
-
-document.getElementById(
-"menuDarkIcon"
-).textContent =
-dark ? "☀️" : "🌙";
-
-document.getElementById(
-"menuDarkText"
-).textContent =
-dark ? "Light Mode" : "Dark Mode";
+localStorage.removeItem(
+"rahmotpurDark"
+);
 
 }
 
+updateDarkModeButtons();
 
-updateMenuDarkMode();
+};
 
 
 /* SETTINGS */
@@ -1705,136 +1749,7 @@ alert(
 
 </script>
 
-</script>
-<script>
-
-/* MENU */
-
-const menuButton =
-document.getElementById("menuButton");
-
-const menuClose =
-document.getElementById("menuClose");
-
-const sideMenu =
-document.getElementById("sideMenu");
-
-const menuOverlay =
-document.getElementById("menuOverlay");
-
-
-function openMenu(){
-
-sideMenu.classList.add("show");
-
-menuOverlay.classList.add("show");
-
-}
-
-
-function closeMenu(){
-
-sideMenu.classList.remove("show");
-
-menuOverlay.classList.remove("show");
-
-}
-
-
-menuButton.onclick =
-function(){
-
-openMenu();
-
-};
-
-
-menuClose.onclick =
-function(){
-
-closeMenu();
-
-};
-
-
-menuOverlay.onclick =
-function(){
-
-closeMenu();
-
-};
-
-
-/* MENU DARK MODE */
-
-document.getElementById(
-"menuDarkMode"
-).onclick =
-function(){
-
-document.getElementById(
-"darkButton"
-).click();
-
-updateMenuDarkMode();
-
-};
-
-
-function updateMenuDarkMode(){
-
-const dark =
-document.body.classList.contains("dark");
-
-document.getElementById(
-"menuDarkIcon"
-).textContent =
-dark ? "☀️" : "🌙";
-
-document.getElementById(
-"menuDarkText"
-).textContent =
-dark ? "Light Mode" : "Dark Mode";
-
-}
-
-
-updateMenuDarkMode();
-
-
-/* SETTINGS */
-
-document.getElementById(
-"settingsMenu"
-).onclick =
-function(){
-
-closeMenu();
-
-alert(
-"⚙️ Settings\n\nRahmotpur News\n\nএখানে ভবিষ্যতে আরও Settings যোগ করা যাবে।"
-);
-
-};
-
-
-/* ABOUT */
-
-document.getElementById(
-"aboutMenu"
-).onclick =
-function(){
-
-closeMenu();
-
-alert(
-"📰 Rahmotpur News\n\nআপনার এলাকার খবর সবার আগে।\n\nরহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর জানতে আমাদের সঙ্গে থাকুন।"
-);
-
-};
-
-</script>
 
 </body>
 
-</html>
+  </html>
