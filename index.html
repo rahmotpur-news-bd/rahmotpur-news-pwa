@@ -1131,7 +1131,8 @@ initializeApp(firebaseConfig);
 
 const messaging =
 getMessaging(firebaseApp);
-
+const db =
+getFirestore(firebaseApp);
 
 const vapidKey =
 "BHPP9J01OXs3DwyDhLDpeKo77BEOGrAx7JWaS0z1MQXBMGE2FfkxJcr33HH3z9i-97yJTDz9XU4BqJI8yNweQRY";
@@ -1190,7 +1191,13 @@ localStorage.setItem(
 "rahmotpur_fcm_token",
 token
 );
-
+await setDoc(
+doc(db,"fcm_tokens",token),
+{
+token:token,
+createdAt:new Date().toISOString()
+}
+);
 alert(
 "🔔 Notification সফলভাবে চালু হয়েছে!"
 );
