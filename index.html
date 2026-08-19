@@ -593,6 +593,58 @@ transform:rotate(360deg);
 }
 
   }
+/* RAHMOTPUR NEWS LOADING SCREEN */
+
+#rahmotpurLoading{
+position:fixed;
+inset:0;
+background:#fff;
+color:#222;
+z-index:999998;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+body.dark #rahmotpurLoading{
+background:#121212;
+color:#eee;
+}
+
+.loading-logo{
+width:85px;
+height:85px;
+border-radius:50%;
+object-fit:cover;
+background:white;
+padding:4px;
+box-shadow:0 3px 12px rgba(0,0,0,.2);
+}
+
+.loading-spinner{
+width:35px;
+height:35px;
+margin-top:22px;
+border:4px solid #ddd;
+border-top-color:#d40000;
+border-radius:50%;
+animation:loadingSpin .8s linear infinite;
+}
+
+@keyframes loadingSpin{
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+#rahmotpurLoading p{
+margin-top:12px;
+font-size:14px;
+  }
 </style>
 
 </head>
@@ -600,7 +652,20 @@ transform:rotate(360deg);
 
 <body>
 <!-- RAHMOTPUR NEWS SPLASH SCREEN -->
+<!-- RAHMOTPUR NEWS LOADING SCREEN -->
 
+<div id="rahmotpurLoading">
+
+<img
+src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjubv8pdof9w5KdiSeB5TV8e93OYhQ8nhBcO3RRgSW8GyPr9ysInzD3GCU_B7K74qHbnZHJdcLuaqVRNACbfhk4DLCpg6nbweylNnfSgRBAJXoMdyXuYLZ-aLEWp3Yt4qwh-U1gx5UoXs49xMKeA6w7BLVH1lvjGzSCHH3ayVQKSbdOpQ/s1600/FB_IMG_1786278216091.jpg"
+class="loading-logo"
+alt="Rahmotpur News">
+
+<div class="loading-spinner"></div>
+
+<p>খবর লোড হচ্ছে...</p>
+
+</div>
 <div id="rahmotpurSplash">
 
 <img
@@ -2060,6 +2125,34 @@ splash.classList.add("hide");
 
 },
 1200
+);
+
+}
+);
+    /* LOADING SCREEN */
+
+window.addEventListener(
+"load",
+function(){
+
+setTimeout(
+function(){
+
+const loading =
+document.getElementById(
+"rahmotpurLoading"
+);
+
+if(loading){
+
+loading.style.opacity="0";
+
+loading.style.visibility="hidden";
+
+}
+
+},
+900
 );
 
 }
