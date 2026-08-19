@@ -130,6 +130,15 @@ footer{
 <footer>
   © 2026 রহমতপুর নিউজ
 </footer>
+  <script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("Rahmotpur News PWA ready"))
+      .catch(error => console.log("Service Worker error:", error));
+  });
+}
+  </script>
 
 </body>
   </html>
