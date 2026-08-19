@@ -534,14 +534,87 @@ height:320px;
 }
 
 }
+/* RAHMOTPUR NEWS SPLASH SCREEN */
 
+#rahmotpurSplash{
+position:fixed;
+inset:0;
+background:#d40000;
+color:white;
+z-index:999999;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+transition:opacity .5s ease,visibility .5s ease;
+}
+
+#rahmotpurSplash.hide{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+
+.splash-logo{
+width:115px;
+height:115px;
+border-radius:50%;
+object-fit:cover;
+background:white;
+padding:5px;
+box-shadow:0 4px 15px rgba(0,0,0,.3);
+}
+
+#rahmotpurSplash h2{
+margin:18px 0 5px;
+font-size:26px;
+}
+
+#rahmotpurSplash p{
+margin:0;
+font-size:14px;
+}
+
+.splash-loader{
+width:38px;
+height:38px;
+margin-top:25px;
+border:4px solid rgba(255,255,255,.35);
+border-top-color:white;
+border-radius:50%;
+animation:splashSpin .8s linear infinite;
+}
+
+@keyframes splashSpin{
+
+to{
+transform:rotate(360deg);
+}
+
+  }
 </style>
 
 </head>
 
 
 <body>
+<!-- RAHMOTPUR NEWS SPLASH SCREEN -->
 
+<div id="rahmotpurSplash">
+
+<img
+src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjubv8pdof9w5KdiSeB5TV8e93OYhQ8nhBcO3RRgSW8GyPr9ysInzD3GCU_B7K74qHbnZHJdcLuaqVRNACbfhk4DLCpg6nbweylNnfSgRBAJXoMdyXuYLZ-aLEWp3Yt4qwh-U1gx5UoXs49xMKeA6w7BLVH1lvjGzSCHH3ayVQKSbdOpQ/s1600/FB_IMG_1786278216091.jpg"
+class="splash-logo"
+alt="Rahmotpur News">
+
+<h2>Rahmotpur News</h2>
+
+<p>আপনার এলাকার খবর সবার আগে</p>
+
+<div class="splash-loader"></div>
+
+</div>
 
 <header>
 
@@ -1965,7 +2038,32 @@ script
 
 
 loadBlogger();
+/* SPLASH SCREEN */
 
+window.addEventListener(
+"load",
+function(){
+
+setTimeout(
+function(){
+
+const splash =
+document.getElementById(
+"rahmotpurSplash"
+);
+
+if(splash){
+
+splash.classList.add("hide");
+
+}
+
+},
+1200
+);
+
+}
+);
 </script>
 
 
