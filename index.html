@@ -13,108 +13,108 @@
 *{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f3f3f3;
-  color:#222;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f3f3;
+color:#222;
 }
 
 header{
-  background:#d40000;
-  color:white;
-  padding:18px 15px;
-  text-align:center;
+background:#d40000;
+color:white;
+padding:18px 15px;
+text-align:center;
 }
 
 header h1{
-  margin:0;
-  font-size:28px;
+margin:0;
+font-size:28px;
 }
 
 header p{
-  margin:6px 0 0;
-  font-size:14px;
+margin:6px 0 0;
+font-size:14px;
 }
 
 nav{
-  background:#111;
-  padding:12px 8px;
-  display:flex;
-  overflow-x:auto;
-  gap:8px;
+background:#111;
+padding:12px 8px;
+display:flex;
+overflow-x:auto;
+gap:8px;
 }
 
 nav a{
-  color:white;
-  text-decoration:none;
-  background:#333;
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:13px;
-  white-space:nowrap;
+color:white;
+text-decoration:none;
+background:#333;
+padding:8px 12px;
+border-radius:20px;
+font-size:13px;
+white-space:nowrap;
 }
 
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:15px;
+max-width:900px;
+margin:auto;
+padding:15px;
 }
 
 .welcome{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  margin-bottom:18px;
-  box-shadow:0 2px 8px #ccc;
+background:white;
+padding:20px;
+border-radius:12px;
+margin-bottom:18px;
+box-shadow:0 2px 8px #ccc;
 }
 
 .welcome h2{
-  color:#d40000;
-  margin-top:0;
+color:#d40000;
+margin-top:0;
 }
 
 .category-title{
-  font-size:21px;
-  margin:20px 0 12px;
-  color:#d40000;
+font-size:21px;
+margin:20px 0 12px;
+color:#d40000;
 }
 
 .categories{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
 
 .category{
-  background:white;
-  padding:18px 10px;
-  text-align:center;
-  border-radius:12px;
-  text-decoration:none;
-  color:#222;
-  font-weight:bold;
-  box-shadow:0 2px 7px #ccc;
+background:white;
+padding:18px 10px;
+text-align:center;
+border-radius:12px;
+text-decoration:none;
+color:#222;
+font-weight:bold;
+box-shadow:0 2px 7px #ccc;
 }
 
 .category .icon{
-  font-size:30px;
-  display:block;
-  margin-bottom:7px;
+font-size:30px;
+display:block;
+margin-bottom:7px;
 }
 
 footer{
-  background:#111;
-  color:white;
-  text-align:center;
-  padding:22px 10px;
-  margin-top:30px;
-  font-size:13px;
+background:#111;
+color:white;
+text-align:center;
+padding:22px 10px;
+margin-top:30px;
+font-size:13px;
 }
 
 @media(min-width:600px){
-  .categories{
-    grid-template-columns:repeat(4,1fr);
-  }
+.categories{
+grid-template-columns:repeat(4,1fr);
+}
 }
 </style>
 </head>
@@ -122,26 +122,15 @@ footer{
 <body>
 
 <header>
-  <h1>📰 Rahmotpur News</h1>
-  <p>আপনার এলাকার খবর সবার আগে</p>
+<h1>📰 Rahmotpur News</h1>
+<p>আপনার এলাকার খবর সবার আগে</p>
 </header>
 
-<nav>
-  <a href="https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/">হোম</a>
-
-  <a href="https://rahmotpurnewsbd.blogspot.com/">সর্বশেষ</a>
-
-  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF">রাজনীতি</a>
-
-  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC">জাতীয়</a>
-
-  <a href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95">আন্তর্জাতিক</a>
-</nav>
+<nav id="topNav"></nav>
 
 <div class="container">
 
 <div class="welcome">
-
 <h2>Welcome to Rahmotpur News</h2>
 
 <p>
@@ -149,80 +138,209 @@ footer{
 জানতে আমাদের নিউজ পোর্টালে প্রবেশ করুন।
 </p>
 
-<a href="https://rahmotpurnewsbd.blogspot.com/"
+<a
+href="https://rahmotpurnewsbd.blogspot.com/"
 style="display:inline-block;background:#d40000;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;">
 সর্বশেষ খবর দেখুন
 </a>
-
 </div>
 
 <h2 class="category-title">📰 সংবাদ বিভাগ</h2>
 
-<div class="categories">
+<div class="categories" id="categories"></div>
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%A4%E0%A6%AA%E0%A7%81%E0%A6%B0">
-<span class="icon">📍</span>
-রহমতপুর
-</a>
+</div>
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%87%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A6%AA%E0%A7%81%E0%A6%B0">
-<span class="icon">🏘️</span>
-ইমাদপুর
-</a>
+<footer>
+© 2026 Rahmotpur News<br>
+আপনার এলাকার খবর সবার আগে
+</footer>
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%AE%E0%A6%BF%E0%A6%A0%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%95%E0%A7%81%E0%A6%B0">
-<span class="icon">📌</span>
-মিঠাপুকুর
-</a>
+<script>
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF">
-<span class="icon">🏛️</span>
-রাজনীতি
-</a>
+/* Blogger website */
+const BLOGGER =
+"https://rahmotpurnewsbd.blogspot.com";
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/জাতীয়">
-<span class="icon">🇧🇩</span>
-জাতীয়
-</a>
+/* All Blogger Labels */
+const labels = [
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95">
-<span class="icon">🌍</span>
-আন্তর্জাতিক
-</a>
+{
+name:"রহমতপুর",
+icon:"📍"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6">
-<span class="icon">🗺️</span>
-সারাদেশ
-</a>
+{
+name:"ইমাদপুর",
+icon:"🏘️"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%96%E0%A7%87%E0%A6%B2%E0%A6%BE%E0%A6%A7%E0%A7%81%E0%A6%B2%E0%A6%BE">
-<span class="icon">⚽</span>
-খেলাধুলা
-</a>
+{
+name:"মিঠাপুকুর",
+icon:"📌"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%85%E0%A6%AA%E0%A6%B0%E0%A6%BE%E0%A6%A7">
-<span class="icon">🚔</span>
-অপরাধ
-</a>
+{
+name:"রাজনীতি",
+icon:"🏛️"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4">
-<span class="icon">💬</span>
-মতামত
-</a>
+{
+name:"জাতীয়",
+icon:"🇧🇩"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%B6%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE">
-<span class="icon">🎓</span>
-শিক্ষা
-</a>
+{
+name:"আন্তর্জাতিক",
+icon:"🌍"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/ধর্মীয়">
-<span class="icon">🕌</span>
-ধর্মীয়
-</a>
+{
+name:"সারাদেশ",
+icon:"🗺️"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/আবহাওয়া">
-<span class="icon">🌦️</span>
-আবহাওয়া
-</a>
+{
+name:"খেলাধুলা",
+icon:"⚽"
+},
 
-<a class="category" href="https://rahmotpurnewsbd.blogspot.com/search/label/%E0%A6%AC%E0%A6%
+{
+name:"অপরাধ",
+icon:"🚔"
+},
+
+{
+name:"মতামত",
+icon:"💬"
+},
+
+{
+name:"শিক্ষা",
+icon:"🎓"
+},
+
+{
+name:"ধর্মীয়",
+icon:"🕌"
+},
+
+{
+name:"আবহাওয়া",
+icon:"🌦️"
+},
+
+{
+name:"বিনোদন",
+icon:"🎬"
+},
+
+{
+name:"পরিবেশ",
+icon:"🌳"
+},
+
+{
+name:"রহমতপুরের আশেপাশের অঞ্চল",
+icon:"📍"
+}
+
+];
+
+/* Create category links */
+const categoryBox =
+document.getElementById("categories");
+
+labels.forEach(item => {
+
+const link =
+document.createElement("a");
+
+link.className = "category";
+
+/*
+URL encoding automatically handles
+Bangla characters.
+*/
+
+link.href =
+BLOGGER +
+"/search/label/" +
+encodeURIComponent(item.name);
+
+link.innerHTML =
+'<span class="icon">' +
+item.icon +
+'</span>' +
+item.name;
+
+categoryBox.appendChild(link);
+
+});
+
+
+/* Top navigation */
+
+const topNav =
+document.getElementById("topNav");
+
+const home =
+document.createElement("a");
+
+home.href =
+"https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/";
+
+home.textContent = "হোম";
+
+topNav.appendChild(home);
+
+
+const latest =
+document.createElement("a");
+
+latest.href = BLOGGER;
+
+latest.textContent = "সর্বশেষ";
+
+topNav.appendChild(latest);
+
+
+["জাতীয়","রাজনীতি","আন্তর্জাতিক","খেলাধুলা"].forEach(name => {
+
+const a =
+document.createElement("a");
+
+a.href =
+BLOGGER +
+"/search/label/" +
+encodeURIComponent(name);
+
+a.textContent = name;
+
+topNav.appendChild(a);
+
+});
+
+
+/* Service Worker */
+
+if ("serviceWorker" in navigator) {
+
+window.addEventListener("load", () => {
+
+navigator.serviceWorker.register("./sw.js")
+.then(() =>
+console.log("Rahmotpur News PWA ready")
+)
+.catch(error =>
+console.log("Service Worker error:",error)
+);
+
+});
+
+}
+
+</script>
+
+</body>
+  </html>
