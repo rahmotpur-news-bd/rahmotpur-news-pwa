@@ -43,9 +43,21 @@ body.dark .category,
 body.dark .news-card,
 body.dark .featured-card,
 body.dark .search-box,
-body.dark .notification-box{
+body.dark .notification-box,
+body.dark .menu-panel,
+body.dark .settings-box,
+body.dark .about-box{
 background:#1e1e1e;
 color:#eee;
+}
+
+body.dark .menu-item{
+color:#eee;
+border-bottom-color:#333;
+}
+
+body.dark .menu-header{
+border-bottom-color:#333;
 }
 
 header{
@@ -53,6 +65,7 @@ background:#d40000;
 color:white;
 padding:18px 15px;
 text-align:center;
+position:relative;
 }
 
 header h1{
@@ -64,6 +77,253 @@ header p{
 margin:6px 0 0;
 font-size:14px;
 }
+
+/* MENU BUTTON */
+
+.menu-button{
+position:absolute;
+left:12px;
+top:15px;
+width:45px;
+height:45px;
+border:0;
+border-radius:8px;
+background:rgba(0,0,0,.25);
+color:white;
+font-size:27px;
+cursor:pointer;
+}
+
+.menu-button:active{
+transform:scale(.95);
+}
+
+/* SIDE MENU */
+
+.menu-overlay{
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.55);
+z-index:10000;
+display:none;
+}
+
+.menu-overlay.show{
+display:block;
+}
+
+.menu-panel{
+position:absolute;
+left:0;
+top:0;
+bottom:0;
+width:290px;
+max-width:85%;
+background:white;
+box-shadow:4px 0 15px rgba(0,0,0,.3);
+overflow-y:auto;
+transform:translateX(-100%);
+transition:.3s;
+}
+
+.menu-overlay.show .menu-panel{
+transform:translateX(0);
+}
+
+.menu-header{
+background:#d40000;
+color:white;
+padding:22px 18px;
+position:relative;
+border-bottom:1px solid #ddd;
+}
+
+.menu-header h2{
+margin:0;
+font-size:22px;
+}
+
+.menu-header p{
+margin:5px 0 0;
+font-size:13px;
+}
+
+.menu-close{
+position:absolute;
+right:10px;
+top:10px;
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+background:rgba(0,0,0,.2);
+color:white;
+font-size:25px;
+}
+
+.menu-list{
+padding:8px 0;
+}
+
+.menu-item{
+width:100%;
+display:flex;
+align-items:center;
+gap:13px;
+padding:15px 18px;
+border:0;
+border-bottom:1px solid #eee;
+background:transparent;
+color:#222;
+font-size:15px;
+text-align:left;
+cursor:pointer;
+text-decoration:none;
+}
+
+.menu-item:hover{
+background:#f5f5f5;
+}
+
+.menu-icon{
+font-size:22px;
+width:28px;
+text-align:center;
+}
+
+.menu-dark-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.menu-toggle{
+width:48px;
+height:27px;
+border-radius:20px;
+background:#999;
+position:relative;
+transition:.3s;
+}
+
+.menu-toggle::after{
+content:"";
+position:absolute;
+width:21px;
+height:21px;
+background:white;
+border-radius:50%;
+top:3px;
+left:3px;
+transition:.3s;
+}
+
+.menu-toggle.active{
+background:#d40000;
+}
+
+.menu-toggle.active::after{
+left:24px;
+}
+
+/* MODAL */
+
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.65);
+z-index:10001;
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px;
+}
+
+.modal-overlay.show{
+display:flex;
+}
+
+.modal-box{
+background:white;
+color:#222;
+width:100%;
+max-width:500px;
+max-height:85vh;
+overflow-y:auto;
+border-radius:15px;
+box-shadow:0 5px 25px rgba(0,0,0,.4);
+padding:20px;
+position:relative;
+}
+
+body.dark .modal-box{
+background:#1e1e1e;
+color:#eee;
+}
+
+.modal-box h2{
+margin-top:0;
+color:#d40000;
+}
+
+.modal-close{
+position:absolute;
+right:12px;
+top:10px;
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+background:#eee;
+font-size:22px;
+}
+
+body.dark .modal-close{
+background:#333;
+color:white;
+}
+
+.settings-option{
+padding:14px 0;
+border-bottom:1px solid #ddd;
+}
+
+body.dark .settings-option{
+border-bottom-color:#444;
+}
+
+.settings-option:last-child{
+border-bottom:0;
+}
+
+.settings-option b{
+display:block;
+margin-bottom:5px;
+}
+
+.settings-option p{
+margin:0;
+font-size:13px;
+opacity:.8;
+}
+
+.settings-button{
+margin-top:10px;
+background:#d40000;
+color:white;
+border:0;
+padding:10px 14px;
+border-radius:7px;
+font-size:14px;
+}
+
+/* TOP NAV */
 
 nav{
 background:#111;
@@ -377,11 +637,306 @@ height:320px;
 
 <header>
 
+<button
+class="menu-button"
+id="menuButton"
+aria-label="Menu">
+
+☰
+
+</button>
+
 <h1>📰 Rahmotpur News</h1>
 
 <p>আপনার এলাকার খবর সবার আগে</p>
 
 </header>
+
+
+<!-- SIDE MENU -->
+
+<div
+class="menu-overlay"
+id="menuOverlay">
+
+<div class="menu-panel">
+
+<div class="menu-header">
+
+<button
+class="menu-close"
+id="menuClose">
+
+×
+</button>
+
+<h2>📰 Rahmotpur News</h2>
+
+<p>আপনার এলাকার খবর সবার আগে</p>
+
+</div>
+
+
+<div class="menu-list">
+
+
+<button
+class="menu-item"
+data-menu-section="homeSection">
+
+<span class="menu-icon">🏠</span>
+
+<span>হোম</span>
+
+</button>
+
+
+<button
+class="menu-item"
+data-menu-section="categorySection">
+
+<span class="menu-icon">📰</span>
+
+<span>ক্যাটাগরি</span>
+
+</button>
+
+
+<button
+class="menu-item"
+data-menu-section="latestSection">
+
+<span class="menu-icon">🔴</span>
+
+<span>সর্বশেষ খবর</span>
+
+</button>
+
+
+<button
+class="menu-item"
+data-menu-section="searchSection">
+
+<span class="menu-icon">🔎</span>
+
+<span>খবর সার্চ করুন</span>
+
+</button>
+
+
+<div
+class="menu-item menu-dark-row"
+id="menuDarkMode">
+
+<div>
+
+<span class="menu-icon">🌙</span>
+
+<span>Dark Mode</span>
+
+</div>
+
+<div
+class="menu-toggle"
+id="menuDarkToggle">
+</div>
+
+</div>
+
+
+<button
+class="menu-item"
+id="settingsMenuButton">
+
+<span class="menu-icon">⚙️</span>
+
+<span>Settings</span>
+
+</button>
+
+
+<button
+class="menu-item"
+id="aboutMenuButton">
+
+<span class="menu-icon">ℹ️</span>
+
+<span>About Rahmotpur News</span>
+
+</button>
+
+
+<a
+class="menu-item"
+href="https://www.facebook.com/rahmotpurnews"
+target="_blank"
+rel="noopener">
+
+<span class="menu-icon">📘</span>
+
+<span>Facebook Page</span>
+
+</a>
+
+
+<button
+class="menu-item"
+id="notificationMenuButton">
+
+<span class="menu-icon">🔔</span>
+
+<span>Notification</span>
+
+</button>
+
+
+<button
+class="menu-item"
+id="installMenuButton">
+
+<span class="menu-icon">📱</span>
+
+<span>Install App</span>
+
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS MODAL -->
+
+<div
+class="modal-overlay"
+id="settingsModal">
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+data-close-modal="settingsModal">
+
+×
+</button>
+
+<h2>⚙️ Settings</h2>
+
+
+<div class="settings-option">
+
+<b>🌙 Dark Mode</b>
+
+<p>
+অ্যাপের Dark Mode চালু বা বন্ধ করুন।
+</p>
+
+<button
+class="settings-button"
+id="settingsDarkButton">
+
+🌙 Dark Mode চালু করুন
+
+</button>
+
+</div>
+
+
+<div class="settings-option">
+
+<b>🔔 Notification</b>
+
+<p>
+Rahmotpur News-এর নতুন খবরের Notification পেতে চালু করুন।
+</p>
+
+<button
+class="settings-button"
+id="settingsNotificationButton">
+
+🔔 Notification চালু করুন
+
+</button>
+
+</div>
+
+
+<div class="settings-option">
+
+<b>📱 App Install</b>
+
+<p>
+Rahmotpur News অ্যাপটি আপনার ফোনে ইনস্টল করতে পারেন।
+</p>
+
+<button
+class="settings-button"
+id="settingsInstallButton">
+
+📱 Install App
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ABOUT MODAL -->
+
+<div
+class="modal-overlay"
+id="aboutModal">
+
+<div class="modal-box about-box">
+
+<button
+class="modal-close"
+data-close-modal="aboutModal">
+
+×
+</button>
+
+<h2>ℹ️ Rahmotpur News</h2>
+
+<p>
+<strong>Rahmotpur News</strong> একটি অনলাইন নিউজ প্ল্যাটফর্ম,
+যেখানে রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর প্রকাশ করা হয়।
+</p>
+
+<p>
+📰 জাতীয় সংবাদ<br>
+🌍 আন্তর্জাতিক সংবাদ<br>
+⚽ খেলাধুলা<br>
+🏛️ রাজনীতি<br>
+📍 স্থানীয় সংবাদ<br>
+🎬 বিনোদনসহ বিভিন্ন খবর এখানে পাওয়া যাবে।
+</p>
+
+<p>
+<strong>লক্ষ্য:</strong><br>
+আপনার এলাকার খবর সবার আগে মানুষের কাছে পৌঁছে দেওয়া।
+</p>
+
+<a
+class="main-button"
+href="https://www.facebook.com/rahmotpurnews"
+target="_blank"
+rel="noopener">
+
+📘 Facebook Page দেখুন
+
+</a>
+
+</div>
+
+</div>
 
 
 <div class="breaking">
@@ -1197,17 +1752,9 @@ found
 };
 
 
-document
-.querySelectorAll(".bottom-nav button")
-.forEach(
-function(button){
+/* BOTTOM NAVIGATION */
 
-button.onclick =
-function(){
-
-const id =
-button.dataset.section;
-
+function showSection(id){
 
 [
 "homeSection",
@@ -1232,12 +1779,16 @@ document
 .querySelectorAll(".bottom-nav button")
 .forEach(
 function(x){
+
 x.classList.remove("active");
+
+if(x.dataset.section===id){
+
+x.classList.add("active");
+
 }
-);
 
-
-button.classList.add("active");
+});
 
 
 window.scrollTo({
@@ -1245,180 +1796,12 @@ top:0,
 behavior:"smooth"
 });
 
-};
-
-}
-);
-
-
-/* DARK MODE */
-
-document.getElementById(
-"darkButton"
-).onclick =
-function(){
-
-document.body.classList.toggle(
-"dark"
-);
-
-if(
-document.body.classList.contains("dark")
-){
-
-localStorage.setItem(
-"rahmotpurDark",
-"1"
-);
-
-this.textContent="☀️";
-
-}else{
-
-localStorage.removeItem(
-"rahmotpurDark"
-);
-
-this.textContent="🌙";
-
-}
-
-};
-
-
-if(
-localStorage.getItem("rahmotpurDark")
-){
-
-document.body.classList.add("dark");
-
-document.getElementById(
-"darkButton"
-).textContent="☀️";
-
 }
 
 
-/* INSTALL */
+document
+.querySelectorAll(".bottom-nav button")
+.forEach(
+function(button){
 
-let deferredPrompt=null;
-
-
-window.addEventListener(
-"beforeinstallprompt",
-function(event){
-
-event.preventDefault();
-
-deferredPrompt=event;
-
-document.getElementById(
-"installBox"
-).style.display="block";
-
-});
-
-
-document.getElementById(
-"installButton"
-).onclick =
-async function(){
-
-if(!deferredPrompt){
-
-alert(
-"Chrome-এর Menu থেকে Install app অথবা Add to Home screen ব্যবহার কর।"
-);
-
-return;
-
-}
-
-
-deferredPrompt.prompt();
-
-await deferredPrompt.userChoice;
-
-deferredPrompt=null;
-
-document.getElementById(
-"installBox"
-).style.display="none";
-
-};
-
-
-/* NOTIFICATION */
-
-document.getElementById(
-"notificationButton"
-).onclick =
-function(){
-
-if(
-window.enableRahmotpurNotifications
-){
-
-window.enableRahmotpurNotifications();
-
-}
-
-};
-
-
-/* BLOGGER FEED */
-
-function loadBlogger(){
-
-const old =
-document.getElementById(
-"bloggerScript"
-);
-
-if(old){
-old.remove();
-}
-
-
-const script =
-document.createElement("script");
-
-
-script.id="bloggerScript";
-
-
-script.src =
-BLOGGER+
-"/feeds/posts/default"+
-"?alt=json-in-script"+
-"&max-results=10"+
-"&callback=showNews";
-
-
-script.onerror =
-function(){
-
-document.getElementById(
-"latestNews"
-).innerHTML=
-"<p>খবর লোড করা যাচ্ছে না।</p>";
-
-};
-
-
-document.body.appendChild(
-script
-);
-
-}
-
-
-loadBlogger();
-
-
-</script>
-
-
-</body>
-
-  </html>
+  
