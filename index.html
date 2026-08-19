@@ -1199,7 +1199,10 @@ createdAt:new Date().toISOString()
 }
 );
 alert(
-"🔔 Notification সফলভাবে চালু হয়েছে!"
+"Firebase Error:\n" +
+(error.code || "") +
+"\n" +
+(error.message || error)
 );
 
 console.log(
