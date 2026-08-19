@@ -1,19 +1,32 @@
 {
   "name": "Rahmotpur News",
-  "short_name": "Rahmotpur News",
-  "description": "Latest news from Rahmotpur, Mithapukur and Bangladesh",
+  "short_name": "Rahmotpur",
+  "description": "রহমতপুর, মিঠাপুকুর ও বাংলাদেশের সর্বশেষ খবর",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#d40000",
   "orientation": "portrait",
-  "lang": "en",
+  "lang": "bn",
   "icons": [
     {
-      "src": "./icon.svg",
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
