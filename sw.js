@@ -1,36 +1,87 @@
-const CACHE_NAME = "rahmotpur-news-v1";
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"
+);
 
-const FILES_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icon.svg"
-];
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js"
+);
 
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
+firebase.initializeApp({
+
+  apiKey:
+    "AIzaSyBZjx3DqTd-1yzymUBp4cVpO3QokVq11M4",
+
+  authDomain:
+    "rahmotpur-news.firebaseapp.com",
+
+  projectId:
+    "rahmotpur-news",
+
+  storageBucket:
+    "rahmotpur-news.firebasestorage.app",
+
+  messagingSenderId:
+    "669823932201",
+
+  appId:
+    "1:669823932201:web:0f6e4fd04fc01293a78938"
+
 });
 
-self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-      )
-    )
-  );
-});
 
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
-});
+const messaging =
+firebase.messaging();
+
+
+messaging.onBackgroundMessage(
+  function(payload) {
+
+    const title =
+      payload.notification?.title ||
+      "Rahmotpur News";
+
+    const options = {
+
+      body:
+        payload.notification?.body ||
+        "নতুন খবর প্রকাশিত হয়েছে।",
+
+      icon:
+        "./icon.svg",
+
+      data: {
+
+        url:
+          payload.data?.url ||
+          "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/"
+
+      }
+
+    };
+
+
+    self.registration.showNotification(
+      title,
+      options
+    );
+
+  }
+);
+
+
+self.addEventListener(
+  "notificationclick",
+  function(event) {
+
+    event.notification.close();
+
+    const url =
+      event.notification?.data?.url ||
+      "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/";
+
+    event.waitUntil(
+      clients.openWindow(url)
+    );
+
+  }
+);
