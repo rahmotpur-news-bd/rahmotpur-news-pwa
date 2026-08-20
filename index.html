@@ -18,17 +18,17 @@
 html{scroll-behavior:smooth}
 
 body{
- margin:0;
- padding:0 0 75px;
- font-family:Arial,"Noto Sans Bengali",sans-serif;
- background:#f3f3f3;
- color:#222;
- transition:.3s
+margin:0;
+padding:0 0 75px;
+font-family:Arial,"Noto Sans Bengali",sans-serif;
+background:#f3f3f3;
+color:#222;
+transition:.3s
 }
 
 body.dark{
- background:#121212;
- color:#eee
+background:#121212;
+color:#eee
 }
 
 body.dark .box,
@@ -37,462 +37,467 @@ body.dark .search-box,
 body.dark .modal-box,
 body.dark .category,
 body.dark .featured{
- background:#1e1e1e;
- color:#eee
+background:#1e1e1e;
+color:#eee
 }
 
 header{
- position:relative;
- background:#d40000;
- color:white;
- text-align:center;
- padding:17px 55px
+position:relative;
+background:#d40000;
+color:white;
+text-align:center;
+padding:17px 55px
 }
 
 header h1{
- margin:0;
- font-size:27px
+margin:0;
+font-size:27px
 }
 
 header p{
- margin:6px 0 0;
- font-size:14px
+margin:6px 0 0;
+font-size:14px
 }
 
 .more-menu{
- position:absolute;
- right:10px;
- top:10px
+position:absolute;
+right:10px;
+top:10px
 }
 
 .more-button{
- width:42px;
- height:42px;
- border:0;
- border-radius:50%;
- background:rgba(0,0,0,.25);
- color:white;
- font-size:23px
+width:42px;
+height:42px;
+border:0;
+border-radius:50%;
+background:rgba(0,0,0,.25);
+color:white;
+font-size:23px
 }
 
 .more-dropdown{
- position:absolute;
- right:0;
- top:48px;
- width:250px;
- background:white;
- color:#222;
- border-radius:12px;
- box-shadow:0 5px 20px #333;
- display:none;
- z-index:10000;
- overflow:hidden
+position:absolute;
+right:0;
+top:48px;
+width:250px;
+background:white;
+color:#222;
+border-radius:12px;
+box-shadow:0 5px 20px #333;
+display:none;
+z-index:10000;
+overflow:hidden
 }
 
 .more-dropdown.show{
- display:block
+display:block
 }
 
 .more-item{
- display:block;
- width:100%;
- padding:14px;
- border:0;
- border-bottom:1px solid #ddd;
- background:transparent;
- text-align:left;
- color:inherit;
- text-decoration:none
+display:block;
+width:100%;
+padding:14px;
+border:0;
+border-bottom:1px solid #ddd;
+background:transparent;
+text-align:left;
+color:inherit;
+text-decoration:none;
+cursor:pointer
 }
 
 .breaking{
- height:42px;
- background:#111;
- color:white;
- display:flex;
- align-items:center;
- overflow:hidden
+height:42px;
+background:#111;
+color:white;
+display:flex;
+align-items:center;
+overflow:hidden
 }
 
 .breaking-title{
- background:#d40000;
- height:100%;
- padding:0 13px;
- display:flex;
- align-items:center;
- font-weight:bold
+background:#d40000;
+height:100%;
+padding:0 13px;
+display:flex;
+align-items:center;
+font-weight:bold
 }
 
 .breaking-scroll{
- overflow:hidden;
- flex:1
+overflow:hidden;
+flex:1
 }
 
 .breaking-track{
- display:inline-block;
- white-space:nowrap;
- padding-left:100%;
- animation:moveNews 25s linear infinite
+display:inline-block;
+white-space:nowrap;
+padding-left:100%;
+animation:moveNews 25s linear infinite
 }
 
 @keyframes moveNews{
- from{transform:translateX(0)}
- to{transform:translateX(-100%)}
+from{transform:translateX(0)}
+to{transform:translateX(-100%)}
 }
 
 nav{
- background:#111;
- padding:9px 10px;
- display:flex;
- gap:8px;
- overflow-x:auto
+background:#111;
+padding:9px 10px;
+display:flex;
+gap:8px;
+overflow-x:auto
 }
 
 nav::-webkit-scrollbar{
- display:none
+display:none
 }
 
 nav button{
- background:#333;
- color:white;
- border:0;
- padding:8px 13px;
- border-radius:20px;
- white-space:nowrap
+background:#333;
+color:white;
+border:0;
+padding:8px 13px;
+border-radius:20px;
+white-space:nowrap
 }
 
 .container{
- max-width:900px;
- margin:auto;
- padding:15px
+max-width:900px;
+margin:auto;
+padding:15px
 }
 
 .box,
 .card,
 .search-box{
- background:white;
- border-radius:12px;
- box-shadow:0 2px 8px #ccc;
- margin-bottom:18px
+background:white;
+border-radius:12px;
+box-shadow:0 2px 8px #ccc;
+margin-bottom:18px
 }
 
 .box{
- padding:20px
+padding:20px
 }
 
 .card{
- overflow:hidden;
- margin-bottom:15px
+overflow:hidden;
+margin-bottom:15px
 }
 
 .card img{
- width:100%;
- max-height:230px;
- object-fit:cover;
- display:block
+width:100%;
+max-height:230px;
+object-fit:cover;
+display:block
 }
 
 .card-content{
- padding:15px
+padding:15px
 }
 
 .title{
- font-size:18px;
- font-weight:bold;
- line-height:1.5
+font-size:18px;
+font-weight:bold;
+line-height:1.5
 }
 
 .date{
- font-size:12px;
- color:#777;
- margin-top:7px
+font-size:12px;
+color:#777;
+margin-top:7px
 }
 
 .button{
- display:inline-block;
- background:#d40000;
- color:white;
- border:0;
- border-radius:7px;
- padding:10px 15px;
- margin-top:8px;
- text-decoration:none;
- cursor:pointer
+display:inline-block;
+background:#d40000;
+color:white;
+border:0;
+border-radius:7px;
+padding:10px 15px;
+margin-top:8px;
+text-decoration:none;
+cursor:pointer
 }
 
 .category-title{
- color:#d40000;
- font-size:21px;
- margin:22px 0 12px
+color:#d40000;
+font-size:21px;
+margin:22px 0 12px
 }
 
 .categories{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px
 }
 
 .category{
- background:white;
- border:0;
- border-radius:12px;
- padding:17px 8px;
- box-shadow:0 2px 7px #ccc;
- font-weight:bold;
- cursor:pointer
+background:white;
+border:0;
+border-radius:12px;
+padding:17px 8px;
+box-shadow:0 2px 7px #ccc;
+font-weight:bold;
+cursor:pointer
 }
 
 .category .icon{
- display:block;
- font-size:28px;
- margin-bottom:6px
+display:block;
+font-size:28px;
+margin-bottom:6px
 }
 
 .search-box{
- padding:15px
+padding:15px
 }
 
 .search-input{
- width:100%;
- padding:13px;
- border:1px solid #ccc;
- border-radius:8px;
- font-size:16px
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px
 }
 
-/* FACEBOOK PHOTO BOX */
+/* FACEBOOK PHOTO */
 
 .facebook-photo-box{
- text-align:center;
- padding:25px 18px
+text-align:center;
+padding:25px 18px
 }
 
 .facebook-photo-icon{
- font-size:55px;
- margin-bottom:10px
+font-size:55px;
+margin-bottom:10px
 }
 
 .facebook-photo-box h3{
- margin:5px 0 10px
+margin:5px 0 10px
 }
 
 .facebook-photo-box p{
- color:#666;
- line-height:1.7
+color:#666;
+line-height:1.7
 }
 
 body.dark .facebook-photo-box p{
- color:#bbb
+color:#bbb
 }
 
 .featured{
- overflow:hidden;
- background:white;
- border-radius:14px;
- box-shadow:0 2px 8px #ccc
+overflow:hidden;
+background:white;
+border-radius:14px;
+box-shadow:0 2px 8px #ccc
 }
 
 .featured img{
- width:100%;
- height:250px;
- object-fit:cover
+width:100%;
+height:250px;
+object-fit:cover
 }
 
 .featured-content{
- padding:16px
+padding:16px
 }
 
 .bottom-nav{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- height:65px;
- background:#111;
- display:flex;
- justify-content:space-around;
- align-items:center;
- z-index:9999
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:65px;
+background:#111;
+display:flex;
+justify-content:space-around;
+align-items:center;
+z-index:9999
 }
 
 .bottom-nav button{
- background:none;
- border:0;
- color:white;
- font-size:11px;
- cursor:pointer
+background:none;
+border:0;
+color:white;
+font-size:11px;
+cursor:pointer
 }
 
 .nav-icon{
- display:block;
- font-size:21px;
- margin-bottom:2px
+display:block;
+font-size:21px;
+margin-bottom:2px
 }
 
 .bottom-nav button.active{
- color:#ff3333
+color:#ff3333
 }
 
 .modal-overlay{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.65);
- z-index:20000;
- display:none;
- align-items:center;
- justify-content:center;
- padding:15px
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:20000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px
 }
 
 .modal-overlay.show{
- display:flex
+display:flex
 }
 
 .modal-box{
- width:100%;
- max-width:500px;
- max-height:85vh;
- overflow:auto;
- background:white;
- border-radius:15px;
- padding:20px;
- position:relative
+width:100%;
+max-width:500px;
+max-height:85vh;
+overflow:auto;
+background:white;
+border-radius:15px;
+padding:20px;
+position:relative
 }
 
 .modal-close{
- position:absolute;
- right:10px;
- top:10px;
- width:38px;
- height:38px;
- border:0;
- border-radius:50%;
- font-size:23px;
- cursor:pointer
+position:absolute;
+right:10px;
+top:10px;
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+font-size:23px;
+cursor:pointer
 }
 
 footer{
- background:#111;
- color:white;
- text-align:center;
- padding:22px 10px;
- margin-top:30px;
- font-size:13px
+background:#111;
+color:white;
+text-align:center;
+padding:22px 10px;
+margin-top:30px;
+font-size:13px
 }
 
 #newsReader{
- position:fixed;
- inset:0;
- z-index:30000;
- background:#f3f3f3;
- display:none;
- overflow:auto;
- padding-bottom:70px
+position:fixed;
+inset:0;
+z-index:30000;
+background:#f3f3f3;
+display:none;
+overflow:auto;
+padding-bottom:70px
 }
 
 #newsReader.show{
- display:block
+display:block
 }
 
 .reader-head{
- position:sticky;
- top:0;
- background:#d40000;
- color:white;
- padding:12px;
- display:flex;
- gap:10px;
- align-items:center
+position:sticky;
+top:0;
+background:#d40000;
+color:white;
+padding:12px;
+display:flex;
+gap:10px;
+align-items:center
 }
 
 .reader-back{
- width:40px;
- height:40px;
- border:0;
- border-radius:50%;
- color:#d40000;
- font-size:22px
+width:40px;
+height:40px;
+border:0;
+border-radius:50%;
+color:#d40000;
+font-size:22px
 }
 
 .reader-box{
- max-width:900px;
- margin:auto;
- background:white;
- min-height:100vh;
- padding:18px
+max-width:900px;
+margin:auto;
+background:white;
+min-height:100vh;
+padding:18px
 }
 
 body.dark #newsReader,
 body.dark .reader-box{
- background:#121212;
- color:#eee
+background:#121212;
+color:#eee
 }
 
 .reader-title{
- font-size:24px;
- font-weight:bold;
- line-height:1.5
+font-size:24px;
+font-weight:bold;
+line-height:1.5
 }
 
 .reader-image{
- width:100%;
- border-radius:10px;
- margin:15px 0
+width:100%;
+border-radius:10px;
+margin:15px 0
 }
 
 .reader-content{
- font-size:17px;
- line-height:1.85
+font-size:17px;
+line-height:1.85
 }
 
 .reader-content img{
- width:100%;
- border-radius:10px
+width:100%;
+border-radius:10px
 }
 
 #loading{
- position:fixed;
- inset:0;
- z-index:99999;
- background:white;
- display:flex;
- align-items:center;
- justify-content:center;
- flex-direction:column
+position:fixed;
+inset:0;
+z-index:99999;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column
 }
 
 body.dark #loading{
- background:#121212;
- color:white
+background:#121212;
+color:white
 }
 
 .spinner{
- width:38px;
- height:38px;
- border:4px solid #ddd;
- border-top-color:#d40000;
- border-radius:50%;
- animation:spin .8s linear infinite
+width:38px;
+height:38px;
+border:4px solid #ddd;
+border-top-color:#d40000;
+border-radius:50%;
+animation:spin .8s linear infinite
 }
 
 @keyframes spin{
- to{transform:rotate(360deg)}
+to{transform:rotate(360deg)}
 }
 
 @media(min-width:600px){
- .categories{
-  grid-template-columns:repeat(4,1fr)
- }
 
- .featured img{
-  height:320px
- }
+.categories{
+grid-template-columns:repeat(4,1fr)
+}
+
+.featured img{
+height:320px
+}
+
 }
 
 @media(max-width:380px){
- .categories{
-  grid-template-columns:repeat(2,1fr)
- }
+
+.categories{
+grid-template-columns:repeat(2,1fr)
+}
+
 }
 </style>
 </head>
@@ -500,38 +505,69 @@ body.dark #loading{
 <body>
 
 <div id="loading">
- <h2>📰 Rahmotpur News</h2>
- <div class="spinner"></div>
- <p>লোড হচ্ছে...</p>
+
+<h2>📰 Rahmotpur News</h2>
+
+<div class="spinner"></div>
+
+<p>লোড হচ্ছে...</p>
+
 </div>
+
 
 <header>
 
 <h1>📰 Rahmotpur News</h1>
+
 <p>আপনার এলাকার খবর সবার আগে</p>
+
 
 <div class="more-menu">
 
-<button class="more-button" id="moreButton">☰</button>
+<button
+class="more-button"
+id="moreButton">
+☰
+</button>
 
-<div class="more-dropdown" id="moreDropdown">
 
-<button class="more-item" id="settingsButton">
+<div
+class="more-dropdown"
+id="moreDropdown">
+
+
+<button
+class="more-item"
+id="menuPhotosButton">
+📸 সব ছবি
+</button>
+
+
+<button
+class="more-item"
+id="settingsButton">
 ⚙️ Settings
 </button>
 
-<button class="more-item" id="aboutButton">
+
+<button
+class="more-item"
+id="aboutButton">
 ℹ️ About Rahmotpur News
 </button>
 
-<a class="more-item"
+
+<a
+class="more-item"
 href="https://www.facebook.com/rahmotpurnews"
 target="_blank"
 rel="noopener">
 📘 Facebook Page
 </a>
 
+
 </div>
+
 </div>
 
 </header>
@@ -545,7 +581,9 @@ rel="noopener">
 
 <div class="breaking-scroll">
 
-<div class="breaking-track" id="breakingNews">
+<div
+class="breaking-track"
+id="breakingNews">
 সর্বশেষ খবর লোড হচ্ছে...
 </div>
 
@@ -564,15 +602,20 @@ rel="noopener">
 
 <section id="homeSection">
 
+
 <div class="box">
 
-<h2>Welcome to Rahmotpur News</h2>
+<h2>
+Welcome to Rahmotpur News
+</h2>
 
 <p>
 রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর জানতে আমাদের নিউজ পোর্টালে প্রবেশ করুন।
 </p>
 
-<button class="button" id="latestButton">
+<button
+class="button"
+id="latestButton">
 🔴 সর্বশেষ খবর
 </button>
 
@@ -583,35 +626,11 @@ rel="noopener">
 ⭐ প্রধান খবর
 </h2>
 
+
 <div id="featuredNews">
 খবর লোড হচ্ছে...
 </div>
 
-
-<h2 class="category-title">
-📸 সব ছবি
-</h2>
-
-
-<div class="box facebook-photo-box">
-
-<div class="facebook-photo-icon">
-📸
-</div>
-
-<h3>
-Rahmotpur News-এর সব ছবি
-</h3>
-
-<p>
-Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দেখতে নিচের বাটনে চাপ দাও।
-</p>
-
-<button class="button" id="photoHomeButton">
-📸 Facebook-এর সব ছবি দেখুন
-</button>
-
-</div>
 
 </section>
 
@@ -619,13 +638,20 @@ Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দ�
 
 <!-- CATEGORY -->
 
-<section id="categorySection" style="display:none">
+<section
+id="categorySection"
+style="display:none">
 
 <h2 class="category-title">
 📰 সংবাদ বিভাগ
 </h2>
 
-<div class="categories" id="categories"></div>
+
+<div
+class="categories"
+id="categories">
+</div>
+
 
 <div id="categoryNews"></div>
 
@@ -635,15 +661,22 @@ Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দ�
 
 <!-- PHOTO -->
 
-<section id="photoSection" style="display:none">
+<section
+id="photoSection"
+style="display:none">
 
-<div style="display:flex;justify-content:space-between;align-items:center">
+
+<div
+style="display:flex;justify-content:space-between;align-items:center">
 
 <h2 class="category-title">
 📸 সব ছবি
 </h2>
 
-<button class="button" id="photoBackButton">
+
+<button
+class="button"
+id="photoBackButton">
 ← হোম
 </button>
 
@@ -652,17 +685,21 @@ Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দ�
 
 <div class="box facebook-photo-box">
 
+
 <div class="facebook-photo-icon">
 📸
 </div>
 
+
 <h3>
-Rahmotpur News Facebook Photos
+Rahmotpur News-এর সব ছবি
 </h3>
+
 
 <p>
 Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দেখতে নিচের বাটনে চাপ দাও।
 </p>
+
 
 <a
 class="button"
@@ -672,6 +709,7 @@ rel="noopener">
 📸 Facebook-এর সব ছবি দেখুন
 </a>
 
+
 </div>
 
 </section>
@@ -680,26 +718,37 @@ rel="noopener">
 
 <!-- SEARCH -->
 
-<section id="searchSection" style="display:none">
+<section
+id="searchSection"
+style="display:none">
+
 
 <h2 class="category-title">
 🔎 খবর খুঁজুন
 </h2>
 
+
 <div class="search-box">
+
 
 <input
 id="searchInput"
 class="search-input"
 placeholder="খবরের শিরোনাম লিখুন...">
 
-<button class="button" id="searchButton">
+
+<button
+class="button"
+id="searchButton">
 🔎 খুঁজুন
 </button>
 
+
 </div>
 
+
 <div id="searchResults"></div>
+
 
 </section>
 
@@ -707,21 +756,25 @@ placeholder="খবরের শিরোনাম লিখুন...">
 
 <!-- LATEST -->
 
-<section id="latestSection" style="display:none">
+<section
+id="latestSection"
+style="display:none">
+
 
 <h2 class="category-title">
 🔴 সর্বশেষ খবর
 </h2>
 
+
 <div id="latestNews">
 খবর লোড হচ্ছে...
 </div>
+
 
 </section>
 
 
 </div>
-
 
 
 <footer>
@@ -740,44 +793,55 @@ placeholder="খবরের শিরোনাম লিখুন...">
 
 <div class="bottom-nav">
 
-<button class="active" data-section="homeSection">
 
-<span class="nav-icon">🏠</span>
+<button
+class="active"
+data-section="homeSection">
+
+<span class="nav-icon">
+🏠
+</span>
+
 হোম
 
 </button>
 
 
-<button data-section="categorySection">
+<button
+data-section="categorySection">
 
-<span class="nav-icon">📰</span>
+<span class="nav-icon">
+📰
+</span>
+
 ক্যাটাগরি
 
 </button>
 
 
-<button data-section="photoSection">
+<button
+data-section="latestSection">
 
-<span class="nav-icon">📸</span>
-সব ছবি
+<span class="nav-icon">
+🔴
+</span>
 
-</button>
-
-
-<button data-section="latestSection">
-
-<span class="nav-icon">🔴</span>
 সর্বশেষ
 
 </button>
 
 
-<button data-section="searchSection">
+<button
+data-section="searchSection">
 
-<span class="nav-icon">🔎</span>
+<span class="nav-icon">
+🔎
+</span>
+
 সার্চ
 
 </button>
+
 
 </div>
 
@@ -787,37 +851,48 @@ placeholder="খবরের শিরোনাম লিখুন...">
 
 <div id="newsReader">
 
+
 <div class="reader-head">
 
-<button class="reader-back" id="readerBack">
+
+<button
+class="reader-back"
+id="readerBack">
 ←
 </button>
+
 
 <b>
 Rahmotpur News
 </b>
+
 
 </div>
 
 
 <div class="reader-box">
 
+
 <h1
 class="reader-title"
 id="readerTitle">
 </h1>
 
+
 <div id="readerDate"></div>
+
 
 <img
 id="readerImage"
 class="reader-image"
 style="display:none">
 
+
 <div
 id="readerContent"
 class="reader-content">
 </div>
+
 
 </div>
 
@@ -827,9 +902,13 @@ class="reader-content">
 
 <!-- ABOUT -->
 
-<div class="modal-overlay" id="aboutModal">
+<div
+class="modal-overlay"
+id="aboutModal">
+
 
 <div class="modal-box">
+
 
 <button
 class="modal-close"
@@ -837,19 +916,23 @@ data-close="aboutModal">
 ×
 </button>
 
+
 <h2>
 ℹ️ Rahmotpur News
 </h2>
 
+
 <p>
 Rahmotpur News একটি অনলাইন নিউজ প্ল্যাটফর্ম।
 </p>
+
 
 <p>
 রহমতপুর, মিঠাপুকুরসহ দেশের জাতীয়,
 আন্তর্জাতিক, খেলাধুলা, রাজনীতি,
 বিনোদন ও স্থানীয় সংবাদ প্রকাশ করা হয়।
 </p>
+
 
 <a
 class="button"
@@ -859,6 +942,7 @@ rel="noopener">
 📘 Facebook Page
 </a>
 
+
 </div>
 
 </div>
@@ -867,9 +951,13 @@ rel="noopener">
 
 <!-- SETTINGS -->
 
-<div class="modal-overlay" id="settingsModal">
+<div
+class="modal-overlay"
+id="settingsModal">
+
 
 <div class="modal-box">
+
 
 <button
 class="modal-close"
@@ -877,19 +965,37 @@ data-close="settingsModal">
 ×
 </button>
 
+
 <h2>
 ⚙️ Settings
 </h2>
 
-<button class="more-item" id="darkButton">
+
+<button
+class="more-item"
+id="darkButton">
+
 🌙 Dark Mode:
-<span id="darkValue">বন্ধ</span>
+
+<span id="darkValue">
+বন্ধ
+</span>
+
 </button>
 
-<button class="more-item" id="textButton">
+
+<button
+class="more-item"
+id="textButton">
+
 🔤 Text Size:
-<span id="textValue">মাঝারি</span>
+
+<span id="textValue">
+মাঝারি
+</span>
+
 </button>
+
 
 </div>
 
@@ -911,7 +1017,7 @@ const BLOGGER=
 
 
 /* =====================================
-   SECTION SYSTEM
+   SECTION
 ===================================== */
 
 const buttons=
@@ -928,7 +1034,8 @@ function showSection(id){
 "photoSection",
 "latestSection",
 "searchSection"
-].forEach(function(x){
+]
+.forEach(function(x){
 
 const el=
 document.getElementById(x);
@@ -936,7 +1043,11 @@ document.getElementById(x);
 if(el){
 
 el.style.display=
-x===id ? "block" : "none";
+x===id
+?
+"block"
+:
+"none";
 
 }
 
@@ -974,13 +1085,42 @@ btn.dataset.section
 });
 
 
+document.getElementById(
+"latestButton"
+).onclick=function(){
+
+showSection(
+"latestSection"
+);
+
+};
+
+
+document.getElementById(
+"photoBackButton"
+).onclick=function(){
+
+showSection(
+"homeSection"
+);
+
+};
+
+
+
 /* =====================================
-   FACEBOOK PHOTO BUTTON
+   📸 MENU PHOTO
 ===================================== */
 
 document.getElementById(
-"photoHomeButton"
+"menuPhotosButton"
 ).onclick=function(){
+
+document.getElementById(
+"moreDropdown"
+).classList.remove(
+"show"
+);
 
 window.open(
 "https://www.facebook.com/rahmotpurnews/photos",
@@ -991,27 +1131,9 @@ window.open(
 };
 
 
-document.getElementById(
-"photoBackButton"
-).onclick=function(){
-
-showSection("homeSection");
-
-};
-
-
-document.getElementById(
-"latestButton"
-).onclick=function(){
-
-showSection("latestSection");
-
-};
-
-
 
 /* =====================================
-   ESCAPE HTML
+   ESCAPE
 ===================================== */
 
 function escapeHTML(value){
@@ -1029,7 +1151,7 @@ return div.innerHTML;
 
 
 /* =====================================
-   BLOGGER LABELS
+   LABELS
 ===================================== */
 
 function getLabels(entry){
@@ -1064,13 +1186,7 @@ return [];
 function showNews(data){
 
 const entries=
-data &&
-data.feed &&
-data.feed.entry
-?
-data.feed.entry
-:
-[];
+data?.feed?.entry || [];
 
 
 allNews=[];
@@ -1229,15 +1345,6 @@ document.getElementById(
 box.innerHTML="";
 
 
-labels.forEach(function(label){
-
-const btn=
-document.createElement("button");
-
-
-btn.className="category";
-
-
 const icons={
 
 "রহমতপুর":"📍",
@@ -1257,6 +1364,15 @@ const icons={
 "পরিবেশ":"🌳"
 
 };
+
+
+labels.forEach(function(label){
+
+const btn=
+document.createElement("button");
+
+
+btn.className="category";
 
 
 btn.innerHTML=`
@@ -1301,7 +1417,9 @@ box.appendChild(btn);
 
 
 
-/* TOP NAV */
+/* =====================================
+   TOP NAV
+===================================== */
 
 const top=
 document.getElementById(
@@ -1312,7 +1430,7 @@ document.getElementById(
 top.innerHTML="";
 
 
-["🏠 হোম","📸 সব ছবি","🔴 সর্বশেষ"]
+["🏠 হোম","🔴 সর্বশেষ"]
 .concat(labels)
 .forEach(function(name){
 
@@ -1327,25 +1445,25 @@ b.onclick=function(){
 
 if(name==="🏠 হোম"){
 
-showSection("homeSection");
-
-}
-
-else if(name==="📸 সব ছবি"){
-
-showSection("photoSection");
+showSection(
+"homeSection"
+);
 
 }
 
 else if(name==="🔴 সর্বশেষ"){
 
-showSection("latestSection");
+showSection(
+"latestSection"
+);
 
 }
 
 else{
 
-showSection("categorySection");
+showSection(
+"categorySection"
+);
 
 
 const found=
@@ -1414,7 +1532,8 @@ ${escapeHTML(news.title)}
 
 <div class="date">
 
-প্রকাশ: ${escapeHTML(news.date)}
+প্রকাশ:
+${escapeHTML(news.date)}
 
 </div>
 
@@ -1605,7 +1724,9 @@ news.content;
 
 document.getElementById(
 "newsReader"
-).classList.add("show");
+).classList.add(
+"show"
+);
 
 });
 
@@ -1616,7 +1737,9 @@ document.getElementById(
 
 document.getElementById(
 "newsReader"
-).classList.remove("show");
+).classList.remove(
+"show"
+);
 
 };
 
@@ -1707,7 +1830,9 @@ e.stopPropagation();
 
 document.getElementById(
 "moreDropdown"
-).classList.toggle("show");
+).classList.toggle(
+"show"
+);
 
 };
 
@@ -1722,7 +1847,9 @@ if(
 
 document.getElementById(
 "moreDropdown"
-).classList.remove("show");
+).classList.remove(
+"show"
+);
 
 }
 
@@ -1740,12 +1867,16 @@ document.getElementById(
 
 document.getElementById(
 "moreDropdown"
-).classList.remove("show");
+).classList.remove(
+"show"
+);
 
 
 document.getElementById(
 "aboutModal"
-).classList.add("show");
+).classList.add(
+"show"
+);
 
 };
 
@@ -1756,12 +1887,16 @@ document.getElementById(
 
 document.getElementById(
 "moreDropdown"
-).classList.remove("show");
+).classList.remove(
+"show"
+);
 
 
 document.getElementById(
 "settingsModal"
-).classList.add("show");
+).classList.add(
+"show"
+);
 
 };
 
@@ -1774,7 +1909,9 @@ btn.onclick=function(){
 
 document.getElementById(
 btn.dataset.close
-).classList.remove("show");
+).classList.remove(
+"show"
+);
 
 };
 
@@ -1927,7 +2064,9 @@ old.remove();
 
 
 const script=
-document.createElement("script");
+document.createElement(
+"script"
+);
 
 
 script.id=
@@ -1985,7 +2124,8 @@ setTimeout(function(){
 
 document.getElementById(
 "loading"
-).style.display="none";
+).style.display=
+"none";
 
 },1200);
 
