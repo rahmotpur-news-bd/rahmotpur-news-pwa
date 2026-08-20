@@ -1,26 +1,21 @@
 {
   "name": "Rahmotpur News",
   "short_name": "Rahmotpur News",
-  "description": "রহমতপুর, মিঠাপুকুর ও বাংলাদেশের সর্বশেষ খবর",
-  "start_url": "./index.html",
+  "description": "রহমতপুর, মিঠাপুকুরসহ দেশের গুরুত্বপূর্ণ খবর সবার আগে।",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#d40000",
-  "orientation": "portrait",
   "lang": "bn",
+  "dir": "ltr",
   "icons": [
     {
       "src": "./icon.svg",
-      "sizes": "512x512",
+      "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
