@@ -655,41 +655,106 @@ cursor:pointer;
 
 
 /* =========================
-   NEWS CARD
+   NEWS CARD — PRO
 ========================= */
 
 .news-card{
 background:#fff;
-margin-bottom:15px;
-border-radius:12px;
+margin-bottom:18px;
+border-radius:15px;
 overflow:hidden;
-box-shadow:
-0 2px 8px #ccc;
+box-shadow:0 3px 12px rgba(0,0,0,.12);
+border:1px solid rgba(0,0,0,.04);
+transition:
+transform .18s,
+box-shadow .18s;
+}
+
+.news-card:active{
+transform:scale(.985);
+box-shadow:0 2px 7px rgba(0,0,0,.12);
 }
 
 .news-card img{
 width:100%;
-max-height:230px;
+height:220px;
 object-fit:cover;
 display:block;
+background:#eee;
 }
 
 .news-content{
-padding:15px;
+padding:16px;
 }
 
 .news-title{
 font-size:18px;
-font-weight:bold;
-line-height:1.5;
+font-weight:700;
+line-height:1.55;
+color:#222;
 }
 
 .news-date{
 font-size:12px;
 color:#777;
-margin-top:7px;
+margin-top:9px;
+padding-top:8px;
+border-top:1px solid #eee;
 }
 
+.news-button{
+display:inline-block;
+margin-top:12px;
+background:#d40000;
+color:#fff;
+padding:9px 14px;
+border-radius:7px;
+text-decoration:none;
+font-size:14px;
+font-weight:600;
+transition:
+transform .15s,
+background .15s;
+}
+
+.news-button:active{
+transform:scale(.95);
+}
+
+body.dark .news-card{
+background:#1e1e1e;
+border-color:#333;
+box-shadow:0 3px 12px rgba(0,0,0,.35);
+}
+
+body.dark .news-title{
+color:#eee;
+}
+
+body.dark .news-date{
+color:#aaa;
+border-top-color:#333;
+}
+
+body.dark .news-card img{
+background:#292929;
+}
+
+@media(min-width:600px){
+
+.news-card img{
+height:260px;
+}
+
+.news-content{
+padding:18px;
+}
+
+.news-title{
+font-size:19px;
+}
+
+}
 
 /* =========================
    INSTALL
