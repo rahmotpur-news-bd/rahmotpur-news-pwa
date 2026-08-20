@@ -1911,27 +1911,7 @@ alternate.href;
 
 let image = "";
 
-const content =
-entry.content?.$t ||
-entry.summary?.$t ||
-"";
-
-/* প্রথমে পোস্টের আসল বড় ছবি নেওয়ার চেষ্টা */
-
-const imageMatch =
-content.match(
-/<img[^>]+src=["']([^"']+)["']/i
-);
-
-if(imageMatch){
-
-image = imageMatch[1];
-
-}
-
-/* আসল ছবি না পাওয়া গেলে Blogger thumbnail */
-
-if(!image &&
+if(
 entry.media$thumbnail &&
 entry.media$thumbnail.url
 ){
@@ -1940,10 +1920,11 @@ image =
 entry.media$thumbnail.url
 .replace(
 "s72-c",
-"s1600"
+"s800"
 );
 
 }
+
 
 
 const imageMatch =
