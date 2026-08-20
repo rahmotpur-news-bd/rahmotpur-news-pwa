@@ -1910,6 +1910,12 @@ alternate.href;
 }
 
 let image = "";
+
+if(
+entry.media$thumbnail &&
+entry.media$thumbnail.url
+){
+
 image =
 entry.media$thumbnail.url
 .replace(
@@ -1918,6 +1924,7 @@ entry.media$thumbnail.url
 );
 
 }
+
 if(!image){
 
 const content =
