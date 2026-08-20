@@ -1911,7 +1911,27 @@ alternate.href;
 
 let image = "";
 
-if(
+const content =
+entry.content?.$t ||
+entry.summary?.$t ||
+"";
+
+/* প্রথমে পোস্টের আসল বড় ছবি নেওয়ার চেষ্টা */
+
+const imageMatch =
+content.match(
+/<img[^>]+src=["']([^"']+)["']/i
+);
+
+if(imageMatch){
+
+image = imageMatch[1];
+
+}
+
+/* আসল ছবি না পাওয়া গেলে Blogger thumbnail */
+
+if(!image &&
 entry.media$thumbnail &&
 entry.media$thumbnail.url
 ){
@@ -1925,12 +1945,6 @@ entry.media$thumbnail.url
 
 }
 
-if(!image){
-
-const content =
-entry.content?.$t ||
-entry.summary?.$t ||
-"";
 
 const imageMatch =
 content.match(
