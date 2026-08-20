@@ -2004,10 +2004,12 @@ day:"numeric"
 }
 
 allNews.push({
+id: entry.id?.$t || link,
 title: title,
 link: link,
 image: image,
-date: date
+date: date,
+content: content
 });
 
 });
@@ -2072,23 +2074,16 @@ return "#";
 
 function createCard(news){
 
-const safeLink =
-safeURL(
-news.link
-);
-
-let imageHTML = "";
-
-if(news.image){
-
-imageHTML =
-'<img src="'+
-safeURL(news.image)+
-'" alt="'+
-escapeHTML(news.title)+
-'" loading="lazy">';
-
-}
+const imageHTML =
+news.image
+?
+'<img src="' +
+safeURL(news.image) +
+'" alt="' +
+escapeHTML(news.title) +
+'" loading="lazy">'
+:
+"";
 
 return `
 
@@ -2100,28 +2095,25 @@ ${imageHTML}
 
 <div class="news-title">
 
-${escapeHTML(
-news.title
-)}
+${escapeHTML(news.title)}
 
 </div>
 
 <div class="news-date">
 
 প্রকাশ:
-${escapeHTML(
-news.date
-)}
+${escapeHTML(news.date)}
 
 </div>
 
-<a
+<button
+type="button"
 class="news-button"
-href="${safeLink}">
+onclick="openNewsReader('${news.id}')">
 
 বিস্তারিত পড়ুন
 
-</a>
+</button>
 
 </div>
 
@@ -2153,9 +2145,12 @@ document.getElementById(
 "breakingNews"
 );
 
-if(
-!allNews.length
-){
+
+/* =========================
+   NO NEWS
+========================= */
+
+if(!allNews.length){
 
 if(latest){
 
@@ -2168,7 +2163,7 @@ if(featured){
 
 featured.innerHTML =
 "<p style='text-align:center'>" +
-"কোনো প্রধান খবর পাওয়া যায়নি." +
+"কোনো প্রধান খবর পাওয়া যায়নি।" +
 "</p>";
 
 }
@@ -2184,6 +2179,11 @@ return;
 
 }
 
+
+/* =========================
+   LATEST NEWS
+========================= */
+
 if(latest){
 
 latest.innerHTML =
@@ -2192,6 +2192,11 @@ allNews
 .join("");
 
 }
+
+
+/* =========================
+   FEATURED NEWS
+========================= */
 
 const first =
 allNews[0];
@@ -2204,11 +2209,10 @@ first.image ||
 
 featured.innerHTML = `
 
-<a
-href="${safeURL(first.link)}"
-style="text-decoration:none;color:inherit">
-
-<div class="featured-card">
+<div
+class="featured-card"
+data-news-id="${escapeHTML(first.id)}"
+style="cursor:pointer">
 
 <img
 src="${safeURL(image)}"
@@ -2222,22 +2226,37 @@ loading="eager">
 </div>
 
 <div class="featured-title">
-
-${escapeHTML(
-first.title
-)}
-
+${escapeHTML(first.title)}
 </div>
 
 </div>
 
 </div>
-
-</a>
 
 `;
 
+const featuredCard =
+featured.querySelector(
+".featured-card"
+);
+
+if(featuredCard){
+
+featuredCard.onclick =
+function(){
+
+openNewsReader(first);
+
+};
+
 }
+
+}
+
+
+/* =========================
+   BREAKING NEWS
+========================= */
 
 if(breaking){
 
@@ -2247,7 +2266,7 @@ allNews
 .map(
 function(item){
 
-return "📰 "+
+return "📰 " +
 item.title;
 
 }
@@ -2257,7 +2276,6 @@ item.title;
 }
 
 }
-
 
 /* =========================
    SEARCH
