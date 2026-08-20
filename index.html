@@ -1910,22 +1910,11 @@ alternate.href;
 }
 
 let image = "";
-
-if(
-entry.media$thumbnail &&
-entry.media$thumbnail.url
-){
-
-if(
-entry.media$thumbnail &&
-entry.media$thumbnail.url
-){
-
 image =
 entry.media$thumbnail.url
 .replace(
-/\/s\d+(-c)?\//,
-"/s1600/"
+"s72-c",
+"s800"
 );
 
 }
