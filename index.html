@@ -804,42 +804,110 @@ font-size:19px;
 }
 
 /* =========================
-   INSTALL
+   INSTALL — PRO
 ========================= */
 
 .install-box{
-background:#d40000;
+background:linear-gradient(135deg,#d40000,#a80000);
 color:#fff;
-padding:16px;
-border-radius:12px;
+padding:20px 16px;
+border-radius:15px;
 margin-top:20px;
 text-align:center;
+box-shadow:0 4px 14px rgba(212,0,0,.25);
+position:relative;
+overflow:hidden;
+}
+
+.install-box::before{
+content:"";
+position:absolute;
+width:100px;
+height:100px;
+right:-35px;
+top:-45px;
+background:rgba(255,255,255,.10);
+border-radius:50%;
 }
 
 .install-button{
 background:#fff;
 color:#d40000;
 border:0;
-padding:11px 17px;
-border-radius:7px;
-font-weight:bold;
+padding:11px 18px;
+border-radius:9px;
+font-weight:700;
 font-size:15px;
-margin-top:8px;
+margin-top:10px;
 cursor:pointer;
+box-shadow:0 3px 8px rgba(0,0,0,.18);
+transition:
+transform .15s,
+box-shadow .15s;
+}
+
+.install-button:active{
+transform:scale(.96);
+box-shadow:0 2px 5px rgba(0,0,0,.15);
 }
 
 
 /* =========================
-   NOTIFICATION
+   NOTIFICATION — PRO
 ========================= */
 
 .notification-box{
 background:#fff;
-padding:16px;
-border-radius:12px;
-box-shadow:
-0 2px 7px #ccc;
-margin-top:15px;
+padding:18px;
+border-radius:15px;
+box-shadow:0 3px 12px rgba(0,0,0,.12);
+border:1px solid rgba(0,0,0,.04);
+margin-top:16px;
+}
+
+.notification-box b{
+display:block;
+font-size:17px;
+margin-bottom:7px;
+color:#222;
+}
+
+.notification-box p{
+margin:0;
+font-size:14px;
+line-height:1.6;
+color:#666;
+}
+
+.notification-box .install-button{
+background:#d40000;
+color:#fff;
+width:100%;
+margin-top:13px;
+box-shadow:0 3px 8px rgba(212,0,0,.25);
+}
+
+body.dark .notification-box{
+background:#1e1e1e;
+border-color:#333;
+box-shadow:0 3px 12px rgba(0,0,0,.35);
+}
+
+body.dark .notification-box b{
+color:#eee;
+}
+
+body.dark .notification-box p{
+color:#aaa;
+}
+
+@media(min-width:600px){
+
+.install-box,
+.notification-box{
+padding:20px;
+}
+
 }
 
 
