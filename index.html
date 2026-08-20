@@ -545,38 +545,77 @@ color:#fff;
 
 
 /* =========================
-   CATEGORY
+   CATEGORY — PRO
 ========================= */
 
 .categories{
 display:grid;
-grid-template-columns:
-repeat(2,1fr);
+grid-template-columns:repeat(2,1fr);
 gap:12px;
 }
 
 .category{
 background:#fff;
-padding:17px 8px;
+padding:18px 8px 16px;
 text-align:center;
-border-radius:12px;
+border-radius:15px;
 text-decoration:none;
 color:#222;
-font-weight:bold;
-box-shadow:
-0 2px 7px #ccc;
+font-weight:700;
+box-shadow:0 3px 12px rgba(0,0,0,.12);
+border:1px solid rgba(0,0,0,.04);
+transition:
+transform .18s,
+box-shadow .18s;
+position:relative;
+overflow:hidden;
+}
+
+.category::before{
+content:"";
+position:absolute;
+left:0;
+right:0;
+top:0;
+height:3px;
+background:#d40000;
+}
+
+.category:active{
+transform:scale(.96);
+box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
 
 .category .icon{
 display:block;
-font-size:28px;
-margin-bottom:6px;
+font-size:30px;
+margin-bottom:8px;
+line-height:1;
 }
 
 body.dark .category{
+background:#1e1e1e;
 color:#eee;
+border-color:#333;
+box-shadow:0 3px 12px rgba(0,0,0,.35);
 }
 
+body.dark .category::before{
+background:#d40000;
+}
+
+@media(min-width:600px){
+
+.categories{
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.category{
+padding:20px 10px;
+}
+
+}
 
 /* =========================
    SEARCH
