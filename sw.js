@@ -1,10 +1,12 @@
-const CACHE_NAME = "rahmotpur-news-v1";
+const CACHE_NAME = "rahmotpur-news-v2";
 
-const OFFLINE_FILES = [
+const APP_FILES = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./icon.svg"
+  "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 
@@ -18,7 +20,7 @@ self.addEventListener("install", function(event) {
 
     caches.open(CACHE_NAME).then(function(cache) {
 
-      return cache.addAll(OFFLINE_FILES);
+      return cache.addAll(APP_FILES);
 
     })
 
@@ -53,11 +55,13 @@ self.addEventListener("activate", function(event) {
 
       );
 
+    }).then(function() {
+
+      return self.clients.claim();
+
     })
 
   );
-
-  self.clients.claim();
 
 });
 
@@ -74,19 +78,72 @@ self.addEventListener("fetch", function(event) {
 
   }
 
+
+  const requestURL =
+    new URL(
+      event.request.url
+    );
+
+
+  /*
+     নিজের PWA-এর navigation
+     সবসময় অ্যাপের ভিতরেই থাকবে
+  */
+
+  if(
+    event.request.mode === "navigate" &&
+    requestURL.origin === location.origin
+  ){
+
+    event.respondWith(
+
+      fetch(event.request)
+        .then(function(response){
+
+          return response;
+
+        })
+        .catch(function(){
+
+          return caches.match(
+            "./index.html"
+          );
+
+        })
+
+    );
+
+    return;
+
+  }
+
+
+  /*
+     অন্যান্য GET request
+  */
+
   event.respondWith(
 
     fetch(event.request)
 
-      .then(function(response) {
+      .then(function(response){
 
-        if(response && response.status === 200) {
+        if(
+          response &&
+          response.status === 200
+        ){
 
-          const copy = response.clone();
+          const copy =
+            response.clone();
 
-          caches.open(CACHE_NAME).then(function(cache) {
+          caches.open(
+            CACHE_NAME
+          ).then(function(cache){
 
-            cache.put(event.request, copy);
+            cache.put(
+              event.request,
+              copy
+            );
 
           });
 
@@ -96,9 +153,11 @@ self.addEventListener("fetch", function(event) {
 
       })
 
-      .catch(function() {
+      .catch(function(){
 
-        return caches.match(event.request);
+        return caches.match(
+          event.request
+        );
 
       })
 
@@ -133,9 +192,10 @@ self.addEventListener(
 
           title: "Rahmotpur News",
 
-          body: event.data
-            ? event.data.text()
-            : "নতুন খবর প্রকাশিত হয়েছে।"
+          body:
+            event.data
+              ? event.data.text()
+              : "নতুন খবর প্রকাশিত হয়েছে।"
 
         }
 
@@ -160,22 +220,26 @@ self.addEventListener(
         "নতুন খবর প্রকাশিত হয়েছে।",
 
       icon:
-        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjubv8pdof9w5KdiSeB5TV8e93OYhQ8nhBcO3RRgSW8GyPr9ysInzD3GCU_B7K74qHbnZHJdcLuaqVRNACbfhk4DLCpg6nbweylNnfSgRBAJXoMdyXuYLZ-aLEWp3Yt4qwh-U1gx5UoXs49xMKeA6w7BLVH1lvjGzSCHH3ayVQKSbdOpQ/s1600/FB_IMG_1786278216091.jpg",
+        "./icon-192.png",
 
       badge:
-        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjubv8pdof9w5KdiSeB5TV8e93OYhQ8nhBcO3RRgSW8GyPr9ysInzD3GCU_B7K74qHbnZHJdcLuaqVRNACbfhk4DLCpg6nbweylNnfSgRBAJXoMdyXuYLZ-aLEWp3Yt4qwh-U1gx5UoXs49xMKeA6w7BLVH1lvjGzSCHH3ayVQKSbdOpQ/s1600/FB_IMG_1786278216091.jpg",
+        "./icon-192.png",
 
       data: {
 
         url:
           notification.click_action ||
-          "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/"
+          "./"
 
       },
 
       requireInteraction: false,
 
-      vibrate: [200, 100, 200]
+      vibrate: [
+        200,
+        100,
+        200
+      ]
 
     };
 
@@ -204,11 +268,11 @@ self.addEventListener(
     event.notification.close();
 
 
-    const url =
+    const targetURL =
       event.notification.data &&
       event.notification.data.url
         ? event.notification.data.url
-        : "https://rahmotpur-news-bd.github.io/rahmotpur-news-pwa/";
+        : "./";
 
 
     event.waitUntil(
@@ -220,26 +284,29 @@ self.addEventListener(
 
       }).then(function(clientList) {
 
+
         for(
           const client of clientList
-        ) {
+        ){
 
           if(
             client.url.includes(
-              "rahmotpur-news-bd.github.io"
+              "/rahmotpur-news-pwa/"
             )
-          ) {
+          ){
 
             client.focus();
 
-            return client.navigate(url);
+            return;
 
           }
 
         }
 
 
-        return clients.openWindow(url);
+        return clients.openWindow(
+          targetURL
+        );
 
       })
 
