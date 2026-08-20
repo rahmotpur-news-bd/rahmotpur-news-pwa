@@ -1859,8 +1859,7 @@ name
 let allNews = [];
 
 
-window.showNews =
-function(data){
+window.showNews = function(data){
 
 const entries =
 data &&
@@ -1873,59 +1872,36 @@ data.feed.entry
 
 allNews = [];
 
-entries.forEach(
-function(entry){
+entries.forEach(function(entry){
 
 if(!entry.title){
-
 return;
-
 }
 
 const title =
-entry.title.$t ||
-"";
+entry.title.$t || "";
 
-let link =
-BLOGGER;
+let link = BLOGGER;
 
 if(entry.link){
 
 const alternate =
-entry.link.find(
-function(x){
-
+entry.link.find(function(x){
 return x.rel === "alternate";
-
-}
-);
+});
 
 if(alternate){
-
-link =
-alternate.href;
-
+link = alternate.href;
 }
 
 }
 
 let image = "";
 
-if(
-entry.media$thumbnail &&
-entry.media$thumbnail.url
-){
-
-image =
-entry.media$thumbnail.url
-.replace(
-"s72-c",
-"s800"
-);
-
-}
-
-
+const content =
+entry.content?.$t ||
+entry.summary?.$t ||
+"";
 
 const imageMatch =
 content.match(
@@ -1934,10 +1910,21 @@ content.match(
 
 if(imageMatch){
 
-image =
-imageMatch[1];
+image = imageMatch[1];
 
 }
+
+if(!image &&
+entry.media$thumbnail &&
+entry.media$thumbnail.url
+){
+
+image =
+entry.media$thumbnail.url
+.replace(
+/\/s\d+(?:-c)?\//,
+"/s1600/"
+);
 
 }
 
@@ -1964,12 +1951,10 @@ day:"numeric"
 }
 
 allNews.push({
-
-title:title,
-link:link,
-image:image,
-date:date
-
+title: title,
+link: link,
+image: image,
+date: date
 });
 
 });
@@ -1977,8 +1962,6 @@ date:date
 renderNews();
 
 };
-
-
 /* =========================
    SECURITY
 ========================= */
