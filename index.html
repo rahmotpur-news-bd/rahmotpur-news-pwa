@@ -26,27 +26,38 @@ body{
  transition:.3s
 }
 
-body.dark{background:#121212;color:#eee}
+body.dark{
+ background:#121212;
+ color:#eee
+}
 
 body.dark .box,
 body.dark .card,
 body.dark .search-box,
 body.dark .modal-box,
-body.dark .photo-item{
+body.dark .category,
+body.dark .featured{
  background:#1e1e1e;
  color:#eee
 }
 
 header{
+ position:relative;
  background:#d40000;
  color:white;
  text-align:center;
- padding:17px 55px;
- position:relative
+ padding:17px 55px
 }
 
-header h1{margin:0;font-size:27px}
-header p{margin:6px 0 0;font-size:14px}
+header h1{
+ margin:0;
+ font-size:27px
+}
+
+header p{
+ margin:6px 0 0;
+ font-size:14px
+}
 
 .more-menu{
  position:absolute;
@@ -55,14 +66,22 @@ header p{margin:6px 0 0;font-size:14px}
 }
 
 .more-button{
- width:42px;height:42px;border:0;border-radius:50%;
- background:rgba(0,0,0,.25);color:white;font-size:23px
+ width:42px;
+ height:42px;
+ border:0;
+ border-radius:50%;
+ background:rgba(0,0,0,.25);
+ color:white;
+ font-size:23px
 }
 
 .more-dropdown{
  position:absolute;
- right:0;top:48px;width:250px;
- background:white;color:#222;
+ right:0;
+ top:48px;
+ width:250px;
+ background:white;
+ color:#222;
  border-radius:12px;
  box-shadow:0 5px 20px #333;
  display:none;
@@ -70,31 +89,48 @@ header p{margin:6px 0 0;font-size:14px}
  overflow:hidden
 }
 
-.more-dropdown.show{display:block}
+.more-dropdown.show{
+ display:block
+}
 
 .more-item{
- display:block;width:100%;padding:14px;
- border:0;border-bottom:1px solid #ddd;
- background:transparent;text-align:left;
+ display:block;
+ width:100%;
+ padding:14px;
+ border:0;
+ border-bottom:1px solid #ddd;
+ background:transparent;
+ text-align:left;
  color:inherit;
  text-decoration:none
 }
 
 .breaking{
- height:42px;background:#111;color:white;
- display:flex;align-items:center;overflow:hidden
+ height:42px;
+ background:#111;
+ color:white;
+ display:flex;
+ align-items:center;
+ overflow:hidden
 }
 
 .breaking-title{
- background:#d40000;height:100%;
- padding:0 13px;display:flex;align-items:center;
+ background:#d40000;
+ height:100%;
+ padding:0 13px;
+ display:flex;
+ align-items:center;
  font-weight:bold
 }
 
-.breaking-scroll{overflow:hidden;flex:1}
+.breaking-scroll{
+ overflow:hidden;
+ flex:1
+}
 
 .breaking-track{
- display:inline-block;white-space:nowrap;
+ display:inline-block;
+ white-space:nowrap;
  padding-left:100%;
  animation:moveNews 25s linear infinite
 }
@@ -107,15 +143,21 @@ header p{margin:6px 0 0;font-size:14px}
 nav{
  background:#111;
  padding:9px 10px;
- display:flex;gap:8px;
+ display:flex;
+ gap:8px;
  overflow-x:auto
 }
 
-nav::-webkit-scrollbar{display:none}
+nav::-webkit-scrollbar{
+ display:none
+}
 
 nav button{
- background:#333;color:white;border:0;
- padding:8px 13px;border-radius:20px;
+ background:#333;
+ color:white;
+ border:0;
+ padding:8px 13px;
+ border-radius:20px;
  white-space:nowrap
 }
 
@@ -125,14 +167,18 @@ nav button{
  padding:15px
 }
 
-.box,.card,.search-box{
+.box,
+.card,
+.search-box{
  background:white;
  border-radius:12px;
  box-shadow:0 2px 8px #ccc;
  margin-bottom:18px
 }
 
-.box{padding:20px}
+.box{
+ padding:20px
+}
 
 .card{
  overflow:hidden;
@@ -146,7 +192,9 @@ nav button{
  display:block
 }
 
-.card-content{padding:15px}
+.card-content{
+ padding:15px
+}
 
 .title{
  font-size:18px;
@@ -161,12 +209,14 @@ nav button{
 }
 
 .button{
+ display:inline-block;
  background:#d40000;
  color:white;
  border:0;
  border-radius:7px;
  padding:10px 15px;
  margin-top:8px;
+ text-decoration:none;
  cursor:pointer
 }
 
@@ -188,7 +238,8 @@ nav button{
  border-radius:12px;
  padding:17px 8px;
  box-shadow:0 2px 7px #ccc;
- font-weight:bold
+ font-weight:bold;
+ cursor:pointer
 }
 
 .category .icon{
@@ -197,7 +248,9 @@ nav button{
  margin-bottom:6px
 }
 
-.search-box{padding:15px}
+.search-box{
+ padding:15px
+}
 
 .search-input{
  width:100%;
@@ -207,134 +260,30 @@ nav button{
  font-size:16px
 }
 
-/* PHOTO GALLERY */
-
-.photo-toolbar{
- display:flex;
- gap:8px;
- margin-bottom:15px
-}
-
-.photo-search{
- flex:1;
- padding:12px;
- border:1px solid #ccc;
- border-radius:8px;
- font-size:15px
-}
-
-.photo-refresh{
- background:#d40000;
- color:#fff;
- border:0;
- border-radius:8px;
- padding:0 14px;
- font-size:18px
-}
-
-.photo-status{
- text-align:center;
- padding:10px;
- color:#777;
- font-size:13px
-}
-
-.photo-grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:5px
-}
-
-.photo-item{
- background:#fff;
- border-radius:7px;
- overflow:hidden;
- box-shadow:0 1px 4px #bbb;
- cursor:pointer
-}
-
-.photo-item img{
- width:100%;
- aspect-ratio:1/1;
- object-fit:cover;
- display:block
-}
-
-.photo-info{
- padding:7px;
- font-size:11px;
- line-height:1.4
-}
-
-.photo-viewer{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.94);
- z-index:50000;
- display:none;
- align-items:center;
- justify-content:center;
- padding:15px
-}
-
-.photo-viewer.show{display:flex}
-
-.photo-viewer img{
- max-width:100%;
- max-height:85vh;
- object-fit:contain;
- border-radius:8px
-}
-
-.photo-close{
- position:absolute;
- top:15px;
- right:15px;
- width:42px;height:42px;
- border:0;border-radius:50%;
- background:white;color:#111;
- font-size:25px
-}
-
-.photo-caption{
- position:absolute;
- bottom:20px;
- left:15px;
- right:15px;
- color:white;
- text-align:center;
- font-size:14px
-}
+/* FACEBOOK PHOTO BOX */
 
 .facebook-photo-box{
  text-align:center;
- padding:22px 15px
+ padding:25px 18px
 }
 
-.facebook-photo-box .fb-icon{
- font-size:48px;
- margin-bottom:8px
+.facebook-photo-icon{
+ font-size:55px;
+ margin-bottom:10px
 }
 
-.facebook-photo-button{
- display:block;
- width:100%;
- background:#1877f2;
- color:white;
- border:0;
- border-radius:9px;
- padding:13px;
- margin-top:15px;
- font-size:16px;
- font-weight:bold;
- cursor:pointer
+.facebook-photo-box h3{
+ margin:5px 0 10px
 }
 
-.facebook-photo-button:active{
- transform:scale(.98)
+.facebook-photo-box p{
+ color:#666;
+ line-height:1.7
 }
 
-/* FEATURED */
+body.dark .facebook-photo-box p{
+ color:#bbb
+}
 
 .featured{
  overflow:hidden;
@@ -343,21 +292,21 @@ nav button{
  box-shadow:0 2px 8px #ccc
 }
 
-body.dark .featured{background:#1e1e1e}
-
 .featured img{
  width:100%;
  height:250px;
  object-fit:cover
 }
 
-.featured-content{padding:16px}
-
-/* BOTTOM */
+.featured-content{
+ padding:16px
+}
 
 .bottom-nav{
  position:fixed;
- bottom:0;left:0;right:0;
+ bottom:0;
+ left:0;
+ right:0;
  height:65px;
  background:#111;
  display:flex;
@@ -367,8 +316,10 @@ body.dark .featured{background:#1e1e1e}
 }
 
 .bottom-nav button{
- background:none;border:0;
- color:white;font-size:11px;
+ background:none;
+ border:0;
+ color:white;
+ font-size:11px;
  cursor:pointer
 }
 
@@ -378,7 +329,9 @@ body.dark .featured{background:#1e1e1e}
  margin-bottom:2px
 }
 
-.bottom-nav button.active{color:#ff3333}
+.bottom-nav button.active{
+ color:#ff3333
+}
 
 .modal-overlay{
  position:fixed;
@@ -391,7 +344,9 @@ body.dark .featured{background:#1e1e1e}
  padding:15px
 }
 
-.modal-overlay.show{display:flex}
+.modal-overlay.show{
+ display:flex
+}
 
 .modal-box{
  width:100%;
@@ -408,9 +363,12 @@ body.dark .featured{background:#1e1e1e}
  position:absolute;
  right:10px;
  top:10px;
- width:38px;height:38px;
- border:0;border-radius:50%;
- font-size:23px
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:50%;
+ font-size:23px;
+ cursor:pointer
 }
 
 footer{
@@ -432,7 +390,9 @@ footer{
  padding-bottom:70px
 }
 
-#newsReader.show{display:block}
+#newsReader.show{
+ display:block
+}
 
 .reader-head{
  position:sticky;
@@ -446,8 +406,10 @@ footer{
 }
 
 .reader-back{
- width:40px;height:40px;
- border:0;border-radius:50%;
+ width:40px;
+ height:40px;
+ border:0;
+ border-radius:50%;
  color:#d40000;
  font-size:22px
 }
@@ -462,7 +424,8 @@ footer{
 
 body.dark #newsReader,
 body.dark .reader-box{
- background:#121212;color:#eee
+ background:#121212;
+ color:#eee
 }
 
 .reader-title{
@@ -498,26 +461,38 @@ body.dark .reader-box{
  flex-direction:column
 }
 
-body.dark #loading{background:#121212;color:white}
+body.dark #loading{
+ background:#121212;
+ color:white
+}
 
 .spinner{
- width:38px;height:38px;
+ width:38px;
+ height:38px;
  border:4px solid #ddd;
  border-top-color:#d40000;
  border-radius:50%;
  animation:spin .8s linear infinite
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin{
+ to{transform:rotate(360deg)}
+}
 
 @media(min-width:600px){
- .categories{grid-template-columns:repeat(4,1fr)}
- .photo-grid{grid-template-columns:repeat(4,1fr)}
- .featured img{height:320px}
+ .categories{
+  grid-template-columns:repeat(4,1fr)
+ }
+
+ .featured img{
+  height:320px
+ }
 }
 
 @media(max-width:380px){
- .photo-grid{grid-template-columns:repeat(2,1fr)}
+ .categories{
+  grid-template-columns:repeat(2,1fr)
+ }
 }
 </style>
 </head>
@@ -525,9 +500,9 @@ body.dark #loading{background:#121212;color:white}
 <body>
 
 <div id="loading">
-<h2>📰 Rahmotpur News</h2>
-<div class="spinner"></div>
-<p>লোড হচ্ছে...</p>
+ <h2>📰 Rahmotpur News</h2>
+ <div class="spinner"></div>
+ <p>লোড হচ্ছে...</p>
 </div>
 
 <header>
@@ -561,18 +536,29 @@ rel="noopener">
 
 </header>
 
+
 <div class="breaking">
-<div class="breaking-title">🔴 ব্রেকিং</div>
+
+<div class="breaking-title">
+🔴 ব্রেকিং
+</div>
+
 <div class="breaking-scroll">
+
 <div class="breaking-track" id="breakingNews">
 সর্বশেষ খবর লোড হচ্ছে...
 </div>
+
 </div>
+
 </div>
+
 
 <nav id="topNav"></nav>
 
+
 <div class="container">
+
 
 <!-- HOME -->
 
@@ -592,27 +578,36 @@ rel="noopener">
 
 </div>
 
-<h2 class="category-title">⭐ প্রধান খবর</h2>
+
+<h2 class="category-title">
+⭐ প্রধান খবর
+</h2>
 
 <div id="featuredNews">
 খবর লোড হচ্ছে...
 </div>
 
-<h2 class="category-title">📸 সব ছবি</h2>
+
+<h2 class="category-title">
+📸 সব ছবি
+</h2>
+
 
 <div class="box facebook-photo-box">
 
-<div class="fb-icon">📸</div>
+<div class="facebook-photo-icon">
+📸
+</div>
 
-<h3>Rahmotpur News-এর সব ছবি</h3>
+<h3>
+Rahmotpur News-এর সব ছবি
+</h3>
 
 <p>
-Rahmotpur News Facebook Page-এ প্রকাশিত
-সব ছবি দেখতে নিচের বাটনে চাপ দাও।
+Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দেখতে নিচের বাটনে চাপ দাও।
 </p>
 
-<button class="facebook-photo-button"
-id="photoHomeButton">
+<button class="button" id="photoHomeButton">
 📸 Facebook-এর সব ছবি দেখুন
 </button>
 
@@ -621,17 +616,21 @@ id="photoHomeButton">
 </section>
 
 
+
 <!-- CATEGORY -->
 
 <section id="categorySection" style="display:none">
 
-<h2 class="category-title">📰 সংবাদ বিভাগ</h2>
+<h2 class="category-title">
+📰 সংবাদ বিভাগ
+</h2>
 
 <div class="categories" id="categories"></div>
 
 <div id="categoryNews"></div>
 
 </section>
+
 
 
 <!-- PHOTO -->
@@ -650,60 +649,42 @@ id="photoHomeButton">
 
 </div>
 
-<div class="box">
 
-<div class="facebook-photo-box">
+<div class="box facebook-photo-box">
 
-<div class="fb-icon">📸</div>
+<div class="facebook-photo-icon">
+📸
+</div>
 
-<h3>Rahmotpur News Facebook Photos</h3>
+<h3>
+Rahmotpur News Facebook Photos
+</h3>
 
 <p>
-Facebook Page-এ প্রকাশিত সব ছবি দেখতে নিচের বাটনে চাপ দাও।
+Rahmotpur News Facebook Page-এ প্রকাশিত সব ছবি দেখতে নিচের বাটনে চাপ দাও।
 </p>
 
-<button class="facebook-photo-button"
-id="facebookPhotosButton">
+<a
+class="button"
+href="https://www.facebook.com/rahmotpurnews/photos"
+target="_blank"
+rel="noopener">
 📸 Facebook-এর সব ছবি দেখুন
-</button>
-
-</div>
-
-<hr>
-
-<div class="photo-toolbar">
-
-<input
-id="photoSearch"
-class="photo-search"
-type="search"
-placeholder="Firebase-এর ছবি খুঁজুন...">
-
-<button class="photo-refresh"
-id="photoRefresh">
-↻
-</button>
-
-</div>
-
-<div id="photoStatus"
-class="photo-status">
-ছবি লোড হচ্ছে...
-</div>
-
-<div id="photoGrid"
-class="photo-grid"></div>
+</a>
 
 </div>
 
 </section>
 
 
+
 <!-- SEARCH -->
 
 <section id="searchSection" style="display:none">
 
-<h2 class="category-title">🔎 খবর খুঁজুন</h2>
+<h2 class="category-title">
+🔎 খবর খুঁজুন
+</h2>
 
 <div class="search-box">
 
@@ -723,11 +704,14 @@ placeholder="খবরের শিরোনাম লিখুন...">
 </section>
 
 
+
 <!-- LATEST -->
 
 <section id="latestSection" style="display:none">
 
-<h2 class="category-title">🔴 সর্বশেষ খবর</h2>
+<h2 class="category-title">
+🔴 সর্বশেষ খবর
+</h2>
 
 <div id="latestNews">
 খবর লোড হচ্ছে...
@@ -735,13 +719,21 @@ placeholder="খবরের শিরোনাম লিখুন...">
 
 </section>
 
+
 </div>
 
+
+
 <footer>
+
 © 2026 Rahmotpur News
+
 <br>
+
 আপনার এলাকার খবর সবার আগে
+
 </footer>
+
 
 
 <!-- BOTTOM NAV -->
@@ -749,44 +741,46 @@ placeholder="খবরের শিরোনাম লিখুন...">
 <div class="bottom-nav">
 
 <button class="active" data-section="homeSection">
+
 <span class="nav-icon">🏠</span>
 হোম
+
 </button>
+
 
 <button data-section="categorySection">
+
 <span class="nav-icon">📰</span>
 ক্যাটাগরি
+
 </button>
+
 
 <button data-section="photoSection">
+
 <span class="nav-icon">📸</span>
 সব ছবি
+
 </button>
+
 
 <button data-section="latestSection">
+
 <span class="nav-icon">🔴</span>
 সর্বশেষ
+
 </button>
+
 
 <button data-section="searchSection">
+
 <span class="nav-icon">🔎</span>
 সার্চ
+
 </button>
 
 </div>
 
-
-<!-- PHOTO VIEWER -->
-
-<div class="photo-viewer" id="photoViewer">
-
-<button class="photo-close" id="photoClose">×</button>
-
-<img id="viewerImage" alt="">
-
-<div class="photo-caption" id="viewerCaption"></div>
-
-</div>
 
 
 <!-- NEWS READER -->
@@ -799,21 +793,29 @@ placeholder="খবরের শিরোনাম লিখুন...">
 ←
 </button>
 
-<b>Rahmotpur News</b>
+<b>
+Rahmotpur News
+</b>
 
 </div>
 
+
 <div class="reader-box">
 
-<h1 class="reader-title" id="readerTitle"></h1>
+<h1
+class="reader-title"
+id="readerTitle">
+</h1>
 
 <div id="readerDate"></div>
 
-<img id="readerImage"
+<img
+id="readerImage"
 class="reader-image"
 style="display:none">
 
-<div id="readerContent"
+<div
+id="readerContent"
 class="reader-content">
 </div>
 
@@ -822,17 +824,22 @@ class="reader-content">
 </div>
 
 
+
 <!-- ABOUT -->
 
 <div class="modal-overlay" id="aboutModal">
 
 <div class="modal-box">
 
-<button class="modal-close" data-close="aboutModal">
+<button
+class="modal-close"
+data-close="aboutModal">
 ×
 </button>
 
-<h2>ℹ️ Rahmotpur News</h2>
+<h2>
+ℹ️ Rahmotpur News
+</h2>
 
 <p>
 Rahmotpur News একটি অনলাইন নিউজ প্ল্যাটফর্ম।
@@ -844,7 +851,8 @@ Rahmotpur News একটি অনলাইন নিউজ প্ল্যা�
 বিনোদন ও স্থানীয় সংবাদ প্রকাশ করা হয়।
 </p>
 
-<a class="button"
+<a
+class="button"
 href="https://www.facebook.com/rahmotpurnews"
 target="_blank"
 rel="noopener">
@@ -852,7 +860,9 @@ rel="noopener">
 </a>
 
 </div>
+
 </div>
+
 
 
 <!-- SETTINGS -->
@@ -861,19 +871,19 @@ rel="noopener">
 
 <div class="modal-box">
 
-<button class="modal-close" data-close="settingsModal">
+<button
+class="modal-close"
+data-close="settingsModal">
 ×
 </button>
 
-<h2>⚙️ Settings</h2>
+<h2>
+⚙️ Settings
+</h2>
 
 <button class="more-item" id="darkButton">
 🌙 Dark Mode:
 <span id="darkValue">বন্ধ</span>
-</button>
-
-<button class="more-item" id="notificationButton">
-🔔 Notification চালু করুন
 </button>
 
 <button class="more-item" id="textButton">
@@ -882,73 +892,26 @@ rel="noopener">
 </button>
 
 </div>
+
 </div>
 
 
-<script type="module">
 
-/* =====================================
-   FIREBASE
-===================================== */
-
-import {
-initializeApp
-}
-from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-getDocs,
-query,
-orderBy
-}
-from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-
-const firebaseConfig={
-
-apiKey:"AIzaSyBZjx3DqTd-1yzymUB7p4cVpO3QokVq11M4",
-
-authDomain:"rahmotpur-news.firebaseapp.com",
-
-projectId:"rahmotpur-news",
-
-storageBucket:"rahmotpur-news.firebasestorage.app",
-
-messagingSenderId:"669823932201",
-
-appId:"1:669823932201:web:0f6e4fd04fc01293a78938"
-
-};
-
-
-const firebaseApp=
-initializeApp(firebaseConfig);
-
-const db=
-getFirestore(firebaseApp);
-
-
-/* =====================================
-   CLOUDFLARE WORKER
-===================================== */
-
-const WORKER=
-"https://twilight-wind-a98drahmotpur-facebook-photos.hasanuzzamanmamun773.workers.dev";
-
+<script>
 
 /* =====================================
    GLOBAL
 ===================================== */
 
-let allPhotos=[];
 let allNews=[];
 let labels=[];
 
+const BLOGGER=
+"https://rahmotpurnewsbd.blogspot.com";
+
 
 /* =====================================
-   SECTION
+   SECTION SYSTEM
 ===================================== */
 
 const buttons=
@@ -970,9 +933,12 @@ function showSection(id){
 const el=
 document.getElementById(x);
 
-if(el)
+if(el){
+
 el.style.display=
-x===id?"block":"none";
+x===id ? "block" : "none";
+
+}
 
 });
 
@@ -992,11 +958,6 @@ top:0,
 behavior:"smooth"
 });
 
-
-if(id==="photoSection"){
-loadPhotos();
-}
-
 }
 
 
@@ -1014,43 +975,21 @@ btn.dataset.section
 
 
 /* =====================================
-   FACEBOOK PHOTOS
+   FACEBOOK PHOTO BUTTON
 ===================================== */
-
-function openFacebookPhotos(){
-
-window.open(
-"https://www.facebook.com/rahmotpurnews/photos",
-"_blank",
-"noopener,noreferrer"
-);
-
-}
-
-
-/* HOME PHOTO BUTTON */
 
 document.getElementById(
 "photoHomeButton"
 ).onclick=function(){
 
-openFacebookPhotos();
+window.open(
+"https://www.facebook.com/rahmotpurnews/photos",
+"_blank",
+"noopener"
+);
 
 };
 
-
-/* PHOTO SECTION FACEBOOK BUTTON */
-
-document.getElementById(
-"facebookPhotosButton"
-).onclick=function(){
-
-openFacebookPhotos();
-
-};
-
-
-/* PHOTO BACK */
 
 document.getElementById(
 "photoBackButton"
@@ -1061,8 +1000,6 @@ showSection("homeSection");
 };
 
 
-/* LATEST */
-
 document.getElementById(
 "latestButton"
 ).onclick=function(){
@@ -1072,418 +1009,9 @@ showSection("latestSection");
 };
 
 
-/* =====================================
-   FIREBASE PHOTO LOADER
-===================================== */
-
-async function loadFirebasePhotos(){
-
-try{
-
-const ref=
-collection(db,"photos");
-
-let snapshot;
-
-try{
-
-const q=
-query(
-ref,
-orderBy("createdAt","desc")
-);
-
-snapshot=
-await getDocs(q);
-
-}catch(error){
-
-snapshot=
-await getDocs(ref);
-
-}
-
-
-const photos=[];
-
-
-snapshot.forEach(function(doc){
-
-const data=doc.data();
-
-const image=
-data.image||
-data.imageUrl||
-data.url||
-data.photo||
-"";
-
-if(!image)return;
-
-
-photos.push({
-
-id:doc.id,
-
-image:image,
-
-title:
-data.title||
-data.caption||
-"Rahmotpur News",
-
-date:
-data.date||
-data.createdAt||
-""
-
-});
-
-});
-
-
-return photos;
-
-}catch(error){
-
-console.error(
-"Firebase photo error:",
-error
-);
-
-return [];
-
-}
-
-}
-
 
 /* =====================================
-   WORKER PHOTO LOADER
-===================================== */
-
-async function loadWorkerPhotos(){
-
-try{
-
-const response=
-await fetch(
-WORKER+"/photos",
-{
-method:"GET",
-cache:"no-store"
-}
-);
-
-
-if(!response.ok)
-return [];
-
-
-const data=
-await response.json();
-
-
-if(
-!data||
-!Array.isArray(data.photos)
-)
-return [];
-
-
-return data.photos.map(
-function(photo,index){
-
-return {
-
-id:
-photo.id||
-"worker-"+index,
-
-image:
-photo.image||
-photo.imageUrl||
-photo.url||
-photo.source||
-"",
-
-title:
-photo.title||
-photo.caption||
-"Facebook Photo",
-
-date:
-photo.date||
-""
-
-};
-
-}).filter(
-function(photo){
-
-return photo.image;
-
-});
-
-
-}catch(error){
-
-console.log(
-"Worker photo loading:",
-error
-);
-
-return [];
-
-}
-
-}
-
-
-/* =====================================
-   ALL PHOTOS
-===================================== */
-
-async function loadPhotos(){
-
-const status=
-document.getElementById(
-"photoStatus"
-);
-
-const grid=
-document.getElementById(
-"photoGrid"
-);
-
-
-status.textContent=
-"📸 ছবি লোড হচ্ছে...";
-
-grid.innerHTML="";
-
-
-const [
-firebasePhotos,
-workerPhotos
-]=await Promise.all([
-
-loadFirebasePhotos(),
-
-loadWorkerPhotos()
-
-]);
-
-
-const combined=[
-...firebasePhotos,
-...workerPhotos
-];
-
-
-const seen=
-new Set();
-
-
-allPhotos=
-combined.filter(
-function(photo){
-
-if(!photo.image)
-return false;
-
-if(seen.has(photo.image))
-return false;
-
-seen.add(photo.image);
-
-return true;
-
-});
-
-
-renderPhotos(allPhotos);
-
-}
-
-
-/* =====================================
-   RENDER PHOTOS
-===================================== */
-
-function renderPhotos(photos){
-
-const grid=
-document.getElementById(
-"photoGrid"
-);
-
-const status=
-document.getElementById(
-"photoStatus"
-);
-
-
-grid.innerHTML="";
-
-
-if(!photos.length){
-
-status.innerHTML=
-"📸 Firebase/Worker-এ এখনো কোনো ছবি পাওয়া যায়নি।";
-
-return;
-
-}
-
-
-status.textContent=
-"মোট "+photos.length+"টি ছবি";
-
-
-photos.forEach(function(photo){
-
-const item=
-document.createElement("div");
-
-item.className=
-"photo-item";
-
-
-item.innerHTML=`
-
-<img
-src="${escapeHTML(photo.image)}"
-alt="${escapeHTML(photo.title)}"
-loading="lazy">
-
-<div class="photo-info">
-
-<b>
-${escapeHTML(photo.title)}
-</b>
-
-${
-photo.date?
-"<br>"+escapeHTML(String(photo.date)):
-""
-}
-
-</div>
-
-`;
-
-
-item.onclick=function(){
-
-openPhoto(
-photo.image,
-photo.title
-);
-
-};
-
-
-grid.appendChild(item);
-
-});
-
-}
-
-
-/* =====================================
-   PHOTO SEARCH
-===================================== */
-
-document.getElementById(
-"photoSearch"
-).addEventListener(
-"input",
-function(){
-
-const word=
-this.value.trim().toLowerCase();
-
-
-if(!word){
-
-renderPhotos(allPhotos);
-
-return;
-
-}
-
-
-const found=
-allPhotos.filter(
-function(photo){
-
-return String(
-photo.title||""
-)
-.toLowerCase()
-.includes(word);
-
-});
-
-
-renderPhotos(found);
-
-});
-
-
-document.getElementById(
-"photoRefresh"
-).onclick=
-loadPhotos;
-
-
-/* =====================================
-   PHOTO VIEWER
-===================================== */
-
-function openPhoto(image,title){
-
-const viewer=
-document.getElementById(
-"photoViewer"
-);
-
-const img=
-document.getElementById(
-"viewerImage"
-);
-
-const caption=
-document.getElementById(
-"viewerCaption"
-);
-
-
-img.src=image;
-
-caption.textContent=
-title||"Rahmotpur News";
-
-
-viewer.classList.add("show");
-
-}
-
-
-document.getElementById(
-"photoClose"
-).onclick=function(){
-
-document.getElementById(
-"photoViewer"
-).classList.remove("show");
-
-};
-
-
-/* =====================================
-   ESCAPE
+   ESCAPE HTML
 ===================================== */
 
 function escapeHTML(value){
@@ -1492,52 +1020,34 @@ const div=
 document.createElement("div");
 
 div.textContent=
-String(value||"");
+String(value || "");
 
 return div.innerHTML;
 
 }
 
 
+
 /* =====================================
-   BLOGGER
+   BLOGGER LABELS
 ===================================== */
-
-const BLOGGER=
-"https://rahmotpurnewsbd.blogspot.com";
-
-
-const categoryIcons={
-
-"রহমতপুর":"📍",
-"ইমাদপুর":"🏘️",
-"মিঠাপুকুর":"📌",
-"রাজনীতি":"🏛️",
-"জাতীয়":"🇧🇩",
-"আন্তর্জাতিক":"🌍",
-"সারাদেশ":"🗺️",
-"খেলাধুলা":"⚽",
-"অপরাধ":"🚔",
-"মতামত":"💬",
-"শিক্ষা":"🎓",
-"ধর্মীয়":"🕌",
-"আবহাওয়া":"🌦️",
-"বিনোদন":"🎬",
-"পরিবেশ":"🌳"
-
-};
-
 
 function getLabels(entry){
 
 if(
-entry.category&&
+entry.category &&
 Array.isArray(entry.category)
 ){
 
-return entry.category.map(
-x=>String(x.term||"").trim()
-).filter(Boolean);
+return entry.category
+.map(function(x){
+
+return String(
+x.term || ""
+).trim();
+
+})
+.filter(Boolean);
 
 }
 
@@ -1546,14 +1056,21 @@ return [];
 }
 
 
+
 /* =====================================
-   SHOW NEWS
+   BLOGGER NEWS
 ===================================== */
 
 function showNews(data){
 
 const entries=
-data?.feed?.entry||[];
+data &&
+data.feed &&
+data.feed.entry
+?
+data.feed.entry
+:
+[];
 
 
 allNews=[];
@@ -1561,22 +1078,27 @@ allNews=[];
 
 entries.forEach(function(entry){
 
-if(!entry.title)return;
+if(!entry.title)
+return;
 
 
 const title=
-entry.title.$t||"";
+entry.title.$t || "";
 
 
-let link=BLOGGER;
+let link=
+BLOGGER;
 
 
 if(entry.link){
 
 const alt=
-entry.link.find(
-x=>x.rel==="alternate"
-);
+entry.link.find(function(x){
+
+return x.rel==="alternate";
+
+});
+
 
 if(alt)
 link=alt.href;
@@ -1585,8 +1107,8 @@ link=alt.href;
 
 
 const content=
-entry.content?.$t||
-entry.summary?.$t||
+entry.content?.$t ||
+entry.summary?.$t ||
 "";
 
 
@@ -1604,7 +1126,7 @@ image=match[1];
 
 
 if(
-!image&&
+!image &&
 entry.media$thumbnail
 ){
 
@@ -1639,7 +1161,9 @@ day:"numeric"
 
 allNews.push({
 
-id:entry.id?.$t||link,
+id:
+entry.id?.$t ||
+link,
 
 title:title,
 
@@ -1651,7 +1175,8 @@ date:date,
 
 content:content,
 
-labels:getLabels(entry)
+labels:
+getLabels(entry)
 
 });
 
@@ -1663,6 +1188,7 @@ buildCategories();
 renderNews();
 
 }
+
 
 
 /* =====================================
@@ -1678,8 +1204,12 @@ allNews.forEach(function(news){
 
 news.labels.forEach(function(label){
 
-if(!map[label.toLowerCase()])
-map[label.toLowerCase()]=label;
+const key=
+label.toLowerCase();
+
+
+if(!map[key])
+map[key]=label;
 
 });
 
@@ -1704,13 +1234,35 @@ labels.forEach(function(label){
 const btn=
 document.createElement("button");
 
+
 btn.className="category";
+
+
+const icons={
+
+"রহমতপুর":"📍",
+"ইমাদপুর":"🏘️",
+"মিঠাপুকুর":"📌",
+"রাজনীতি":"🏛️",
+"জাতীয়":"🇧🇩",
+"আন্তর্জাতিক":"🌍",
+"সারাদেশ":"🗺️",
+"খেলাধুলা":"⚽",
+"অপরাধ":"🚔",
+"মতামত":"💬",
+"শিক্ষা":"🎓",
+"ধর্মীয়":"🕌",
+"আবহাওয়া":"🌦️",
+"বিনোদন":"🎬",
+"পরিবেশ":"🌳"
+
+};
 
 
 btn.innerHTML=`
 
 <span class="icon">
-${categoryIcons[label]||"📰"}
+${icons[label] || "📰"}
 </span>
 
 ${escapeHTML(label)}
@@ -1723,10 +1275,12 @@ btn.onclick=function(){
 const found=
 allNews.filter(function(news){
 
-return news.labels.some(
-x=>x.toLowerCase()===
-label.toLowerCase()
-);
+return news.labels.some(function(x){
+
+return x.toLowerCase()===
+label.toLowerCase();
+
+});
 
 });
 
@@ -1734,7 +1288,9 @@ label.toLowerCase()
 document.getElementById(
 "categoryNews"
 ).innerHTML=
-found.map(createNewsCard).join("");
+found.map(
+createNewsCard
+).join("");
 
 };
 
@@ -1742,6 +1298,7 @@ found.map(createNewsCard).join("");
 box.appendChild(btn);
 
 });
+
 
 
 /* TOP NAV */
@@ -1755,7 +1312,7 @@ document.getElementById(
 top.innerHTML="";
 
 
-["হোম","📸 সব ছবি","🔴 সর্বশেষ"]
+["🏠 হোম","📸 সব ছবি","🔴 সর্বশেষ"]
 .concat(labels)
 .forEach(function(name){
 
@@ -1768,7 +1325,7 @@ b.textContent=name;
 
 b.onclick=function(){
 
-if(name==="হোম"){
+if(name==="🏠 হোম"){
 
 showSection("homeSection");
 
@@ -1792,14 +1349,16 @@ showSection("categorySection");
 
 
 const found=
-allNews.filter(
-n=>
-n.labels.some(
-x=>
-x.toLowerCase()===
-name.toLowerCase()
-)
-);
+allNews.filter(function(n){
+
+return n.labels.some(function(x){
+
+return x.toLowerCase()===
+name.toLowerCase();
+
+});
+
+});
 
 
 document.getElementById(
@@ -1821,6 +1380,7 @@ top.appendChild(b);
 }
 
 
+
 /* =====================================
    NEWS CARD
 ===================================== */
@@ -1832,21 +1392,30 @@ return `
 <div class="card">
 
 ${
-news.image?
-`<img
+news.image
+?
+`
+<img
 src="${escapeHTML(news.image)}"
-loading="lazy">`
-:""
+loading="lazy"
+alt="${escapeHTML(news.title)}">
+`
+:
+""
 }
 
 <div class="card-content">
 
 <div class="title">
+
 ${escapeHTML(news.title)}
+
 </div>
 
 <div class="date">
+
 প্রকাশ: ${escapeHTML(news.date)}
+
 </div>
 
 <button
@@ -1866,6 +1435,7 @@ data-news="${escapeHTML(news.id)}">
 }
 
 
+
 /* =====================================
    RENDER NEWS
 ===================================== */
@@ -1879,9 +1449,13 @@ document.getElementById(
 
 
 latest.innerHTML=
+allNews.length
+?
 allNews.map(
 createNewsCard
-).join("");
+).join("")
+:
+"<p>কোনো খবর পাওয়া যায়নি।</p>";
 
 
 const first=
@@ -1897,15 +1471,22 @@ document.getElementById(
 <div class="featured">
 
 ${
-first.image?
-`<img
-src="${escapeHTML(first.image)}">`
-:""
+first.image
+?
+`
+<img
+src="${escapeHTML(first.image)}"
+alt="${escapeHTML(first.title)}">
+`
+:
+""
 }
 
 <div class="featured-content">
 
-<b>⭐ প্রধান খবর</b>
+<b>
+⭐ প্রধান খবর
+</b>
 
 <h2>
 ${escapeHTML(first.title)}
@@ -1933,15 +1514,19 @@ data-news="${escapeHTML(first.id)}">
 document.getElementById(
 "breakingNews"
 ).textContent=
-allNews.slice(0,5)
-.map(
-x=>"📰 "+x.title
-)
+allNews
+.slice(0,5)
+.map(function(x){
+
+return "📰 "+x.title;
+
+})
 .join(" • ");
 
 }
 
 }
+
 
 
 /* =====================================
@@ -1957,7 +1542,9 @@ event.target.closest(
 "[data-news]"
 );
 
-if(!target)return;
+
+if(!target)
+return;
 
 
 const id=
@@ -1967,14 +1554,16 @@ target.getAttribute(
 
 
 const news=
-allNews.find(
-x=>
-String(x.id)===
-String(id)
-);
+allNews.find(function(x){
+
+return String(x.id)===
+String(id);
+
+});
 
 
-if(!news)return;
+if(!news)
+return;
 
 
 document.getElementById(
@@ -2000,7 +1589,8 @@ if(news.image){
 img.src=news.image;
 img.style.display="block";
 
-}else{
+}
+else{
 
 img.style.display="none";
 
@@ -2031,6 +1621,7 @@ document.getElementById(
 };
 
 
+
 /* =====================================
    SEARCH
 ===================================== */
@@ -2053,9 +1644,18 @@ document.getElementById(
 );
 
 
+if(!word){
+
+result.innerHTML=
+"<p>খবরের শিরোনাম লিখুন।</p>";
+
+return;
+
+}
+
+
 const found=
-allNews.filter(
-function(news){
+allNews.filter(function(news){
 
 return news.title
 .toLowerCase()
@@ -2065,11 +1665,33 @@ return news.title
 
 
 result.innerHTML=
-found.length?
-found.map(createNewsCard).join(""):
+found.length
+?
+found.map(
+createNewsCard
+).join("")
+:
 "<p>কোনো খবর পাওয়া যায়নি।</p>";
 
 };
+
+
+document.getElementById(
+"searchInput"
+).addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Enter"){
+
+document.getElementById(
+"searchButton"
+).click();
+
+}
+
+});
+
 
 
 /* =====================================
@@ -2094,7 +1716,9 @@ document.addEventListener(
 "click",
 function(e){
 
-if(!e.target.closest(".more-menu")){
+if(
+!e.target.closest(".more-menu")
+){
 
 document.getElementById(
 "moreDropdown"
@@ -2105,8 +1729,9 @@ document.getElementById(
 });
 
 
+
 /* =====================================
-   MODAL
+   MODALS
 ===================================== */
 
 document.getElementById(
@@ -2156,6 +1781,7 @@ btn.dataset.close
 });
 
 
+
 /* =====================================
    DARK MODE
 ===================================== */
@@ -2177,7 +1803,11 @@ dark
 document.getElementById(
 "darkValue"
 ).textContent=
-dark?"চালু":"বন্ধ";
+dark
+?
+"চালু"
+:
+"বন্ধ";
 
 }
 
@@ -2194,13 +1824,18 @@ dark=!dark;
 
 localStorage.setItem(
 "rahmotpurDark",
-dark?"1":"0"
+dark
+?
+"1"
+:
+"0"
 );
 
 
 applyDark();
 
 };
+
 
 
 /* =====================================
@@ -2210,26 +1845,35 @@ applyDark();
 let size=
 localStorage.getItem(
 "rahmotpurSize"
-)||"medium";
+) ||
+"medium";
 
 
 function applySize(){
 
 document.body.style.fontSize=
-size==="small"?
-"14px":
-size==="large"?
-"18px":
+size==="small"
+?
+"14px"
+:
+size==="large"
+?
+"18px"
+:
 "16px";
 
 
 document.getElementById(
 "textValue"
 ).textContent=
-size==="small"?
-"ছোট":
-size==="large"?
-"বড়":
+size==="small"
+?
+"ছোট"
+:
+size==="large"
+?
+"বড়"
+:
 "মাঝারি";
 
 }
@@ -2243,10 +1887,14 @@ document.getElementById(
 ).onclick=function(){
 
 size=
-size==="medium"?
-"large":
-size==="large"?
-"small":
+size==="medium"
+?
+"large"
+:
+size==="large"
+?
+"small"
+:
 "medium";
 
 
@@ -2261,53 +1909,6 @@ applySize();
 };
 
 
-/* =====================================
-   NOTIFICATION
-===================================== */
-
-document.getElementById(
-"notificationButton"
-).onclick=async function(){
-
-if(!("Notification" in window)){
-
-alert(
-"এই ডিভাইসে Notification সাপোর্ট নেই।"
-);
-
-return;
-
-}
-
-
-try{
-
-const permission=
-await Notification.requestPermission();
-
-
-if(permission==="granted"){
-
-alert(
-"✅ Notification অনুমতি চালু হয়েছে।"
-);
-
-}else{
-
-alert(
-"❌ Notification অনুমতি দেওয়া হয়নি।"
-);
-
-}
-
-}catch(error){
-
-console.error(error);
-
-}
-
-};
-
 
 /* =====================================
    BLOGGER LOAD
@@ -2321,14 +1922,16 @@ document.getElementById(
 );
 
 
-if(old)old.remove();
+if(old)
+old.remove();
 
 
 const script=
 document.createElement("script");
 
 
-script.id="bloggerScript";
+script.id=
+"bloggerScript";
 
 
 script.src=
@@ -2340,7 +1943,9 @@ BLOGGER+
 "&callback=showNews";
 
 
-document.body.appendChild(script);
+document.body.appendChild(
+script
+);
 
 }
 
@@ -2348,24 +1953,28 @@ document.body.appendChild(script);
 loadBlogger();
 
 
-/* =====================================
-   INITIAL PHOTO LOAD
-===================================== */
-
-loadPhotos();
-
 
 /* =====================================
    SERVICE WORKER
 ===================================== */
 
-if("serviceWorker" in navigator){
+if(
+"serviceWorker" in navigator
+){
 
-navigator.serviceWorker.register(
-"./sw.js"
-).catch(console.error);
+navigator.serviceWorker
+.register("./sw.js")
+.catch(function(error){
+
+console.log(
+"Service Worker:",
+error
+);
+
+});
 
 }
+
 
 
 /* =====================================
