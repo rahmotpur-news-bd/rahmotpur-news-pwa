@@ -1916,11 +1916,16 @@ entry.media$thumbnail &&
 entry.media$thumbnail.url
 ){
 
+if(
+entry.media$thumbnail &&
+entry.media$thumbnail.url
+){
+
 image =
 entry.media$thumbnail.url
 .replace(
-"s72-c",
-"s800"
+/\/s\d+(-c)?\//,
+"/s1600/"
 );
 
 }
