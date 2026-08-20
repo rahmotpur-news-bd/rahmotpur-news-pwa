@@ -3180,11 +3180,15 @@ openNotification;
 
 
 /* =========================
-   INSTALL APP
+   PROFESSIONAL INSTALL APP
 ========================= */
 
 let deferredPrompt = null;
 
+
+/* =========================
+   INSTALL PROMPT READY
+========================= */
 
 window.addEventListener(
 "beforeinstallprompt",
@@ -3192,8 +3196,14 @@ function(event){
 
 event.preventDefault();
 
-deferredPrompt =
-event;
+deferredPrompt = event;
+
+console.log(
+"Rahmotpur News: Install prompt ready"
+);
+
+
+/* SHOW INSTALL BOX */
 
 const installBox =
 document.getElementById(
@@ -3210,34 +3220,17 @@ installBox.style.display =
 });
 
 
-async function installRahmotpurNews(){
+/* =========================
+   APP INSTALLED
+========================= */
 
-if(!deferredPrompt){
+window.addEventListener(
+"appinstalled",
+function(){
 
-alert(
-"Chrome-এর Menu থেকে\n" +
-"Install app অথবা\n" +
-"Add to Home screen চাপতে পারিস।"
+console.log(
+"Rahmotpur News installed successfully"
 );
-
-return;
-
-}
-
-try{
-
-deferredPrompt.prompt();
-
-await deferredPrompt.userChoice;
-
-}catch(error){
-
-console.error(
-"Install error:",
-error
-);
-
-}
 
 deferredPrompt = null;
 
@@ -3253,10 +3246,102 @@ installBox.style.display =
 
 }
 
+alert(
+"✅ Rahmotpur News সফলভাবে ইনস্টল হয়েছে।"
+);
+
+});
+
+
+/* =========================
+   INSTALL FUNCTION
+========================= */
+
+async function installRahmotpurNews(){
+
+/* APP ALREADY INSTALLED */
+
+if(
+window.matchMedia(
+"(display-mode: standalone)"
+).matches
+){
+
+alert(
+"Rahmotpur News ইতোমধ্যে ইনস্টল করা আছে।"
+);
+
+return;
+
 }
 
 
-/* HOME INSTALL */
+/* INSTALL PROMPT NOT AVAILABLE */
+
+if(!deferredPrompt){
+
+alert(
+"এই মুহূর্তে সরাসরি Install অপশন পাওয়া যাচ্ছে না।\n\n" +
+"Chrome-এর ⋮ Menu খুলে\n" +
+"Install app অথবা\n" +
+"Add to Home screen নির্বাচন কর।"
+);
+
+return;
+
+}
+
+
+/* SHOW INSTALL PROMPT */
+
+try{
+
+deferredPrompt.prompt();
+
+
+const result =
+await deferredPrompt.userChoice;
+
+
+console.log(
+"Install result:",
+result.outcome
+);
+
+
+/* PROMPT CAN ONLY BE USED ONCE */
+
+deferredPrompt = null;
+
+
+/* HIDE INSTALL BOX */
+
+const installBox =
+document.getElementById(
+"installBox"
+);
+
+if(installBox){
+
+installBox.style.display =
+"none";
+
+}
+
+}catch(error){
+
+console.error(
+"Rahmotpur Install Error:",
+error
+);
+
+alert(
+"Install করা যাচ্ছে না। আবার চেষ্টা কর।"
+);
+
+}
+
+}
 
 const installButton =
 document.getElementById(
