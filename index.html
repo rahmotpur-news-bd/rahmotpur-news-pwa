@@ -467,40 +467,59 @@ margin:22px 0 12px;
 
 
 /* =========================
-   FEATURED NEWS
+   FEATURED NEWS — PRO
 ========================= */
 
 .featured-card{
 background:#fff;
-border-radius:14px;
+border-radius:16px;
 overflow:hidden;
-box-shadow:
-0 2px 8px #ccc;
-margin-bottom:20px;
+box-shadow:0 4px 15px rgba(0,0,0,.14);
+margin-bottom:22px;
+position:relative;
+transition:transform .2s, box-shadow .2s;
+}
+
+.featured-card:active{
+transform:scale(.99);
 }
 
 .featured-card img{
 width:100%;
-height:250px;
+height:260px;
 object-fit:cover;
 display:block;
 }
 
 .featured-content{
-padding:16px;
+padding:17px 16px 18px;
 }
 
 .featured-label{
-font-size:13px;
-color:#d40000;
+display:inline-block;
+font-size:12px;
+color:#fff;
+background:#d40000;
 font-weight:bold;
-margin-bottom:7px;
+padding:5px 9px;
+border-radius:20px;
+margin-bottom:9px;
 }
 
 .featured-title{
 font-size:21px;
-font-weight:bold;
-line-height:1.5;
+font-weight:700;
+line-height:1.55;
+color:#222;
+}
+
+body.dark .featured-card{
+background:#1e1e1e;
+box-shadow:0 4px 15px rgba(0,0,0,.35);
+}
+
+body.dark .featured-title{
+color:#fff;
 }
 
 
