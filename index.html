@@ -328,39 +328,55 @@ color:#aaa;
 
 
 /* =========================
-   BREAKING NEWS
+   BREAKING NEWS — PRO
 ========================= */
 
 .breaking{
-height:42px;
+height:46px;
 background:#111;
 color:#fff;
 display:flex;
 align-items:center;
 overflow:hidden;
+border-bottom:1px solid #333;
 }
 
 .breaking-title{
 height:100%;
+min-width:82px;
 background:#d40000;
-padding:0 13px;
+padding:0 12px;
 display:flex;
 align-items:center;
-font-weight:bold;
+justify-content:center;
+font-weight:700;
+font-size:14px;
 white-space:nowrap;
+position:relative;
+z-index:2;
+box-shadow:3px 0 8px rgba(0,0,0,.25);
 }
 
 .breaking-scroll{
 flex:1;
 overflow:hidden;
+height:100%;
+display:flex;
+align-items:center;
 }
 
 .breaking-track{
 display:inline-block;
 white-space:nowrap;
 padding-left:100%;
+font-size:14px;
+line-height:46px;
 animation:
-moveNews 25s linear infinite;
+moveNews 28s linear infinite;
+}
+
+.breaking-track:hover{
+animation-play-state:paused;
 }
 
 @keyframes moveNews{
@@ -373,6 +389,11 @@ transform:translateX(0);
 transform:translateX(-100%);
 }
 
+}
+
+body.dark .breaking{
+background:#0b0b0b;
+border-bottom-color:#222;
 }
 
 
