@@ -645,6 +645,72 @@ transform:rotate(360deg);
 margin-top:12px;
 font-size:14px;
   }
+  /* =========================
+   SETTINGS DESIGN
+========================= */
+
+.settings-list{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.settings-item{
+width:100%;
+min-height:55px;
+padding:12px 14px;
+border:0;
+border-bottom:1px solid #eee;
+background:transparent;
+color:#222;
+display:flex;
+align-items:center;
+gap:12px;
+text-align:left;
+font-size:14px;
+cursor:pointer;
+border-radius:9px;
+}
+
+.settings-item:hover{
+background:#f5f5f5;
+}
+
+.settings-item > span:first-child{
+font-size:22px;
+width:30px;
+text-align:center;
+flex-shrink:0;
+}
+
+.settings-item > span:nth-child(2){
+flex:1;
+font-weight:500;
+}
+
+.settings-value{
+font-size:12px;
+color:#777;
+white-space:nowrap;
+}
+
+body.dark .settings-item{
+color:#eee;
+border-bottom-color:#333;
+}
+
+body.dark .settings-item:hover{
+background:#292929;
+}
+
+body.dark .settings-value{
+color:#aaa;
+}
+
+#settingsModal .modal-box h2{
+margin-bottom:12px;
+}
 </style>
 
 </head>
@@ -688,7 +754,7 @@ alt="Rahmotpur News">
 <p>আপনার এলাকার খবর সবার আগে</p>
 
 
-<!-- THREE DOT MENU -->
+<!-- HAMBURGER MENU -->
 
 <div class="more-menu">
 
@@ -696,15 +762,40 @@ alt="Rahmotpur News">
 class="more-button"
 id="moreButton">
 
-⋮
+☰
 
 </button>
 
+<button
+class="more-item"
+id="settingsButton">
 
+<span class="more-icon">
+⚙️
+</span>
+
+<span>
+Settings
+</span>
+
+</button>
+  
 <div
 class="more-dropdown"
 id="moreDropdown">
+<button
+class="more-item"
+id="menuInstallButton">
 
+<span class="more-icon">
+📱
+</span>
+
+<span>
+Install Rahmotpur News
+</span>
+
+</button>
 
 <button
 class="more-item"
@@ -833,7 +924,205 @@ rel="noopener">
 </div>
 
 </div>
+<!-- SETTINGS POPUP -->
 
+<div
+class="modal-overlay"
+id="settingsModal">
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+data-close="settingsModal">
+
+×
+
+</button>
+
+<h2>
+⚙️ Settings
+</h2>
+
+<div class="settings-list">
+
+<button
+class="settings-item"
+id="darkModeSetting">
+
+<span>🌙</span>
+
+<span>
+Dark Mode
+</span>
+
+<span class="settings-value">
+অন/অফ
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="notificationSetting">
+
+<span>🔔</span>
+
+<span>
+Notification Settings
+</span>
+
+<span class="settings-value">
+চালু/বন্ধ
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="textSizeSetting">
+
+<span>🔤</span>
+
+<span>
+Text Size
+</span>
+
+<span class="settings-value">
+মাঝারি
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="newsUpdateSetting">
+
+<span>📰</span>
+
+<span>
+News Update
+</span>
+
+<span class="settings-value">
+স্বাভাবিক
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="vibrationSetting">
+
+<span>📳</span>
+
+<span>
+Vibration
+</span>
+
+<span class="settings-value">
+অন/অফ
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="imageLoadingSetting">
+
+<span>🖼️</span>
+
+<span>
+Image Loading
+</span>
+
+<span class="settings-value">
+স্বাভাবিক
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="clearCacheSetting">
+
+<span>🗑️</span>
+
+<span>
+Clear Cache
+</span>
+
+<span class="settings-value">
+পরিষ্কার
+</span>
+
+</button>
+
+
+<div class="settings-item">
+
+<span>ℹ️</span>
+
+<span>
+App Version
+</span>
+
+<span class="settings-value">
+Version 1.0.0
+</span>
+
+</div>
+
+
+<button
+class="settings-item"
+id="privacySetting">
+
+<span>📄</span>
+
+<span>
+Privacy Policy
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="termsSetting">
+
+<span>📜</span>
+
+<span>
+Terms & Conditions
+</span>
+
+</button>
+
+
+<button
+class="settings-item"
+id="aboutSetting">
+
+<span>👤</span>
+
+<span>
+About Rahmotpur News
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+  </div>
 
 <div class="breaking">
 
@@ -2173,6 +2462,73 @@ loading.style.visibility="hidden";
 
 }
 );
+    /* =========================
+   SETTINGS POPUP
+========================= */
+
+const settingsButton =
+document.getElementById("settingsButton");
+
+const settingsModal =
+document.getElementById("settingsModal");
+
+if(settingsButton && settingsModal){
+
+settingsButton.onclick =
+function(){
+
+settingsModal.classList.add("show");
+
+const menu =
+document.getElementById("moreDropdown");
+
+if(menu){
+
+menu.classList.remove("show");
+
+}
+
+};
+
+}
+
+
+/* CLOSE SETTINGS */
+
+if(settingsModal){
+
+const settingsClose =
+settingsModal.querySelector(
+'[data-close="settingsModal"]'
+);
+
+if(settingsClose){
+
+settingsClose.onclick =
+function(){
+
+settingsModal.classList.remove("show");
+
+};
+
+}
+
+
+/* CLOSE BY OUTSIDE CLICK */
+
+settingsModal.addEventListener(
+"click",
+function(event){
+
+if(event.target === settingsModal){
+
+settingsModal.classList.remove("show");
+
+}
+
+});
+
+}
 </script>
 
 
