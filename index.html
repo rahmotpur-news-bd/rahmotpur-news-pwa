@@ -94,27 +94,73 @@ font-size:18px;
 
 
 /* =========================
-   HEADER
+   HEADER — PRO
 ========================= */
 
 header{
 position:relative;
-background:#d40000;
+background:linear-gradient(135deg,#d40000,#b00000);
 color:#fff;
-padding:17px 60px 17px 15px;
+padding:18px 60px 18px 15px;
 text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.18);
+overflow:hidden;
+}
+
+header::before{
+content:"";
+position:absolute;
+width:150px;
+height:150px;
+left:-75px;
+top:-95px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+}
+
+header::after{
+content:"";
+position:absolute;
+width:120px;
+height:120px;
+right:-60px;
+bottom:-80px;
+background:rgba(255,255,255,.07);
+border-radius:50%;
 }
 
 header h1{
+position:relative;
+z-index:1;
 margin:0;
 font-size:27px;
+font-weight:800;
+letter-spacing:.2px;
 }
 
 header p{
+position:relative;
+z-index:1;
 margin:6px 0 0;
 font-size:14px;
+opacity:.95;
 }
 
+@media(max-width:400px){
+
+header{
+padding:16px 55px 16px 10px;
+}
+
+header h1{
+font-size:23px;
+}
+
+header p{
+font-size:13px;
+}
+
+}
 
 /* =========================
    MENU
