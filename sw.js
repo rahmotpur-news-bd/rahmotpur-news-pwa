@@ -1,12 +1,10 @@
-const CACHE_NAME = "rahmotpur-news-v2";
+const CACHE_NAME = "rahmotpur-news-v3";
 
 const APP_FILES = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./icon.svg",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./icon.png"
 ];
 
 
@@ -21,6 +19,13 @@ self.addEventListener("install", function(event) {
     caches.open(CACHE_NAME).then(function(cache) {
 
       return cache.addAll(APP_FILES);
+
+    }).catch(function(error) {
+
+      console.error(
+        "Cache install error:",
+        error
+      );
 
     })
 
@@ -78,17 +83,15 @@ self.addEventListener("fetch", function(event) {
 
   }
 
-
   const requestURL =
     new URL(
       event.request.url
     );
 
 
-  /*
-     নিজের PWA-এর navigation
-     সবসময় অ্যাপের ভিতরেই থাকবে
-  */
+  /* =========================
+     APP NAVIGATION
+  ========================= */
 
   if(
     event.request.mode === "navigate" &&
@@ -118,9 +121,9 @@ self.addEventListener("fetch", function(event) {
   }
 
 
-  /*
-     অন্যান্য GET request
-  */
+  /* =========================
+     OTHER REQUESTS
+  ========================= */
 
   event.respondWith(
 
@@ -220,10 +223,10 @@ self.addEventListener(
         "নতুন খবর প্রকাশিত হয়েছে।",
 
       icon:
-        "./icon-192.png",
+        "./icon.png",
 
       badge:
-        "./icon-192.png",
+        "./icon.png",
 
       data: {
 
