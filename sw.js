@@ -1,339 +1,67 @@
-const CACHE_NAME = "rahmotpur-news-v5";
+const CACHE_NAME = "rahmotpur-news-v2";
 
-const APP_FILES = [
+const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./icon.png",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./icon.png"
 ];
 
-
-/* ================================
-   INSTALL
-================================ */
-
-self.addEventListener("install", function(event) {
-
-  event.waitUntil(
-
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-
-        return cache.addAll(APP_FILES)
-          .catch(function(error) {
-
-            console.warn(
-              "Some cache files could not be added:",
-              error
-            );
-
-            return Promise.all(
-
-              APP_FILES.map(function(file) {
-
-                return cache.add(file)
-                  .catch(function(error) {
-
-                    console.warn(
-                      "Cache skipped:",
-                      file,
-                      error
-                    );
-
-                  });
-
-              })
-
-            );
-
-          });
-
-      })
-
-  );
-
+self.addEventListener("install", event => {
   self.skipWaiting();
 
-});
-
-
-/* ================================
-   ACTIVATE
-================================ */
-
-self.addEventListener("activate", function(event) {
-
   event.waitUntil(
-
-    caches.keys()
-      .then(function(names) {
-
-        return Promise.all(
-
-          names.map(function(name) {
-
-            if (name !== CACHE_NAME) {
-
-              return caches.delete(name);
-
-            }
-
-          })
-
-        );
-
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(APP_SHELL))
+      .catch(error => {
+        console.error("Cache install error:", error);
       })
-      .then(function() {
-
-        return self.clients.claim();
-
-      })
-
   );
-
 });
 
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(names => {
+      return Promise.all(
+        names
+          .filter(name => name !== CACHE_NAME)
+          .map(name => caches.delete(name))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
 
-/* ================================
-   FETCH
-================================ */
-
-self.addEventListener("fetch", function(event) {
+self.addEventListener("fetch", event => {
 
   if (event.request.method !== "GET") {
     return;
   }
 
-  const requestURL = new URL(
-    event.request.url
-  );
+  const url = new URL(event.request.url);
 
-
-  /* Only handle same-origin requests */
-
-  if (requestURL.origin !== self.location.origin) {
+  if (url.origin !== self.location.origin) {
     return;
   }
-
-
-  /* Navigation */
-
-  if (event.request.mode === "navigate") {
-
-    event.respondWith(
-
-      fetch(event.request)
-        .then(function(response) {
-
-          return response;
-
-        })
-        .catch(function() {
-
-          return caches.match("./index.html");
-
-        })
-
-    );
-
-    return;
-
-  }
-
-
-  /* Other files */
 
   event.respondWith(
+    fetch(event.request)
+      .then(response => {
 
-    caches.match(event.request)
-      .then(function(cachedResponse) {
+        if (response && response.status === 200) {
+          const copy = response.clone();
 
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        return fetch(event.request)
-          .then(function(response) {
-
-            if (
-              response &&
-              response.status === 200
-            ) {
-
-              const copy = response.clone();
-
-              caches.open(CACHE_NAME)
-                .then(function(cache) {
-
-                  cache.put(
-                    event.request,
-                    copy
-                  );
-
-                });
-
-            }
-
-            return response;
-
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, copy);
           });
-
-      })
-      .catch(function() {
-
-        return caches.match("./index.html");
-
-      })
-
-  );
-
-});
-
-
-/* ================================
-   PUSH NOTIFICATION
-================================ */
-
-self.addEventListener("push", function(event) {
-
-  let data = {};
-
-  try {
-
-    if (event.data) {
-
-      data = event.data.json();
-
-    }
-
-  } catch (error) {
-
-    data = {
-
-      notification: {
-
-        title: "Rahmotpur News",
-
-        body:
-          event.data
-            ? event.data.text()
-            : "নতুন খবর প্রকাশিত হয়েছে।"
-
-      }
-
-    };
-
-  }
-
-
-  const notification =
-    data.notification || data;
-
-
-  const title =
-    notification.title ||
-    "Rahmotpur News";
-
-
-  const body =
-    notification.body ||
-    "নতুন খবর প্রকাশিত হয়েছে।";
-
-
-  const clickURL =
-    notification.click_action ||
-    "./";
-
-
-  const options = {
-
-    body: body,
-
-    icon: "./icon-192.png",
-
-    badge: "./icon-192.png",
-
-    data: {
-      url: clickURL
-    },
-
-    requireInteraction: false,
-
-    vibrate: [
-      200,
-      100,
-      200
-    ]
-
-  };
-
-
-  event.waitUntil(
-
-    self.registration.showNotification(
-      title,
-      options
-    )
-
-  );
-
-});
-
-
-/* ================================
-   NOTIFICATION CLICK
-================================ */
-
-self.addEventListener(
-  "notificationclick",
-  function(event) {
-
-    event.notification.close();
-
-
-    const targetURL =
-      event.notification &&
-      event.notification.data &&
-      event.notification.data.url
-        ? event.notification.data.url
-        : "./";
-
-
-    event.waitUntil(
-
-      clients.matchAll({
-        type: "window",
-        includeUncontrolled: true
-      })
-
-      .then(function(clientList) {
-
-        for (
-          const client of clientList
-        ) {
-
-          if (
-            client.url.includes(
-              "/rahmotpur-news-pwa/"
-            )
-          ) {
-
-            return client.focus();
-
-          }
-
         }
 
-
-        return clients.openWindow(
-          targetURL
-        );
-
+        return response;
       })
-
-    );
-
-  }
-);
+      .catch(() => {
+        return caches.match(event.request)
+          .then(cached => {
+            return cached || caches.match("./");
+          });
+      })
+  );
+});
