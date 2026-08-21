@@ -3,21 +3,17 @@
   "short_name": "Rahmotpur News",
   "description": "আপনার এলাকার খবর সবার আগে",
 
-  "id": "/rahmotpur-news-pwa/",
+  "id": "./",
 
-  "start_url": "/rahmotpur-news-pwa/?source=pwa",
-  "scope": "/rahmotpur-news-pwa/",
+  "start_url": "./",
+  "scope": "./",
 
   "display": "standalone",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone"
-  ],
-
-  "orientation": "portrait",
 
   "background_color": "#d40000",
   "theme_color": "#d40000",
+
+  "orientation": "portrait",
 
   "lang": "bn",
   "dir": "ltr",
@@ -26,19 +22,19 @@
 
   "icons": [
     {
-      "src": "/rahmotpur-news-pwa/icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/rahmotpur-news-pwa/icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/rahmotpur-news-pwa/icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
