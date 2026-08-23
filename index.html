@@ -92,6 +92,75 @@ nav button{color:#fff;background:#333;padding:8px 13px;border-radius:20px;font-s
 .main-button,.news-button{display:inline-block;background:#d40000;color:#fff;padding:10px 15px;border-radius:7px;text-decoration:none;margin-top:8px;border:0;cursor:pointer;font-size:14px}
 
 .featured-card,.news-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #ccc;margin-bottom:20px;cursor:pointer}
+/* HOME SECONDARY NEWS */
+.home-more-news{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-bottom:18px;
+}
+
+.home-more-card{
+background:#fff;
+border-radius:12px;
+padding:10px;
+display:flex;
+gap:12px;
+align-items:center;
+box-shadow:0 2px 7px #ccc;
+cursor:pointer;
+}
+
+.home-more-card img{
+width:105px;
+height:75px;
+object-fit:cover;
+border-radius:8px;
+flex-shrink:0;
+}
+
+.home-more-content{
+flex:1;
+min-width:0;
+}
+
+.home-more-title{
+font-size:15px;
+font-weight:bold;
+line-height:1.45;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
+
+.home-more-date{
+font-size:11px;
+color:#777;
+margin-top:5px;
+}
+
+.more-news-button{
+width:100%;
+padding:12px;
+background:#d40000;
+color:#fff;
+border:0;
+border-radius:9px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+margin-top:3px;
+}
+
+body.dark .home-more-card{
+background:#1e1e1e;
+color:#eee;
+}
+
+body.dark .home-more-date{
+color:#aaa;
+}
 .featured-card img{width:100%;height:250px;object-fit:cover;display:block}
 .featured-content,.news-content{padding:15px}
 .featured-label{font-size:13px;color:#d40000;font-weight:bold;margin-bottom:7px}
@@ -273,6 +342,8 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 
 <h2 class="category-title">⭐ প্রধান খবর</h2>
 <div id="featuredNews"><p style="text-align:center">প্রধান খবর লোড হচ্ছে...</p></div>
+
+<div id="homeMoreNews"></div>
 
 <div class="install-box" id="installBox" style="display:none">
 📱 Rahmotpur News অ্যাপ ইনস্টল করুন<br>
@@ -499,18 +570,34 @@ return allNews.find(news=>String(news.id)===String(id));
 
 document.addEventListener("click",function(event){
 
-const button=event.target.closest("[data-read-news]");
-if(button){
-const news=findNewsById(button.getAttribute("data-read-news"));
-if(news)openNewsReader(news);
-return;
+const card=event.target.closest(".home-more-card");
+
+if(card){
+
+const news=findNewsById(card.getAttribute("data-news-id"));
+
+if(news){
+openNewsReader(news);
 }
 
-const card=event.target.closest(".news-card");
-if(card&&!event.target.closest("button")){
-const news=findNewsById(card.getAttribute("data-news-id"));
-if(news)openNewsReader(news);
 }
+
+});
+
+document.addEventListener("click",function(event){
+
+const card=event.target.closest(".home-more-card");
+
+if(card){
+
+const news=findNewsById(card.getAttribute("data-news-id"));
+
+if(news){
+openNewsReader(news);
+}
+
+}
+
 });
 
 /* LABELS */
@@ -717,37 +804,157 @@ imageHTML+
 '</div></div>';
 }
 
+function createHomeMoreCard(news){
+const imageHTML=news.image
+?'<img src="'+safeURL(news.image)+'" alt="'+escapeHTML(news.title)+'" loading="lazy">'
+:"";
+
+return '<div class="home-more-card" data-news-id="'+escapeHTML(news.id)+'">'+
+imageHTML+
+'<div class="home-more-content">'+
+'<div class="home-more-title">'+escapeHTML(news.title)+'</div>'+
+'<div class="home-more-date">প্রকাশ: '+escapeHTML(news.date)+'</div>'+
+'</div>'+
+'</div>';
+}
+
 function renderNews(){
+
 const latest=document.getElementById("latestNews");
 const featured=document.getElementById("featuredNews");
 const breaking=document.getElementById("breakingNews");
 
 if(!allNews.length){
-if(latest)latest.innerHTML="<p>কোনো খবর পাওয়া যায়নি।</p>";
-if(featured)featured.innerHTML="<p style='text-align:center'>কোনো প্রধান খবর পাওয়া যায়নি.</p>";
-if(breaking)breaking.textContent="কোনো নতুন খবর পাওয়া যায়নি।";
+
+if(latest)
+latest.innerHTML="<p>কোনো খবর পাওয়া যায়নি।</p>";
+
+if(featured)
+featured.innerHTML="<p style='text-align:center'>কোনো প্রধান খবর পাওয়া যায়নি।</p>";
+
+if(breaking)
+breaking.textContent="কোনো নতুন খবর পাওয়া যায়নি।";
+
 return;
 }
 
-if(latest)latest.innerHTML=allNews.map(createCard).join("");
+/* =========================
+   🔴 সর্বশেষ খবর
+========================= */
+
+if(latest){
+latest.innerHTML=allNews.map(createCard).join("");
+}
+
+/* =========================
+   ⭐ প্রধান খবর
+   ১টি বড় খবর
+========================= */
 
 const first=allNews[0];
 
 if(featured){
-featured.innerHTML=
-'<div class="featured-card" data-featured-id="'+escapeHTML(first.id)+'">'+
-(first.image?'<img src="'+safeURL(first.image)+'" alt="'+escapeHTML(first.title)+'" loading="eager">':"")+
+
+let html=
+'<div class="featured-card" data-featured-id="'+
+escapeHTML(first.id)+'">'+
+
+(first.image?
+'<img src="'+safeURL(first.image)+
+'" alt="'+escapeHTML(first.title)+
+'" loading="eager">':"")+
+
 '<div class="featured-content">'+
+
 '<div class="featured-label">⭐ প্রধান খবর</div>'+
-'<div class="featured-title">'+escapeHTML(first.title)+'</div>'+
-'<div class="news-date">প্রকাশ: '+escapeHTML(first.date)+'</div>'+
-'<button type="button" class="news-button" data-featured-read="'+escapeHTML(first.id)+'">বিস্তারিত পড়ুন</button>'+
+
+'<div class="featured-title">'+
+escapeHTML(first.title)+
+'</div>'+
+
+'<div class="news-date">প্রকাশ: '+
+escapeHTML(first.date)+
+'</div>'+
+
+'<button type="button" class="news-button" data-featured-read="'+
+escapeHTML(first.id)+
+'">বিস্তারিত পড়ুন</button>'+
+
 '</div></div>';
+
+/* =========================
+   📰 আরও ৩টি খবর
+========================= */
+
+const moreNews=allNews.slice(1,4);
+
+if(moreNews.length){
+
+html+=
+'<div class="home-more-news">';
+
+moreNews.forEach(news=>{
+html+=createHomeMoreCard(news);
+});
+
+html+='</div>';
 }
 
-if(breaking){
-breaking.textContent=allNews.slice(0,5).map(item=>"📰 "+item.title).join(" • ");
+/* =========================
+   👉 আরও খবর পড়ুন
+========================= */
+
+html+=
+'<div class="more-news-button-wrap">'+
+'<button type="button" class="more-news-button" id="moreNewsButton">'+
+'👉 আরও খবর পড়ুন'+
+'</button>'+
+'</div>';
+
+featured.innerHTML=html;
+
+/* =========================
+   আরও খবর → সর্বশেষ
+========================= */
+
+const moreNewsButton=
+document.getElementById("moreNewsButton");
+
+if(moreNewsButton){
+
+moreNewsButton.onclick=function(){
+
+showSection("latestSection");
+
+if(localStorage.getItem("rahmotpurVibration")!=="off"&&navigator.vibrate){
+navigator.vibrate(30);
 }
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+}
+
+}
+
+/* =========================
+   🔴 ব্রেকিং নিউজ
+========================= */
+
+if(breaking){
+
+breaking.textContent=
+allNews
+.slice(0,5)
+.map(item=>"📰 "+item.title)
+.join(" • ");
+
+}
+
 }
 
 document.addEventListener("click",function(event){
