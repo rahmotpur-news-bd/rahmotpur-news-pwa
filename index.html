@@ -565,7 +565,13 @@ closeNewsReader(false);
 };
 
 function findNewsById(id){
-return allNews.find(news=>String(news.id)===String(id));
+if(!id)return null;
+
+const target=String(id).trim();
+
+return allNews.find(news=>{
+return String(news.id).trim()===target;
+});
 }
 
 document.addEventListener("click",function(event){
@@ -586,11 +592,28 @@ openNewsReader(news);
 
 document.addEventListener("click",function(event){
 
-const card=event.target.closest(".home-more-card");
+const button=event.target.closest("[data-read-news]");
+
+if(button){
+
+const news=findNewsById(
+button.getAttribute("data-read-news")
+);
+
+if(news){
+openNewsReader(news);
+}
+
+return;
+}
+
+const card=event.target.closest(".news-card");
 
 if(card){
 
-const news=findNewsById(card.getAttribute("data-news-id"));
+const news=findNewsById(
+card.getAttribute("data-news-id")
+);
 
 if(news){
 openNewsReader(news);
@@ -793,14 +816,19 @@ showCategoryNews(savedCategory,true);
 /* CARDS */
 
 function createCard(news){
-const imageHTML=news.image?'<img src="'+safeURL(news.image)+'" alt="'+escapeHTML(news.title)+'" loading="lazy">':"";
 
-return '<div class="news-card" data-news-id="'+escapeHTML(news.id)+'">'+
+const newsId=String(news.id||"");
+
+const imageHTML=news.image
+?'<img src="'+safeURL(news.image)+'" alt="'+escapeHTML(news.title)+'" loading="lazy">'
+:"";
+
+return '<div class="news-card" data-news-id="'+escapeHTML(newsId)+'">'+
 imageHTML+
 '<div class="news-content">'+
 '<div class="news-title">'+escapeHTML(news.title)+'</div>'+
 '<div class="news-date">প্রকাশ: '+escapeHTML(news.date)+'</div>'+
-'<button type="button" class="news-button" data-read-news="'+escapeHTML(news.id)+'">বিস্তারিত পড়ুন</button>'+
+'<button type="button" class="news-button" data-read-news="'+escapeHTML(newsId)+'">বিস্তারিত পড়ুন</button>'+
 '</div></div>';
 }
 
