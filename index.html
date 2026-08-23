@@ -353,7 +353,7 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 <div class="notification-box">
 <b>🔔 নতুন খবরের নোটিফিকেশন</b>
 <p>নতুন খবরের Notification পেতে অনুমতি দিন।</p>
-<button type="button" class="install-button" id="notificationButton">🔔 Notification চালু করুন</button>
+<button type="button" class="install-button" id="notificationButton">🔔 Notification চালু/বন্ধ করুন</button>
 </div>
 
 </section>
@@ -408,8 +408,8 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import{getMessaging,getToken,onMessage}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging.js";
-import{getFirestore,doc,setDoc}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getMessaging,getToken,onMessage,deleteToken}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging.js";
+import{getFirestore,doc,setDoc,deleteDoc}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const firebaseConfig={
 apiKey:"AIzaSyBZjx3DqTd-1yzymUB7p4cVpO3QokVq11M4",
@@ -431,32 +431,146 @@ db=getFirestore(firebaseApp);
 const vapidKey="BHPP9J01OXs3DwyDhLDpeKo77BEOGrAx7JWaS0z1MQXBMGE2FfkxJcr33HH3z9i-97yJTDz9XU4BqJI8yNweQRY";
 
 window.enableRahmotpurNotifications=async function(){
+
 try{
-if(!("Notification"in window)){alert("এই ব্রাউজারে Notification সমর্থিত নয়।");return}
-if(!messaging||!db){alert("Notification system প্রস্তুত হয়নি।");return}
+
+if(!("Notification"in window)){
+alert("এই ব্রাউজারে Notification সমর্থিত নয়।");
+return;
+}
+
+if(!messaging||!db){
+alert("Notification system প্রস্তুত হয়নি।");
+return;
+}
+
+/* =========================
+   APP NOTIFICATION OFF
+========================= */
+
+const currentStatus=localStorage.getItem("rahmotpurNotifications");
+
+if(currentStatus==="on"){
+
+let token=localStorage.getItem("rahmotpur_fcm_token");
+
+/* Firebase token থাকলে মুছে ফেলবে */
+
+if(token){
+
+try{
+await deleteDoc(doc(db,"fcm_tokens",token));
+}catch(e){
+console.log("Firestore token delete:",e);
+}
+
+}
+
+/* Firebase messaging token delete */
+
+try{
+await deleteToken(messaging);
+}catch(e){
+console.log("FCM token delete:",e);
+}
+
+localStorage.removeItem("rahmotpur_fcm_token");
+localStorage.setItem("rahmotpurNotifications","off");
+
+alert("🔕 Notification বন্ধ করা হয়েছে।");
+
+if(typeof updateSettingsValues==="function"){
+updateSettingsValues();
+}
+
+return;
+}
+
+/* =========================
+   APP NOTIFICATION ON
+========================= */
+
+if(Notification.permission!=="granted"){
+
 const permission=await Notification.requestPermission();
-if(permission!=="granted"){alert("Notification-এর অনুমতি দেওয়া হয়নি।");if(typeof updateSettingsValues==="function")updateSettingsValues();return}
+
+if(permission!=="granted"){
+
+localStorage.setItem("rahmotpurNotifications","off");
+
+alert("Notification-এর অনুমতি দেওয়া হয়নি।");
+
+if(typeof updateSettingsValues==="function"){
+updateSettingsValues();
+}
+
+return;
+}
+
+}
 
 let registration=window.rahmotpurSWRegistration;
+
 if(!registration){
-registration=await navigator.serviceWorker.register("./sw.js",{scope:"./"});
+
+registration=await navigator.serviceWorker.register("./sw.js",{
+scope:"./"
+});
+
 window.rahmotpurSWRegistration=registration;
+
 }
 
-const token=await getToken(messaging,{vapidKey,serviceWorkerRegistration:registration});
-if(!token){alert("Notification token পাওয়া যায়নি।");return}
+const token=await getToken(messaging,{
+vapidKey,
+serviceWorkerRegistration:registration
+});
+
+if(!token){
+
+alert("Notification token পাওয়া যায়নি।");
+return;
+
+}
 
 localStorage.setItem("rahmotpur_fcm_token",token);
-await setDoc(doc(db,"fcm_tokens",token),{token,createdAt:new Date().toISOString()});
+
+localStorage.setItem("rahmotpurNotifications","on");
+
+await setDoc(
+doc(db,"fcm_tokens",token),
+{
+token,
+createdAt:new Date().toISOString(),
+enabled:true
+}
+);
+
 alert("🔔 Notification সফলভাবে চালু হয়েছে।");
-if(navigator.vibrate)navigator.vibrate(100);
-if(typeof updateSettingsValues==="function")updateSettingsValues();
+
+if(navigator.vibrate){
+navigator.vibrate(100);
+}
+
+if(typeof updateSettingsValues==="function"){
+updateSettingsValues();
+}
 
 }catch(error){
+
 console.error("Notification Error:",error);
-alert("Notification চালু করা যাচ্ছে না।\n\nChrome-এর Notification permission অনুমোদিত আছে কিনা দেখ।");
-if(typeof updateSettingsValues==="function")updateSettingsValues();
+
+alert(
+"Notification চালু করা যাচ্ছে না।\n\n"+
+"Chrome-এর Notification permission অনুমোদিত আছে কিনা দেখ।"
+);
+
+if(typeof updateSettingsValues==="function"){
+updateSettingsValues();
 }
+
+}
+
 };
 
 if(messaging){
@@ -1253,8 +1367,15 @@ const darkValue=document.getElementById("darkModeValue");
 if(darkValue)darkValue.textContent=darkMode?"চালু":"বন্ধ";
 
 const notificationValue=document.getElementById("notificationValue");
+
 if(notificationValue){
-notificationValue.textContent=("Notification"in window&&Notification.permission==="granted")?"চালু":"বন্ধ";
+
+const notificationStatus=
+localStorage.getItem("rahmotpurNotifications");
+
+notificationValue.textContent=
+notificationStatus==="on"?"চালু":"বন্ধ";
+
 }
 
 const textValue=document.getElementById("textSizeValue");
@@ -1285,15 +1406,24 @@ settingsModal.classList.add("show");
 const notificationButton=document.getElementById("notificationButton");
 
 function openNotification(){
+
 if(typeof window.enableRahmotpurNotifications==="function"){
+
 window.enableRahmotpurNotifications();
+
 }else{
+
 alert("Notification system প্রস্তুত হয়নি।");
+
 }
+
 }
 
 notificationButton.onclick=openNotification;
-if(notificationSetting)notificationSetting.onclick=openNotification;
+
+if(notificationSetting){
+notificationSetting.onclick=openNotification;
+}
 
 /* PWA INSTALL */
 
