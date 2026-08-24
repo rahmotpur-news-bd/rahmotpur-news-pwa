@@ -218,6 +218,132 @@ body.dark #newsReader{background:#121212}
 body.dark .news-reader-source{background:#292929;color:#aaa}  
 .category-reader-title{display:flex;align-items:center;justify-content:space-between;gap:10px}  
 .category-back{background:#d40000;color:#fff;border:0;border-radius:7px;padding:8px 12px;cursor:pointer;font-size:13px}  
+
+/* =========================
+   NEWS SHARE SYSTEM
+========================= */
+
+.news-share-row{
+display:flex;
+gap:8px;
+margin-top:10px;
+}
+
+.news-share-button{
+flex:1;
+padding:9px 10px;
+background:#f1f1f1;
+color:#222;
+border:0;
+border-radius:7px;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.news-share-button:hover{
+background:#e5e5e5;
+}
+
+body.dark .news-share-button{
+background:#292929;
+color:#fff;
+}
+
+.reader-share-button{
+width:100%;
+padding:12px;
+margin:0 0 18px;
+background:#d40000;
+color:#fff;
+border:0;
+border-radius:8px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#shareModal{
+position:fixed;
+inset:0;
+z-index:50000;
+background:rgba(0,0,0,.65);
+display:none;
+align-items:flex-end;
+justify-content:center;
+padding:15px;
+}
+
+#shareModal.show{
+display:flex;
+}
+
+.share-box{
+width:100%;
+max-width:500px;
+background:#fff;
+color:#222;
+border-radius:18px 18px 10px 10px;
+padding:20px;
+box-shadow:0 -5px 25px rgba(0,0,0,.35);
+}
+
+body.dark .share-box{
+background:#1e1e1e;
+color:#fff;
+}
+
+.share-title{
+font-size:20px;
+font-weight:bold;
+color:#d40000;
+margin-bottom:15px;
+}
+
+.share-link-box{
+background:#f3f3f3;
+padding:10px;
+border-radius:8px;
+font-size:12px;
+word-break:break-all;
+margin-bottom:15px;
+}
+
+body.dark .share-link-box{
+background:#292929;
+}
+
+.share-action{
+width:100%;
+padding:13px;
+border:0;
+border-radius:9px;
+margin-top:8px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.copy-link-action{
+background:#eee;
+color:#222;
+}
+
+.native-share-action{
+background:#d40000;
+color:#fff;
+}
+
+.share-close{
+width:100%;
+padding:11px;
+border:0;
+background:transparent;
+color:#777;
+font-size:14px;
+margin-top:5px;
+cursor:pointer;
+}
   
 @media(min-width:600px){  
 .categories{grid-template-columns:repeat(4,1fr)}  
@@ -329,10 +455,23 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 </div>  
 <div class="news-reader-box">  
 <h1 class="news-reader-title" id="readerTitle"></h1>  
-<div class="news-reader-date" id="readerDate"></div>  
-<img id="readerImage" class="news-reader-image" style="display:none" alt="">  
-<div id="readerContent" class="news-reader-content"></div>  
-<div class="news-reader-source">📰 Rahmotpur News</div>  
+<div class="news-reader-date" id="readerDate"></div>
+
+<img id="readerImage" class="news-reader-image" style="display:none" alt="">
+
+<div class="reader-share-box">
+<button type="button" class="reader-share-button" id="readerShareButton">
+📤 শেয়ার করুন
+</button>
+
+<button type="button" class="reader-copy-button" id="readerCopyButton">
+🔗 কপি লিংক
+</button>
+</div>
+
+<div id="readerContent" class="news-reader-content"></div>
+
+<div class="news-reader-source">📰 Rahmotpur News</div>
 </div>  
 </div>  <script type="module">  
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";  
@@ -443,7 +582,7 @@ return content
   
 function openNewsReader(news,fromHistory=false){  
 if(!news)return;  
-  
+currentReaderNews=news;
 readerTitle.textContent=news.title||"Rahmotpur News";  
 readerDate.textContent=news.date?"প্রকাশ: "+news.date:"";  
   
@@ -489,6 +628,26 @@ history.back();
 document.getElementById("newsReaderBack").onclick=function(){  
 closeNewsReader(false);  
 };  
+
+/* READER SHARE BUTTON */
+
+document.getElementById("readerShareButton").onclick=function(){
+
+if(currentReaderNews){
+shareNews(currentReaderNews);
+}
+
+};
+
+/* READER COPY LINK BUTTON */
+
+document.getElementById("readerCopyButton").onclick=function(){
+
+if(currentReaderNews){
+copyNewsLink(currentReaderNews);
+}
+
+};
   
 function findNewsById(id){  
 if(!id)return null;  
@@ -499,6 +658,130 @@ return allNews.find(news=>{
 return String(news.id).trim()===target;  
 });  
 }  
+
+/* =========================
+   NEWS SHARE + COPY LINK
+========================= */
+
+let currentReaderNews=null;
+
+async function copyNewsLink(news){
+
+if(!news)return;
+
+const url=safeURL(news.link)||window.location.href;
+
+try{
+
+await navigator.clipboard.writeText(url);
+
+alert("🔗 নিউজের লিংক কপি হয়েছে।");
+
+if(localStorage.getItem("rahmotpurVibration")!=="off"&&navigator.vibrate){
+navigator.vibrate(40);
+}
+
+}catch(error){
+
+const tempInput=document.createElement("input");
+
+tempInput.value=url;
+
+document.body.appendChild(tempInput);
+
+tempInput.select();
+tempInput.setSelectionRange(0,99999);
+
+try{
+document.execCommand("copy");
+alert("🔗 নিউজের লিংক কপি হয়েছে।");
+}catch(e){
+alert("লিংক কপি করা যায়নি।\n\nলিংক:\n"+url);
+}
+
+tempInput.remove();
+
+}
+
+}
+
+async function shareNews(news){
+
+if(!news)return;
+
+const url=safeURL(news.link)||window.location.href;
+
+const shareData={
+title:news.title||"Rahmotpur News",
+text:(news.title||"Rahmotpur News")+"\n\nবিস্তারিত পড়ুন:",
+url:url
+};
+
+try{
+
+if(navigator.share){
+
+await navigator.share(shareData);
+
+}else{
+
+await copyNewsLink(news);
+
+alert("📤 এই ডিভাইসে সরাসরি Share Menu নেই।\n\nলিংক কপি করা হয়েছে। এখন Facebook, Messenger, WhatsApp বা অন্য কোথাও Paste করতে পারো।");
+
+}
+
+}catch(error){
+
+if(error&&error.name!=="AbortError"){
+console.error("Share Error:",error);
+}
+
+}
+
+}
+
+/* SHARE BUTTON */
+
+document.addEventListener("click",function(event){
+
+const shareButton=event.target.closest("[data-share-news]");
+
+if(!shareButton)return;
+
+event.preventDefault();
+event.stopPropagation();
+
+const news=findNewsById(
+shareButton.getAttribute("data-share-news")
+);
+
+if(news){
+shareNews(news);
+}
+
+});
+
+/* COPY LINK BUTTON */
+
+document.addEventListener("click",function(event){
+
+const copyButton=event.target.closest("[data-copy-news]");
+
+if(!copyButton)return;
+
+event.preventDefault();
+event.stopPropagation();
+
+const news=findNewsById(
+copyButton.getAttribute("data-copy-news")
+);
+
+if(news){
+copyNewsLink(news);
+}
+
+});
   
 document.addEventListener("click",function(event){  
   
@@ -741,22 +1024,44 @@ showCategoryNews(savedCategory,true);
   
 /* CARDS */  
   
-function createCard(news){  
-  
-const newsId=String(news.id||"");  
-  
-const imageHTML=news.image  
-?'<img src="'+safeURL(news.image)+'" alt="'+escapeHTML(news.title)+'" loading="lazy">'  
-:"";  
-  
-return '<div class="news-card" data-news-id="'+escapeHTML(newsId)+'">'+  
-imageHTML+  
-'<div class="news-content">'+  
-'<div class="news-title">'+escapeHTML(news.title)+'</div>'+  
-'<div class="news-date">প্রকাশ: '+escapeHTML(news.date)+'</div>'+  
-'<button type="button" class="news-button" data-read-news="'+escapeHTML(newsId)+'">বিস্তারিত পড়ুন</button>'+  
-'</div></div>';  
-}  
+function createCard(news){
+
+const newsId=String(news.id||"");
+
+const imageHTML=news.image
+?'<img src="'+safeURL(news.image)+'" alt="'+escapeHTML(news.title)+'" loading="lazy">'
+:"";
+
+return '<div class="news-card" data-news-id="'+escapeHTML(newsId)+'">'+
+imageHTML+
+'<div class="news-content">'+
+
+'<div class="news-title">'+
+escapeHTML(news.title)+
+'</div>'+
+
+'<div class="news-date">প্রকাশ: '+
+escapeHTML(news.date)+
+'</div>'+
+
+'<div class="news-actions">'+
+
+'<button type="button" class="news-button" data-read-news="'+
+escapeHTML(newsId)+
+'">বিস্তারিত পড়ুন</button>'+
+
+'<button type="button" class="news-share-button" data-share-news="'+
+escapeHTML(newsId)+
+'">📤 শেয়ার</button>'+
+
+'<button type="button" class="news-copy-button" data-copy-news="'+
+escapeHTML(newsId)+
+'">🔗 কপি লিংক</button>'+
+
+'</div>'+
+
+'</div></div>';
+}
   
 function createHomeMoreCard(news){  
 const imageHTML=news.image  
@@ -830,12 +1135,23 @@ escapeHTML(first.title)+
 escapeHTML(first.date)+  
 '</div>'+  
   
-'<button type="button" class="news-button" data-featured-read="'+  
-escapeHTML(first.id)+  
-'">বিস্তারিত পড়ুন</button>'+  
-  
-'</div></div>';  
-  
+'<div class="news-actions">'+
+
+'<button type="button" class="news-button" data-featured-read="'+
+escapeHTML(first.id)+
+'">বিস্তারিত পড়ুন</button>'+
+
+'<button type="button" class="news-share-button" data-share-news="'+
+escapeHTML(first.id)+
+'">📤 শেয়ার</button>'+
+
+'<button type="button" class="news-copy-button" data-copy-news="'+
+escapeHTML(first.id)+
+'">🔗 কপি লিংক</button>'+
+
+'</div>'+
+'</div>'+
+'</div>';
 /* =========================  
    📰 আরও ৩টি খবর  
 ========================= */  
