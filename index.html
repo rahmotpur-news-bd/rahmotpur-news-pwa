@@ -326,23 +326,85 @@ cursor:pointer;
 
 .copy-link-action{
 background:#eee;
-color:#222;
+
+/* =========================
+   NEWS SHARE + COPY SYSTEM
+========================= */
+
+.news-actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:10px;
 }
 
-.native-share-action{
+.news-button,
+.news-share-button,
+.news-copy-button{
+padding:9px 10px;
+border:0;
+border-radius:7px;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.news-button{
 background:#d40000;
 color:#fff;
 }
 
-.share-close{
-width:100%;
-padding:11px;
+.news-share-button{
+background:#f1f1f1;
+color:#222;
+}
+
+.news-copy-button{
+background:#f1f1f1;
+color:#222;
+}
+
+.news-share-button:hover,
+.news-copy-button:hover{
+background:#e5e5e5;
+}
+
+body.dark .news-share-button,
+body.dark .news-copy-button{
+background:#292929;
+color:#fff;
+}
+
+.reader-share-box{
+display:flex;
+gap:8px;
+margin-bottom:18px;
+}
+
+.reader-share-button,
+.reader-copy-button{
+flex:1;
+padding:12px;
 border:0;
-background:transparent;
-color:#777;
+border-radius:8px;
 font-size:14px;
-margin-top:5px;
+font-weight:bold;
 cursor:pointer;
+}
+
+.reader-share-button{
+background:#d40000;
+color:#fff;
+}
+
+.reader-copy-button{
+background:#eee;
+color:#222;
+}
+
+body.dark .reader-copy-button{
+background:#292929;
+color:#fff;
 }
   
 @media(min-width:600px){  
@@ -731,116 +793,6 @@ alert("📤 এই ডিভাইসে সরাসরি Share Menu নেই
 
 }
 
-/* =========================
-   NEWS SHARE + COPY LINK
-   APP URL SYSTEM
-========================= */
-
-let currentReaderNews=null;
-
-function getAppNewsURL(news){
-
-if(!news)return window.location.href;
-
-const url=new URL(window.location.href);
-
-url.hash="news-"+encodeURIComponent(String(news.id));
-
-return url.href;
-}
-
-
-/* =========================
-   COPY NEWS LINK
-========================= */
-
-async function copyNewsLink(news){
-
-if(!news)return;
-
-const shareURL=getAppNewsURL(news);
-
-try{
-
-await navigator.clipboard.writeText(shareURL);
-
-alert("🔗 নিউজের অ্যাপ লিংক কপি হয়েছে।");
-
-if(localStorage.getItem("rahmotpurVibration")!=="off"&&navigator.vibrate){
-navigator.vibrate(40);
-}
-
-}catch(error){
-
-const tempInput=document.createElement("input");
-
-tempInput.value=shareURL;
-
-document.body.appendChild(tempInput);
-
-tempInput.select();
-tempInput.setSelectionRange(0,99999);
-
-try{
-
-document.execCommand("copy");
-
-alert("🔗 নিউজের অ্যাপ লিংক কপি হয়েছে।");
-
-}catch(e){
-
-alert(
-"লিংক কপি করা যায়নি।\n\nলিংক:\n"+shareURL
-);
-
-}
-
-tempInput.remove();
-
-}
-
-}
-
-
-/* =========================
-   SHARE NEWS
-========================= */
-
-async function shareNews(news){
-
-if(!news)return;
-
-const shareURL=getAppNewsURL(news);
-
-const shareData={
-
-title:news.title||"Rahmotpur News",
-
-text:
-(news.title||"Rahmotpur News")+
-"\n\nRahmotpur News অ্যাপে বিস্তারিত পড়ুন:",
-
-url:shareURL
-
-};
-
-try{
-
-if(navigator.share){
-
-await navigator.share(shareData);
-
-}else{
-
-await copyNewsLink(news);
-
-alert(
-"📤 এই ডিভাইসে সরাসরি Share Menu নেই।\n\n"+
-"অ্যাপের লিংক কপি হয়েছে। এখন Facebook, Messenger, WhatsApp বা অন্য কোথাও Paste করতে পারো।"
-);
-
-}
-
 }catch(error){
 
 if(error&&error.name!=="AbortError"){
@@ -851,15 +803,11 @@ console.error("Share Error:",error);
 
 }
 
-
-/* =========================
-   SHARE BUTTON
-========================= */
+/* SHARE BUTTON */
 
 document.addEventListener("click",function(event){
 
-const shareButton=
-event.target.closest("[data-share-news]");
+const shareButton=event.target.closest("[data-share-news]");
 
 if(!shareButton)return;
 
@@ -876,15 +824,11 @@ shareNews(news);
 
 });
 
-
-/* =========================
-   COPY LINK BUTTON
-========================= */
+/* COPY LINK BUTTON */
 
 document.addEventListener("click",function(event){
 
-const copyButton=
-event.target.closest("[data-copy-news]");
+const copyButton=event.target.closest("[data-copy-news]");
 
 if(!copyButton)return;
 
@@ -1773,114 +1717,14 @@ if(breaking)breaking.textContent="খবর লোড করা যাচ্ছ�
 document.body.appendChild(script);  
 }  
   
-/* INITIAL */
-
-applyDarkMode();
-applyTextSize();
-applyImageLoading();
-startNewsUpdate();
-updateSettingsValues();
-
-loadBlogger();
-
-
-/* =========================
-   OPEN SHARED NEWS FROM APP URL
-========================= */
-
-function openSharedNewsFromURL(){
-
-const hash=window.location.hash||"";
-
-if(!hash.startsWith("#news-"))return;
-
-const encodedId=hash.substring(6);
-
-if(!encodedId)return;
-
-let newsId="";
-
-try{
-
-newsId=decodeURIComponent(encodedId);
-
-}catch(error){
-
-newsId=encodedId;
-
-}
-
-if(!newsId)return;
-
-
-/*
-   Blogger থেকে খবর লোড হওয়ার পর
-   নির্দিষ্ট News ID খুঁজে Reader খুলবে
-*/
-
-let attempts=0;
-
-const checkNews=setInterval(function(){
-
-attempts++;
-
-const news=findNewsById(newsId);
-
-if(news){
-
-clearInterval(checkNews);
-
-openNewsReader(news,true);
-
-return;
-
-}
-
-
-/*
-   সর্বোচ্চ প্রায় 10 সেকেন্ড অপেক্ষা করবে
-*/
-
-if(attempts>=100){
-
-clearInterval(checkNews);
-
-console.log(
-"Shared news not found:",
-newsId
-);
-
-}
-
-},100);
-
-}
-
-
-/* URL hash পরিবর্তন হলে */
-
-window.addEventListener("hashchange",function(){
-
-if(window.location.hash.startsWith("#news-")){
-
-openSharedNewsFromURL();
-
-}
-
-});
-
-
-/* প্রথমবার অ্যাপ চালু হলে */
-
-window.addEventListener("load",function(){
-
-setTimeout(function(){
-
-openSharedNewsFromURL();
-
-},1200);
-
-});
+/* INITIAL */  
+  
+applyDarkMode();  
+applyTextSize();  
+applyImageLoading();  
+startNewsUpdate();  
+updateSettingsValues();  
+loadBlogger();  
   
 /* SERVICE WORKER */  
   
@@ -1908,14 +1752,39 @@ console.error("❌ Service Worker registration failed:",error);
 });  
 }  
   
-/* SPLASH */  
-  
-window.addEventListener("load",function(){  
-setTimeout(function(){  
-const splash=document.getElementById("rahmotpurSplash");  
-if(splash)splash.classList.add("hide");  
-},1200);  
-});  
+/* SPLASH - SAFE AUTO HIDE */
+
+(function(){
+
+const splash=document.getElementById("rahmotpurSplash");
+
+if(!splash)return;
+
+function hideSplash(){
+
+splash.classList.add("hide");
+
+setTimeout(function(){
+
+splash.style.display="none";
+
+},600);
+
+}
+
+/* অ্যাপ খোলার 1.5 সেকেন্ড পর Splash বন্ধ */
+
+setTimeout(hideSplash,1500);
+
+/* কোনো কারণে load event দেরি হলেও Splash বন্ধ হবে */
+
+window.addEventListener("load",function(){
+
+setTimeout(hideSplash,300);
+
+});
+
+})();
   
 /* LOADING */  
   
