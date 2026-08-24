@@ -230,14 +230,15 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 }  
 
 /* =========================
-   VIDEO PLAYER FIX
+   FINAL VIDEO PLAYER FIX
 ========================= */
 
 .news-reader-content iframe{
     width:100%;
     max-width:100%;
-    min-height:220px;
-    height:315px;
+    aspect-ratio:16/9;
+    height:auto;
+    min-height:0;
     display:block;
     border:0;
     border-radius:10px;
@@ -257,14 +258,21 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 
 .news-reader-content .video-container{
     width:100%;
-    margin:18px 0;
+    max-width:100%;
     position:relative;
+    margin:18px 0;
+}
+
+.news-reader-content .video-container iframe{
+    margin:0;
 }
 
 @media(max-width:599px){
     .news-reader-content iframe{
-        height:220px;
-        min-height:220px;
+        width:100%;
+        aspect-ratio:16/9;
+        height:auto;
+        min-height:0;
     }
 }
 
@@ -563,17 +571,165 @@ loading="lazy">
 
 html=html.replace(
 /<iframe([^>]*?)src=["']([^"']+)["']([^>]*)><\/iframe>/gi,
+function cleanNewsContent(content){
+
+if(!content){
+return "<p>এই খবরের বিস্তারিত তথ্য পাওয়া যায়নি।</p>";
+}
+
+let html=String(content);
+
+/* =========================
+   REMOVE SCRIPT
+========================= */
+
+html=html.replace(
+/<script[\s\S]*?<\/script>/gi,
+""
+);
+
+/* =========================
+   REMOVE OLD VIDEO WRAPPER
+========================= */
+
+html=html.replace(
+/<div[^>]*class=["'][^"']*video-container[^"']*["'][^>]*>([\s\S]*?)<\/div>/gi,
+"$1"
+);
+
+/* =========================
+   YOUTUBE IFRAME
+========================= */
+
+html=html.replace(
+/<iframe\b([^>]*?)src=["']([^"']+)["']([^>]*)><\/iframe>/gi,
 function(match,before,url,after){
 
+let videoURL=url.trim();
+
+/* HTML entity ঠিক করা */
+
+videoURL=videoURL
+.replace(/&amp;/g,"&")
+.replace(/&#39;/g,"'")
+.replace(/&quot;/g,'"');
+
+/* youtube.com/watch?v= */
+
+let matchWatch=
+videoURL.match(
+/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?[^"']*v=([^&"'#]+)/i
+);
+
+if(matchWatch){
+
+const videoId=matchWatch[1];
+
+videoURL=
+"https://www.youtube.com/embed/"
++videoId
++"?rel=0&modestbranding=1";
+
+}
+
+/* youtu.be */
+
+let matchShort=
+videoURL.match(
+/(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?&#/"']+)/i
+);
+
+if(matchShort){
+
+const videoId=matchShort[1];
+
+videoURL=
+"https://www.youtube.com/embed/"
++videoId
++"?rel=0&modestbranding=1";
+
+}
+
+/* youtube embed already */
+
 if(
-url.startsWith("https://www.youtube.com/") ||
-url.startsWith("https://www.youtube-nocookie.com/")
+videoURL.startsWith("https://www.youtube.com/embed/") ||
+videoURL.startsWith("https://www.youtube-nocookie.com/embed/")
 ){
 
 return `
 <div class="video-container">
 <iframe
-src="${url}"
+src="${videoURL}"
+title="Rahmotpur News Video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+loading="lazy">
+</iframe>
+</div>
+`;
+
+}
+
+return "";
+}
+);
+
+/* =========================
+   YOUTUBE LINK → VIDEO
+========================= */
+
+html=html.replace(
+/<a\b([^>]*?)href=["']([^"']+)["']([^>]*)>([\s\S]*?)<\/a>/gi,
+function(match,before,url,after,text){
+
+let videoURL=url.trim();
+
+videoURL=videoURL
+.replace(/&amp;/g,"&")
+.replace(/&#39;/g,"'")
+.replace(/&quot;/g,'"');
+
+/* watch?v= */
+
+let matchWatch=
+videoURL.match(
+/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?[^"'#]*v=([^&"'#]+)/i
+);
+
+if(matchWatch){
+
+const videoId=matchWatch[1];
+
+return `
+<div class="video-container">
+<iframe
+src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1"
+title="Rahmotpur News Video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+loading="lazy">
+</iframe>
+</div>
+`;
+
+}
+
+/* youtu.be */
+
+let matchShort=
+videoURL.match(
+/(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?&#/"']+)/i
+);
+
+if(matchShort){
+
+const videoId=matchShort[1];
+
+return `
+<div class="video-container">
+<iframe
+src="https://www.youtube.com/embed/${matchShort[1]}?rel=0&modestbranding=1"
 title="Rahmotpur News Video"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 allowfullscreen
@@ -589,20 +745,66 @@ return match;
 );
 
 /* =========================
-   VIDEO TAG
+   PLAIN YOUTUBE URL
 ========================= */
 
 html=html.replace(
-/<video([^>]*)>/gi,
+/(?<!["'=])(https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([A-Za-z0-9_-]{6,}))/gi,
+function(match,url,videoId){
+
+return `
+<div class="video-container">
+<iframe
+src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1"
+title="Rahmotpur News Video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+loading="lazy">
+</iframe>
+</div>
+`;
+
+}
+);
+
+/* =========================
+   YOUTUBE SHORT URL
+========================= */
+
+html=html.replace(
+/(?<!["'=])(https?:\/\/youtu\.be\/([A-Za-z0-9_-]{6,}))/gi,
+function(match,url,videoId){
+
+return `
+<div class="video-container">
+<iframe
+src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1"
+title="Rahmotpur News Video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+loading="lazy">
+</iframe>
+</div>
+`;
+
+}
+);
+
+/* =========================
+   HTML5 VIDEO
+========================= */
+
+html=html.replace(
+/<video\b([^>]*)>/gi,
 '<video$1 controls playsinline webkit-playsinline preload="metadata">'
 );
 
 /* =========================
-   IMAGE FIX
+   IMAGE
 ========================= */
 
 html=html.replace(
-/<img([^>]*?)>/gi,
+/<img\b([^>]*?)>/gi,
 '<img$1 loading="lazy">'
 );
 
@@ -630,16 +832,22 @@ readerContent.innerHTML=cleanNewsContent(news.content);
    VIDEO PLAYER INITIALIZE
 ========================= */
 
+/* =========================
+   FINAL VIDEO INITIALIZE
+========================= */
+
 const readerVideos=readerContent.querySelectorAll("video");
 
 readerVideos.forEach(video=>{
 
-video.setAttribute("controls","");
+video.controls=true;
+video.playsInline=true;
 video.setAttribute("playsinline","");
 video.setAttribute("webkit-playsinline","");
-video.setAttribute("preload","metadata");
+video.preload="metadata";
 
 });
+
 
 const readerIframes=readerContent.querySelectorAll("iframe");
 
@@ -651,6 +859,8 @@ iframe.setAttribute(
 );
 
 iframe.setAttribute("allowfullscreen","");
+
+iframe.setAttribute("loading","lazy");
 
 });
 newsReader.classList.add("show");  
