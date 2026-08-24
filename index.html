@@ -228,6 +228,51 @@ body.dark .news-reader-source{background:#292929;color:#aaa}
 .news-reader-content{font-size:16px}  
 .news-reader-box{padding:15px}  
 }  
+
+/* =========================
+   VIDEO PLAYER FIX
+========================= */
+
+.news-reader-content iframe{
+    width:100%;
+    max-width:100%;
+    min-height:220px;
+    height:315px;
+    display:block;
+    border:0;
+    border-radius:10px;
+    margin:18px 0;
+    background:#000;
+}
+
+.news-reader-content video{
+    width:100%;
+    max-width:100%;
+    height:auto;
+    display:block;
+    border-radius:10px;
+    margin:18px 0;
+    background:#000;
+}
+
+.news-reader-content .video-container{
+    width:100%;
+    margin:18px 0;
+    position:relative;
+}
+
+@media(max-width:599px){
+    .news-reader-content iframe{
+        height:220px;
+        min-height:220px;
+    }
+}
+
+body.dark .news-reader-content iframe,
+body.dark .news-reader-content video{
+    background:#000;
+}
+
 </style>  </head>  <body>  <div id="rahmotpurLoading">  
 <img src="./icon.png" class="loading-logo" alt="Rahmotpur News">  
 <div class="loading-spinner"></div>  
@@ -434,12 +479,135 @@ const readerDate=document.getElementById("readerDate");
 const readerImage=document.getElementById("readerImage");  
 const readerContent=document.getElementById("readerContent");  
   
-function cleanNewsContent(content){  
-if(!content)return"<p>এই খবরের বিস্তারিত তথ্য পাওয়া যায়নি।</p>";  
-return content  
-.replace(/<script[\s\S]*?<\/script>/gi,"")  
-.replace(/<iframe[\s\S]*?<\/iframe>/gi,"");  
-}  
+function cleanNewsContent(content){
+
+if(!content){
+return "<p>এই খবরের বিস্তারিত তথ্য পাওয়া যায়নি।</p>";
+}
+
+let html=String(content);
+
+/* =========================
+   REMOVE DANGEROUS SCRIPTS
+========================= */
+
+html=html.replace(
+/<script[\s\S]*?<\/script>/gi,
+""
+);
+
+/* =========================
+   YOUTUBE IFRAME FIX
+========================= */
+
+html=html.replace(
+/<iframe([^>]*)(?:src|data-src)=["']([^"']+)["']([^>]*)><\/iframe>/gi,
+function(match,before,url,after){
+
+let videoURL=url;
+
+/* YouTube URL ঠিক করা */
+
+if(videoURL.includes("youtube.com/watch?v=")){
+
+const videoId=
+videoURL.split("youtube.com/watch?v=")[1]
+.split("&")[0];
+
+videoURL=
+"https://www.youtube.com/embed/"
++videoId
++"?rel=0&modestbranding=1";
+}
+
+if(videoURL.includes("youtu.be/")){
+
+const videoId=
+videoURL.split("youtu.be/")[1]
+.split("?")[0]
+.split("&")[0];
+
+videoURL=
+"https://www.youtube.com/embed/"
++videoId
++"?rel=0&modestbranding=1";
+}
+
+/* নিরাপদ URL ছাড়া iframe দেখাবো না */
+
+if(
+!videoURL.startsWith("https://www.youtube.com/") &&
+!videoURL.startsWith("https://www.youtube-nocookie.com/")
+){
+return "";
+}
+
+return `
+<div class="video-container">
+<iframe
+src="${videoURL}"
+title="Rahmotpur News Video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+loading="lazy">
+</iframe>
+</div>
+`;
+
+}
+);
+
+/* =========================
+   EXISTING IFRAME FIX
+========================= */
+
+html=html.replace(
+/<iframe([^>]*?)src=["']([^"']+)["']([^>]*)><\/iframe>/gi,
+function(match,before,url,after){
+
+if(
+url.startsWith("https://www.youtube.com/") ||
+url.startsWith("https://www.youtube-nocookie.com/")
+){
+
+return `
+<div class="video-container">
+<iframe
+src="${url}"
+title="Rahmotpur News Video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+loading="lazy">
+</iframe>
+</div>
+`;
+
+}
+
+return match;
+}
+);
+
+/* =========================
+   VIDEO TAG
+========================= */
+
+html=html.replace(
+/<video([^>]*)>/gi,
+'<video$1 controls playsinline webkit-playsinline preload="metadata">'
+);
+
+/* =========================
+   IMAGE FIX
+========================= */
+
+html=html.replace(
+/<img([^>]*?)>/gi,
+'<img$1 loading="lazy">'
+);
+
+return html;
+}
   
 function openNewsReader(news,fromHistory=false){  
 if(!news)return;  
@@ -456,7 +624,35 @@ readerImage.removeAttribute("src");
 readerImage.style.display="none";  
 }  
   
-readerContent.innerHTML=cleanNewsContent(news.content);  
+readerContent.innerHTML=cleanNewsContent(news.content);
+
+/* =========================
+   VIDEO PLAYER INITIALIZE
+========================= */
+
+const readerVideos=readerContent.querySelectorAll("video");
+
+readerVideos.forEach(video=>{
+
+video.setAttribute("controls","");
+video.setAttribute("playsinline","");
+video.setAttribute("webkit-playsinline","");
+video.setAttribute("preload","metadata");
+
+});
+
+const readerIframes=readerContent.querySelectorAll("iframe");
+
+readerIframes.forEach(iframe=>{
+
+iframe.setAttribute(
+"allow",
+"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+);
+
+iframe.setAttribute("allowfullscreen","");
+
+});
 newsReader.classList.add("show");  
 document.body.style.overflow="hidden";  
 newsReader.scrollTop=0;  
@@ -1346,7 +1542,6 @@ applyTextSize();
 applyImageLoading();  
 startNewsUpdate();  
 updateSettingsValues();  
-loadBlogger();  
   
 /* SERVICE WORKER */  
   
