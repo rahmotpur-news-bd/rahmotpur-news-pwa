@@ -188,11 +188,6 @@ footer{background:#111;color:#fff;text-align:center;padding:22px 10px;margin-top
 .settings-item>span:nth-child(2){flex:1;font-weight:500}  
 .settings-value{font-size:12px;color:#777;white-space:nowrap}  
   
-#rahmotpurLoading{position:fixed;inset:0;background:#fff;color:#222;z-index:999998;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:.5s}  
-body.dark #rahmotpurLoading{background:#121212;color:#eee}  
-.loading-logo{width:85px;height:85px;border-radius:50%;object-fit:cover;background:#fff;padding:4px}  
-.loading-spinner{width:35px;height:35px;margin-top:22px;border:4px solid #ddd;border-top-color:#d40000;border-radius:50%;animation:loadingSpin .8s linear infinite}  
-@keyframes loadingSpin{to{transform:rotate(360deg)}}  
   
 #rahmotpurSplash{position:fixed;inset:0;background:#d40000;color:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:.5s}  
 #rahmotpurSplash.hide{opacity:0;visibility:hidden;pointer-events:none}  
@@ -417,30 +412,7 @@ color:#fff;
 .news-reader-content{font-size:16px}  
 .news-reader-box{padding:15px}  
 }  
-</style>  </head>  <body>  <div id="rahmotpurLoading">  
-<img src="./icon.png" class="loading-logo" alt="Rahmotpur News">  
-<div class="loading-spinner"></div>  
-<p>খবর লোড হচ্ছে...</p>  
-</div>  <div id="rahmotpurSplash">  
-<img src="./icon.png" class="splash-logo" alt="Rahmotpur News">  
-<h2>Rahmotpur News</h2>  
-<p>আপনার এলাকার খবর সবার আগে</p>  
-<div class="splash-loader"></div>  
-</div>  <header>  
-<h1><img src="./icon.png" class="header-logo" alt="Rahmotpur News"><span>Rahmotpur News</span></h1>  
-<p>আপনার এলাকার খবর সবার আগে</p>  <div class="more-menu">  
-<button type="button" class="more-button" id="moreButton">☰</button>  
-<div class="more-dropdown" id="moreDropdown">  <button type="button" class="more-item" id="settingsButton">  
-<span class="more-icon">⚙️</span><span>Settings</span>  
-</button>  <button type="button" class="more-item" id="menuInstallButton">  
-<span class="more-icon">📱</span><span>Install Rahmotpur News</span>  
-</button>  <button type="button" class="more-item" id="aboutButton">  
-<span class="more-icon">ℹ️</span><span>About Rahmotpur News</span>  
-</button>  <a class="more-item" href="https://www.facebook.com/rahmotpurnews" target="_blank" rel="noopener">  
-<span class="more-icon">📘</span><span>Facebook Page</span>  
-</a>  
-</div>  
-</div>  
+</style>  </head>  <body>  
 </header>  <div class="modal-overlay" id="aboutModal">  
 <div class="modal-box">  
 <button type="button" class="modal-close" data-close="aboutModal">×</button>  
@@ -1773,10 +1745,25 @@ splash.style.display="none";
 
 }
 
-/* অ্যাপ খোলার 1.5 সেকেন্ড পর Splash বন্ধ */
+/* দ্রুত Splash Hide */
 
-setTimeout(hideSplash,1500);
+if(document.readyState === "loading"){
 
+document.addEventListener("DOMContentLoaded",function(){
+
+setTimeout(hideSplash,150);
+
+});
+
+}else{
+
+setTimeout(hideSplash,150);
+
+}
+
+/* নিরাপত্তার জন্য সর্বোচ্চ 2.5 সেকেন্ড */
+
+setTimeout(hideSplash,2500);
 /* কোনো কারণে load event দেরি হলেও Splash বন্ধ হবে */
 
 window.addEventListener("load",function(){
@@ -1787,17 +1774,6 @@ setTimeout(hideSplash,300);
 
 })();
   
-/* LOADING */  
-  
-window.addEventListener("load",function(){  
-setTimeout(function(){  
-const loading=document.getElementById("rahmotpurLoading");  
-if(loading){  
-loading.style.opacity="0";  
-loading.style.visibility="hidden";  
-}  
-},900);  
-});  
   
 /* ESC */  
   
