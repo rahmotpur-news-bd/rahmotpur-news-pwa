@@ -1374,6 +1374,15 @@ console.error("❌ Service Worker registration failed:",error);
 });  
 }  
   
+/* SPLASH */  
+  
+window.addEventListener("load",function(){  
+setTimeout(function(){  
+const splash=document.getElementById("rahmotpurSplash");  
+if(splash)splash.classList.add("hide");  
+},1200);  
+});  
+  
 /* LOADING */  
   
 window.addEventListener("load",function(){  
